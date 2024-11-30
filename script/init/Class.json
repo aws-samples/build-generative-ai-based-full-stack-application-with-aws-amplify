@@ -1,725 +1,785 @@
 {
-    "Class": [
-      {
-        "PutRequest": {
-          "Item": {
-            "id": {
-              "S": "1"
-            },
-            "courseId": {
-              "S": "1"
-            },
-            "name": {
-              "S": "Amazon ECS: CI/CD - AWS CodePipeline"
-            },
-            "url": {
-              "S": "https://d2xbndf6m96kr7.cloudfront.net/videos/1_1_Amazon+ECS_+CI_CD.mp4"
-            },
-            "author": {
-              "S": "Piyush Mattoo"
-            },
-            "class_flag": {
-              "N": "0"
-            },
-            "description": {
-              "S": "Amazon Elastic Container Service(ECS) is a fully managed container orchestration service that simplifies your deployment, management, and scaling of containerized applications. This video explains ECS CI/CD pipeline with AWS CodePipeline."
-            },
-            "image": {
-              "S": "https://d2xbndf6m96kr7.cloudfront.net/images/1_1_Amazon+ECS_+CI_CD.png"
-            },
-            "createdAt": {
-              "S": "replace_time"
-            },
-            "updatedAt": {
-              "S": "replace_time"
-            }
-          }
-        }
-      },
-      {
-        "PutRequest": {
-          "Item": {
-            "id": {
-              "S": "2"
-            },
-            "courseId": {
-              "S": "1"
-            },
-            "name": {
-              "S": "Amazon ECS: Task and Task Definition Overview"
-            },
-            "url": {
-              "S": "https://d2xbndf6m96kr7.cloudfront.net/videos/1_2_Amazon+ECS_+Task+and+Task+Definition+Overview.mp4"
-            },
-            "author": {
-              "S": "Jooyoung Kim"
-            },
-            "class_flag": {
-              "N": "0"
-            },
-            "description": {
-              "S": "Amazon Elastic Container Service(ECS) is a fully managed container orchestration service that simplifies your deployment, management, and scaling of containerized applications. This video explains ECS task and task definition. Additionally, through the demo, explore the characteristics of an ECS task."
-            },
-            "image": {
-              "S": "https://d2xbndf6m96kr7.cloudfront.net/images/1_2_Amazon+ECS_+Task+and+Task+Definition+Overview.png"
-            },
-            "createdAt": {
-              "S": "replace_time"
-            },
-            "updatedAt": {
-              "S": "replace_time"
-            }
-          }
-        }
-      },
-      {
-        "PutRequest": {
-          "Item": {
-            "id": {
-              "S": "3"
-            },
-            "courseId": {
-              "S": "1"
-            },
-            "name": {
-              "S": "Amazon ECS: Amazon CloudWatch Container Insights"
-            },
-            "url": {
-              "S": "https://d2xbndf6m96kr7.cloudfront.net/videos/1_3_Amazon+ECS_+Amazon+CloudWatch+Container+Insights.mp4"
-            },
-            "author": {
-              "S": "Arindam Chatterji"
-            },
-            "class_flag": {
-              "N": "10"
-            },
-            "description": {
-              "S": "Amazon Elastic Container Service(ECS) is a fully managed container orchestration service that simplifies your deployment, management, and scaling of containerized applications. This video covers Amazon CloudWatch Container Insights, which can collect, aggregate, and summarize metrics and logs from your containerized applications and microservices."
-            },
-            "image": {
-              "S": "https://d2xbndf6m96kr7.cloudfront.net/images/1_3_Amazon+ECS_+Amazon+CloudWatch+Container+Insights.png"
-            },
-            "createdAt": {
-              "S": "replace_time"
-            },
-            "updatedAt": {
-              "S": "replace_time"
-            }
-          }
-        }
-      },
-      {
-        "PutRequest": {
-          "Item": {
-            "id": {
-              "S": "4"
-            },
-            "courseId": {
-              "S": "1"
-            },
-            "name": {
-              "S": "AWS Container Day - Introduction to EKS Workshop"
-            },
-            "url": {
-              "S": "https://d2xbndf6m96kr7.cloudfront.net/videos/1_4_AWS+Container+Day+-+Introduction+to+EKS+Workshop.mp4"
-            },
-            "author": {
-              "S": "Niall Thomson"
-            },
-            "class_flag": {
-              "N": "0"
-            },
-            "description": {
-              "S": "Missed the AWS Container Day 2019 in Barcelona? Learn more about the EKS workshop. It is a great introduction to learn how to deploy your first cluster to EKS."
-            },
-            "image": {
-              "S": "https://d2xbndf6m96kr7.cloudfront.net/images/1_4_AWS+Container+Day+-+Introduction+to+EKS+Workshop.png"
-            },
-            "createdAt": {
-              "S": "replace_time"
-            },
-            "updatedAt": {
-              "S": "replace_time"
-            }
-          }
-        }
-      },
-      {
-        "PutRequest": {
-          "Item": {
-            "id": {
-              "S": "5"
-            },
-            "courseId": {
-              "S": "1"
-            },
-            "name": {
-              "S": "Amazon VPC Lattice - EKS"
-            },
-            "url": {
-              "S": "https://d2xbndf6m96kr7.cloudfront.net/videos/1_5_Amazon+VPC+Lattice+-+EKS.mp4"
-            },
-            "author": {
-              "S": "Tim Dormer"
-            },
-            "class_flag": {
-              "N": "10"
-            },
-            "description": {
-              "S": "Demonstration of EKS operation with VPC Lattice. Namespaces, Custom DNS and Custom Certs with EKS."
-            },
-            "image": {
-              "S": "https://d2xbndf6m96kr7.cloudfront.net/images/1_5_Amazon+VPC+Lattice+-+EKS.png"
-            },
-            "createdAt": {
-              "S": "replace_time"
-            },
-            "updatedAt": {
-              "S": "replace_time"
-            }
-          }
-        }
-      },
-      {
-        "PutRequest": {
-          "Item": {
-            "id": {
-              "S": "6"
-            },
-            "courseId": {
-              "S": "1"
-            },
-            "name": {
-              "S": "Introduction to AWS Observability Accelerator for Amazon EKS"
-            },
-            "url": {
-              "S": "https://d2xbndf6m96kr7.cloudfront.net/videos/1_6_Introduction+to+AWS+Observability+Accelerator+for+Amazon+EKS.mp4"
-            },
-            "author": {
-              "S": "Amazon Web Services"
-            },
-            "class_flag": {
-              "N": "0"
-            },
-            "description": {
-              "S": "In this video, you'll get an introduction to AWS Observability Accelerator for Amazon Elastic Kubernetes Service (Amazon EKS). With this solution, you can easily deploy and configure an application-specific observability environment, use Terraform to create Amazon Managed Service for Prometheus and Amazon Managed Grafana resources, and conduct end-to-end monitoring of applications."
-            },
-            "image": {
-              "S": "https://d2xbndf6m96kr7.cloudfront.net/images/1_6_Introduction+to+AWS+Observability+Accelerator+for+Amazon+EKS.png"
-            },
-            "createdAt": {
-              "S": "replace_time"
-            },
-            "updatedAt": {
-              "S": "replace_time"
-            }
-          }
-        }
-      },
-      {
-        "PutRequest": {
-          "Item": {
-            "id": {
-              "S": "7"
-            },
-            "courseId": {
-              "S": "2"
-            },
-            "name": {
-              "S": "Accelerate Modernization using AWS Proton and Refactor Spaces"
-            },
-            "url": {
-              "S": "https://d2xbndf6m96kr7.cloudfront.net/videos/2_1_Accelerate+Modernization+using+AWS+Proton+and+Refactor+Spaces.mp4"
-            },
-            "author": {
-              "S": "Amazon Web Services"
-            },
-            "class_flag": {
-              "N": "0"
-            },
-            "description": {
-              "S": "In this video, you’ll see how to accelerate modernization using AWS Proton and Refactor Spaces. With this solution, you can simplify the creation of refactoring environments, helping teams create a scalable platform that provides self-service capabilities to developers."
-            },
-            "image": {
-              "S": "https://d2xbndf6m96kr7.cloudfront.net/images/2_1_Accelerate+Modernization+using+AWS+Proton+and+Refactor+Spaces.png"
-            },
-            "createdAt": {
-              "S": "replace_time"
-            },
-            "updatedAt": {
-              "S": "replace_time"
-            }
-          }
-        }
-      },
-      {
-        "PutRequest": {
-          "Item": {
-            "id": {
-              "S": "8"
-            },
-            "courseId": {
-              "S": "2"
-            },
-            "name": {
-              "S": "Using a new project wizard to determine the migration target in AWS SCT"
-            },
-            "url": {
-              "S": "https://d2xbndf6m96kr7.cloudfront.net/videos/2_2_Using+a+new+project+wizard+to+determine+the+migration+target+in+AWS+SCT.mp4"
-            },
-            "author": {
-              "S": "Amazon Web Services"
-            },
-            "class_flag": {
-              "N": "0"
-            },
-            "description": {
-              "S": "This video shows how to use the new project wizard in the AWS Schema Conversion Tool (AWS SCT). This wizard estimates how complex a migration might be for all supported target destinations and assists you in determining your migration target. The wizard also produces a summary report for the migration of your database to different target destinations. You can use this report to compare possible target destinations and choose the optimal migration path."
-            },
-            "image": {
-              "S": "https://d2xbndf6m96kr7.cloudfront.net/images/2_2_Using+a+new+project+wizard+to+determine+the+migration+target+in+AWS+SCT.png"
-            },
-            "createdAt": {
-              "S": "replace_time"
-            },
-            "updatedAt": {
-              "S": "replace_time"
-            }
-          }
-        }
-      },
-      {
-        "PutRequest": {
-          "Item": {
-            "id": {
-              "S": "9"
-            },
-            "courseId": {
-              "S": "2"
-            },
-            "name": {
-              "S": "Introduction to the DMS Schema Conversion"
-            },
-            "url": {
-              "S": "https://d2xbndf6m96kr7.cloudfront.net/videos/2_3_Introduction+to+the+DMS+Schema+Conversion.mp4"
-            },
-            "author": {
-              "S": "Amazon Web Services"
-            },
-            "class_flag": {
-              "N": "10"
-            },
-            "description": {
-              "S": "AWS introduces  the Schema Conversion feature of AWS Database Migration Service. You can use DMS Schema Conversion to assess migration complexity, convert database objects to a format compatible with your target database engine, and apply the converted code to your target database. Watch this video to get started with the DMS Schema Conversion."
-            },
-            "image": {
-              "S": "https://d2xbndf6m96kr7.cloudfront.net/images/2_3_Introduction+to+the+DMS+Schema+Conversion.png"
-            },
-            "createdAt": {
-              "S": "replace_time"
-            },
-            "updatedAt": {
-              "S": "replace_time"
-            }
-          }
-        }
-      },
-      {
-        "PutRequest": {
-          "Item": {
-            "id": {
-              "S": "10"
-            },
-            "courseId": {
-              "S": "2"
-            },
-            "name": {
-              "S": "Enabling AWS Support with Atlassian Jira Service Management"
-            },
-            "url": {
-              "S": "https://d2xbndf6m96kr7.cloudfront.net/videos/2_4_Enabling+AWS+Support+with+Atlassian+Jira+Service+Management.mp4"
-            },
-            "author": {
-              "S": "Amazon Web Services"
-            },
-            "class_flag": {
-              "N": "0"
-            },
-            "description": {
-              "S": "In this video, you’ll see how to create and manage AWS support cases in Jira Service Management. With the AWS Service Management Connector for Jira Service Management, you can leverage the Jira incident management process throughout the AWS support case lifecycle and synchronize case-related communication between the two services."
-            },
-            "image": {
-              "S": "https://d2xbndf6m96kr7.cloudfront.net/images/2_4_Enabling+AWS+Support+with+Atlassian+Jira+Service+Management.png"
-            },
-            "createdAt": {
-              "S": "replace_time"
-            },
-            "updatedAt": {
-              "S": "replace_time"
-            }
-          }
-        }
-      },
-      {
-        "PutRequest": {
-          "Item": {
-            "id": {
-              "S": "11"
-            },
-            "courseId": {
-              "S": "3"
-            },
-            "name": {
-              "S": "Bring Your Own Custom ML Models with Amazon SageMaker"
-            },
-            "url": {
-              "S": "https://d2xbndf6m96kr7.cloudfront.net/videos/3_1_Bring+Your+Own+Custom+ML+Models+with+Amazon+SageMaker.mp4"
-            },
-            "author": {
-              "S": "Amazon Web Services"
-            },
-            "class_flag": {
-              "N": "0"
-            },
-            "description": {
-              "S": "With Amazon SageMaker, you have the flexibility to bring in your own model and leverage the capabilities of the service. In this video, we will dive deep into how you can bring your own model into SageMaker."
-            },
-            "image": {
-              "S": "https://d2xbndf6m96kr7.cloudfront.net/images/3_1_Bring+Your+Own+Custom+ML+Models+with+Amazon+SageMaker.png"
-            },
-            "createdAt": {
-              "S": "replace_time"
-            },
-            "updatedAt": {
-              "S": "replace_time"
-            }
-          }
-        }
-      },
-      {
-        "PutRequest": {
-          "Item": {
-            "id": {
-              "S": "12"
-            },
-            "courseId": {
-              "S": "3"
-            },
-            "name": {
-              "S": "Centrally track and manage your model versions in Amazon SageMaker"
-            },
-            "url": {
-              "S": "https://d2xbndf6m96kr7.cloudfront.net/videos/3_2_Centrally+track+and+manage+your+model+versions+in+Amazon+SageMaker.mp4"
-            },
-            "author": {
-              "S": "Amazon Web Services"
-            },
-            "class_flag": {
-              "N": "0"
-            },
-            "description": {
-              "S": "Building an ML application involves developing models, data pipelines, training pipelines, inference pipelines, and validation tests. With the Amazon SageMaker Model Registry, you can track model versions, their metadata such as use case grouping, and model performance metrics baselines in a central repository where it is easy to choose the right model for deployment based on your business requirements. Model Registry automatically logs the approval workflows for audit and compliance."
-            },
-            "image": {
-              "S": "https://d2xbndf6m96kr7.cloudfront.net/images/3_2_Centrally+track+and+manage+your+model+versions+in+Amazon+SageMaker.png"
-            },
-            "createdAt": {
-              "S": "replace_time"
-            },
-            "updatedAt": {
-              "S": "replace_time"
-            }
+  "Class": [
+    {
+      "PutRequest": {
+        "Item": {
+          "id": {
+            "S": "1"
+          },
+          "courseId": {
+            "S": "1"
+          },
+          "name": {
+            "S": "Amazon ECS: CI/CD - AWS CodePipeline"
+          },
+          "url": {
+            "S": "https://d2xbndf6m96kr7.cloudfront.net/videos/1_1_Amazon+ECS_+CI_CD.mp4"
+          },
+          "author": {
+            "S": "Piyush Mattoo"
+          },
+          "class_flag": {
+            "N": "0"
+          },
+          "description": {
+            "S": "Amazon Elastic Container Service(ECS) is a fully managed container orchestration service that simplifies your deployment, management, and scaling of containerized applications. This video explains ECS CI/CD pipeline with AWS CodePipeline."
+          },
+          "image": {
+            "S": "https://d2xbndf6m96kr7.cloudfront.net/images/1_1_Amazon+ECS_+CI_CD.png"
+          },
+          "transcript": {
+            "S": "Hello and welcome everyone. My name is Piyush and I am a solutions architect aligned with the financial services industry. This is a series of lightning talks on ECS and Fargate with the objective of making you all familiar with ECS, which is a fully managed container orchestration service. \n\nToday, we'll talk about ECS integration with AWS CodePipeline. Just to level set, continuous integration is a software process in which developers regularly push their code into a central repository such as AWS CodeCommit or GitHub. Every code push invokes an automated build, followed by running of tests. Continuous delivery, on the other hand, is based on the fact that there is always a stable production-ready mainline of the code and deployment can take place anytime from that mainline. Continuous delivery can be fully automated or have approval stages at critical points. This ensures that all required approvals prior to the deployment, such as release management approvals, are in place.\n\nThe benefits of continuous integration and continuous delivery is that application code can be delivered faster to production by automating the software supply chain. This produces secure code of better quality, provides faster feedback and results in a faster time to market of the product.\n\nNext, I would like to go over CodePipeline in the context of Amazon ECS. AWS CodePipeline is a fully managed continuous delivery service that helps you automate your release pipeline for fast and reliable application as well as infrastructure updates. CodePipeline is composed of a series of stages, and those stages are composed of a series of actions. Those actions are tasks that perform the build, deploy, test, and release process.\n\nStarting with the source stage wherein we can use AWS CodeCommit, which is a fully managed source control repository for hosting Git repositories. You have the flexibility to use third-party repositories such as Bitbucket Cloud, GitHub, or GitLab as the source for your code. Next is the build stage wherein you can use Amazon's native AWS CodeBuild to create ready-to-deploy artifacts which are housed inside Amazon Elastic Container Registry (ECR). And finally, in the deploy stage, AWS CodeDeploy would take the image artifact from Amazon ECR, which was built earlier by AWS CodeBuild, and deploy the image onto the ECS cluster.\n\nLet us next take a look at the pipeline in action. I have a web application deployed on Amazon ECS which randomly displays a pet picture when clicked upon. Let us change the text on the displayed picture and push that change to the AWS CodeCommit repository. The modified source code push would invoke the CodePipeline workflow wherein AWS CodeBuild would build a new container image and deploy the image automatically to Amazon ECS. After a few minutes, the CodePipeline execution status shows succeeded. And you can now see the new version of the application. So if I click on the pet image, the pet label got updated with the changes we pushed.\n\nNext, let us see the inner workings of the pipeline and double click into the CodeBuild portion. And let's review the build specification file. The build specification contains a set of build instructions that AWS CodeBuild uses to perform your build. The build specification has a set of lifecycle phases which execute zero or more commands. As you can see in the pre-build phase, you authenticate to the Amazon ECR registry. Subsequently, in the build stage, you build the Docker image from a Dockerfile and then tag the image. Finally, during the post-build phase, you would push the tagged Docker image to the Amazon ECR registry and produce a build output artifact.\n\nThat concludes today's talk about Amazon ECS integration with AWS CodePipeline. We'll see you next time."
+          },
+          "createdAt": {
+            "S": "replace_time"
+          },
+          "updatedAt": {
+            "S": "replace_time"
           }
         }
       }
-      ,
-      {
-        "PutRequest": {
-          "Item": {
-            "id": {
-              "S": "13"
-            },
-            "courseId": {
-              "S": "3"
-            },
-            "name": {
-              "S": "Introducing Amazon Bedrock"
-            },
-            "url": {
-              "S": "https://d2xbndf6m96kr7.cloudfront.net/videos/3_3_Introducing+Amazon+Bedrock.mp4"
-            },
-            "author": {
-              "S": "Amazon Web Services"
-            },
-            "class_flag": {
-              "N": "10"
-            },
-            "description": {
-              "S": "Amazon Bedrock is a fully managed service that offers a choice of high-performing foundation models from leading AI companies, along with a broad set of capabilities to build generative AI applications, simplifying development while maintaining privacy and security. See how customers across industries are leveraging Amazon Bedrock to create new generative AI applications to accelerate productivity and drive innovation."
-            },
-            "image": {
-              "S": "https://d2xbndf6m96kr7.cloudfront.net/images/3_3_Introducing+Amazon+Bedrock.png"
-            },
-            "createdAt": {
-              "S": "replace_time"
-            },
-            "updatedAt": {
-              "S": "replace_time"
-            }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "id": {
+            "S": "2"
+          },
+          "courseId": {
+            "S": "1"
+          },
+          "name": {
+            "S": "Amazon ECS: Task and Task Definition Overview"
+          },
+          "url": {
+            "S": "https://d2xbndf6m96kr7.cloudfront.net/videos/1_2_Amazon+ECS_+Task+and+Task+Definition+Overview.mp4"
+          },
+          "author": {
+            "S": "Jooyoung Kim"
+          },
+          "class_flag": {
+            "N": "0"
+          },
+          "description": {
+            "S": "Amazon Elastic Container Service(ECS) is a fully managed container orchestration service that simplifies your deployment, management, and scaling of containerized applications. This video explains ECS task and task definition. Additionally, through the demo, explore the characteristics of an ECS task."
+          },
+          "image": {
+            "S": "https://d2xbndf6m96kr7.cloudfront.net/images/1_2_Amazon+ECS_+Task+and+Task+Definition+Overview.png"
+          },
+          "transcript":{
+            "S": "Hello everyone. This is Jooyoung Kim again, I'm a Container Specialist Solutions Architect at Amazon Web Services and this is a series of learning talks on ECS and Fargate. As you already know from previous episodes, we explored the ECS core components briefly. Today, we will take a closer look at ECS tasks and task definitions.\n\nLet's start with tasks. First, an ECS task is the smallest unit of execution in an ECS cluster and can have one or more containers. A task is created from the task definition, and creating a task definition is the first step to run tasks in the ECS cluster. \n\nYou can specify some parameters in a task definition. First, you can specify one or more container images to use in your task. Second, you can decide how much CPU and memory to use with each task or each container. Third, you can select the launch type environment to use. This means determining the compute resources that your tasks are hosted on in ECS. You can choose either EC2 or AWS Fargate, or you can select both.\n\nFourth, you can select a network mode. In terms of AWS Fargate, AWS VPC is the only one option for this. There are many other things that can be defined in a task definition, but today, we'll focus only on the items that I mentioned before.\n\nSo let's jump into the ECS console. In here, I have already provisioned the ECS services which are ecs-demo-backend and ecs-demo-frontend. Click the Tasks tab, you can see each task and related task definition. Click one of these tasks. In this case, this task is running on top of AWS Fargate, which is the container computing engine for Fargate. The network mode is AWS VPC. This network mode gives ECS tasks the same networking properties as EC2 instances. So this is the reason why each task has its own network interface.\n\nAlso, you can check the allocated resource amounts assigned to the task in here. Additionally, you can see container information used in this task at the bottom. There is container detail information like container image URI, log configuration, network bindings, which means which ports are used for host and containers. And you can see the other metadata.\n\nSo in this ECS task console, you can figure out task configuration as well as each container's detailed information. If you use multiple containers in a task, you will be able to see all containers' detailed information at a glance. And this task is driven based on the contents of the task definition which is in the configuration tab. You can see the task definition's name and revision number. Therefore, you can easily say a task definition is a custom cookie mold and a task is the cookie made from that mold.\n\nThis is all I have to share today. Please keep in mind tasks and task definitions. Also, keep in mind what values can be defined in here. Thanks for watching this lightning talk on ECS and Fargate. See you next time."
+          },
+          "createdAt": {
+            "S": "replace_time"
+          },
+          "updatedAt": {
+            "S": "replace_time"
           }
         }
-      },
-      {
-        "PutRequest": {
-          "Item": {
-            "id": {
-              "S": "14"
-            },
-            "courseId": {
-              "S": "3"
-            },
-            "name": {
-              "S": "Build ML models at scale with Amazon SageMaker Studio Notebooks"
-            },
-            "url": {
-              "S": "https://d2xbndf6m96kr7.cloudfront.net/videos/3_4_Build+ML+models+at+scale+with+Amazon+SageMaker+Studio+Notebooks.mp4"
-            },
-            "author": {
-              "S": "Amazon Web Services"
-            },
-            "class_flag": {
-              "N": "0"
-            },
-            "description": {
-              "S": "Amazon SageMaker Studio Notebooks are quick start, collaborative notebooks that integrate with purpose-built ML tools in SageMaker and other AWS services for your end-to-end ML development, from prepare data at peta-byte scale using Spark on Amazon EMR, train and debug models, track experiments, deploy and monitor models and manage pipelines – all in Amazon SageMaker Studio – a fully integrated development environment (IDE) for ML. Easily dial up or down compute resources without interrupting your work. Share notebooks easily with your team using a sharable link."
-            },
-            "image": {
-              "S": "https://d2xbndf6m96kr7.cloudfront.net/images/3_4_Build+ML+models+at+scale+with+Amazon+SageMaker+Studio+Notebooks.png"
-            },
-            "createdAt": {
-              "S": "replace_time"
-            },
-            "updatedAt": {
-              "S": "replace_time"
-            }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "id": {
+            "S": "3"
+          },
+          "courseId": {
+            "S": "1"
+          },
+          "name": {
+            "S": "Amazon ECS: Amazon CloudWatch Container Insights"
+          },
+          "url": {
+            "S": "https://d2xbndf6m96kr7.cloudfront.net/videos/1_3_Amazon+ECS_+Amazon+CloudWatch+Container+Insights.mp4"
+          },
+          "author": {
+            "S": "Arindam Chatterji"
+          },
+          "class_flag": {
+            "N": "10"
+          },
+          "description": {
+            "S": "Amazon Elastic Container Service(ECS) is a fully managed container orchestration service that simplifies your deployment, management, and scaling of containerized applications. This video covers Amazon CloudWatch Container Insights, which can collect, aggregate, and summarize metrics and logs from your containerized applications and microservices."
+          },
+          "image": {
+            "S": "https://d2xbndf6m96kr7.cloudfront.net/images/1_3_Amazon+ECS_+Amazon+CloudWatch+Container+Insights.png"
+          },
+          "transcript":{
+            "S": "Hello and welcome to the lightning talk on Amazon ECS and AWS Fargate today. In this video, you will see how to monitor the performance of your Amazon Elastic Container Service (Amazon ECS) application using CloudWatch Container Insights.\n\nWith Container Insights, you can aggregate and summarize metrics and logs from containerized applications, allowing you to troubleshoot your Amazon ECS cluster by isolating specific issues.\n\nSince we are talking about observability, it is a good idea to start with a definition so that we are all on the same page. Observability is the ability to understand the state of a system or application by examining its outputs, logs, and performance metrics.\n\nLet's start with the obvious visibility. Visibility assists with resolving issues, real-time troubleshooting. As we move to the right-hand side on this slide, the examples become more business-focused.\n\nSo, if observability is important, how do we make the systems more observable? The first thing that you have to do is these systems should emit events in the form of metrics, logs, and traces. Metrics help us answer the question, 'Is the application response time faster or slower?' Logs help us troubleshoot and debug specific components of the system. Traces help us understand interconnectivity. These are often called the three pillars of observability: metrics, logs, and traces.\n\nLet us talk about how to get the metrics and logs for ECS. CloudWatch Container Insight collects, aggregates, and summarizes metrics and logs from your containerized application running in ECS. With Container Insights, operational data is collected as performance log events. These are entries that are structured in a JSON schema for high cardinality data to be ingested and stored at scale. From this data, CloudWatch creates higher-level aggregated metrics at the cluster, service, and task level. As CloudWatch metrics, the metrics include utilization for resources such as CPU, memory, disk, and network. The metrics are available in the CloudWatch automatic dashboards and also viewable in the metrics section of the CloudWatch console.\n\nCloudWatch automatically collects metrics for many resources such as CPU, memory, disk, and network. On top of it, Container Insights also provides diagnostic information such as container restart failures to help you isolate issues and resolve them quickly. You can also set CloudWatch alarms on the metrics that Container Insights collects.\n\nOne thing to note before we head over to the demo: Container Insight supports encryption with AWS KMS key for logs and metrics that it collects.\n\nToday, we will demo using the AWS Management Console for setting up Container Insight, but please check out the documentation that includes how to achieve the same using the Amazon AWS Command Line Interface.\n\nOnce you head over to your ECS console, our first thing to ensure is that you're running in a region where Container Insight is enabled. When you are inside your ECS console, there are a few ways you can do it.\n\nOne way is to set the default for the account, and you can do it under account settings. So if you go on the account settings page, there is a section for CloudWatch Container Insights. You can either turn it off or turn it on. In my case, it is turned off by default. You can easily update that by clicking the update button and then going to the CloudWatch Container Insights section and checking that box and hitting save changes.\n\nThe other way to do it is while creating a new cluster using the AWS Management Console. When you hit create cluster, you can actually go down to the monitoring section and enable the Container Insight and hit create.\n\nOnce your cluster is created, you can go to your cluster and you can verify that under CloudWatch monitoring, the Container Insight is selected, which is a green checkmark beside the Container Insight.\n\nAs you can see in my ECS cluster, I have already enabled two services. Let's head over to the metrics section to see how Container Insight works.\n\nAs you can see, once you enable Container Insight, the tabs or the sections of metrics under the metrics tab is blank. This is because all the metrics are now aggregated to your Container Insight dashboard, which provides more extensive and customizable matrix display and a wider range of information including CPU and memory utilization, tasks and service count, storage and network performance, and container instance counts for cluster, services, and tasks.\n\nYou can sort the data in different ways such as by services. As you can see, this application has two different services running, and the data can be viewed for each service. You can select an instance name in the legend, and the page will be filtered for that particular service.\n\nYou can do the same level of data sorting for the task level. Again, we have two tasks out here. One is called 'simple-fargate', another is called 'simple-webservice'. You can select one of them to view the data for that particular task, and we can also scroll down, and you can see a lot of additional information is visible to you, for example, your container performance, some application insights, etc.\n\nLet's see if we can do some deeper analysis, say for the container performance for this sample container, which is called 'sample-webapp'. Once you select that container and you hit actions and you select 'View Performance Log', you will go into the details window which will have the logs inside. It has got some sample queries that you can run, and you can visualize the data or you can look at the logs as you want to do it.\n\nYou can take advantage of the existing queries or you can create your own custom queries. Some of the sample queries that you can use are already provided for you. For example, if I want to see the 25 most recently added log events, I select it under common queries, I hit apply. And then if I run the query, you can see the 25 most recent records for CloudWatch logs that are relevant for my ECS cluster.\n\nThat's it for the demo. Thank you for watching up today and hope you enjoyed it. Now it's time for you to try this."
+          },
+          "createdAt": {
+            "S": "replace_time"
+          },
+          "updatedAt": {
+            "S": "replace_time"
           }
         }
-      },
-      {
-        "PutRequest": {
-          "Item": {
-            "id": {
-              "S": "15"
-            },
-            "courseId": {
-              "S": "4"
-            },
-            "name": {
-              "S": "How to use multiple DynamoDB tables with GraphQL"
-            },
-            "url": {
-              "S": "https://d2xbndf6m96kr7.cloudfront.net/videos/4_1_How+to+use+multiple+DynamoDB+tables+with+GraphQL.mp4"
-            },
-            "author": {
-              "S": "Alex DeBrie"
-            },
-            "class_flag": {
-              "N": "0"
-            },
-            "description": {
-              "S": "This video shows how to build a GraphQL application with multiple DynamoDB tables using AWS AppSync. Many DynamoDB data modeling patterns use a single table to hold multiple entities from your application; however, this single-table design pattern may not be desirable when using DynamoDB with GraphQL applications. In using multiple tables, we are able to create simpler, more focused GraphQL resolvers with more flexible querying."
-            },
-            "image": {
-              "S": "https://d2xbndf6m96kr7.cloudfront.net/images/4_1_How+to+use+multiple+DynamoDB+tables+with+GraphQL.png"
-            },
-            "createdAt": {
-              "S": "replace_time"
-            },
-            "updatedAt": {
-              "S": "replace_time"
-            }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "id": {
+            "S": "4"
+          },
+          "courseId": {
+            "S": "1"
+          },
+          "name": {
+            "S": "AWS Container Day - Introduction to EKS Workshop"
+          },
+          "url": {
+            "S": "https://d2xbndf6m96kr7.cloudfront.net/videos/1_4_AWS+Container+Day+-+Introduction+to+EKS+Workshop.mp4"
+          },
+          "author": {
+            "S": "Niall Thomson"
+          },
+          "class_flag": {
+            "N": "0"
+          },
+          "description": {
+            "S": "Missed the AWS Container Day 2019 in Barcelona? Learn more about the EKS workshop. It is a great introduction to learn how to deploy your first cluster to EKS."
+          },
+          "image": {
+            "S": "https://d2xbndf6m96kr7.cloudfront.net/images/1_4_AWS+Container+Day+-+Introduction+to+EKS+Workshop.png"
+          },
+          "transcript":{
+            "S": "So, realistically, I'm not actually doing anything with you other than talking about this. This is a fully public workshop that anybody in this room can actually go through all the different modules. If you just go to eksworkshop.com, you'll get to this landing page and it's self-guided, you can walk through this. We also do this at a lot of events. We didn't want to pack this into today because we have so much other good content, all the demos that are coming up. So if you want to, you're more than welcome to basically step through this.\n\nA couple of things that are really nice that it goes through is how to set up EKS clusters. It'll walk you through how to launch a cluster using eksctl by Weaveworks. It'll also show you how to do it using CloudFormation and then walks you through doing a lot of really interesting functions of EKS and a lot of the open-source tools that make EKS really good. How to deploy the dashboard, how to do like an example microservice application. And you can actually see the manifests, you can deploy them into your own cluster and really play with the different bits. You'll see that this application, for example, is three microservices that go along. Each one is written in a different language in the full polyglot microservice way to really drive home the example of what EKS's power, what makes ECS powerful as well.\n\nIt'll show you how to deploy Helm charts, do auto-scaling in your clusters, how to do things like cluster autoscaler, how to do things like HPA, all of these things that again make Kubernetes great and EKS great. And then it'll even walk through how to deploy service meshes, which you'll learn a little bit more about pretty soon.\n\nAt 2:30 PM, you guys can go out to the front where you checked in and you get a little card like this and on the back of it, it has a promo code which will give you $200 in free credits, which is for you to use throughout the rest of this week or for whenever you want to. And you can go through all of the modules in this and really learn how to use EKS, deploy clusters, deploy all these tools.\n\nWhat Bob is talking about is the AWS Service Operator. So how to deploy AWS services directly using Kubernetes. You can actually do things like deploy a DynamoDB table directly from Kubernetes using CRDs and have it automatically connected into your application. Same with like an S3 bucket if you wanted to deploy a static website using S3 and have the assets being automatically uploaded. It really walks through how to do all of that stuff. So happy to talk about that throughout the rest of the week or today if you want to grab me."
+          },
+          "createdAt": {
+            "S": "replace_time"
+          },
+          "updatedAt": {
+            "S": "replace_time"
           }
         }
-      },
-      {
-        "PutRequest": {
-          "Item": {
-            "id": {
-              "S": "16"
-            },
-            "courseId": {
-              "S": "4"
-            },
-            "name": {
-              "S": "How to use single-table DynamoDB design with GraphQL"
-            },
-            "url": {
-              "S": "https://d2xbndf6m96kr7.cloudfront.net/videos/4_2_How+to+use+single-table+DynamoDB+design+with+GraphQL.mp4"
-            },
-            "author": {
-              "S": "Alex DeBrie"
-            },
-            "class_flag": {
-              "N": "10"
-            },
-            "description": {
-              "S": "This video shows how to use single-table DynamoDB design with GraphQL. Single-table is a DynamoDB pattern in which multiple entities for an application are combined into a single DynamoDB table. Using AWS AppSync, we set up a blog hosting application that contains Sites, Posts, and Comments in a single table. You will learn how to use “lookaheads” in your GraphQL resolvers to understand the nested relations that are requested in your queries. After watching this video, you will understand the tradeoffs of using single-table design in your GraphQL application."
-            },
-            "image": {
-              "S": "https://d2xbndf6m96kr7.cloudfront.net/images/4_2_How+to+use+single-table+DynamoDB+design+with+GraphQL.png"
-            },
-            "createdAt": {
-              "S": "replace_time"
-            },
-            "updatedAt": {
-              "S": "replace_time"
-            }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "id": {
+            "S": "5"
+          },
+          "courseId": {
+            "S": "1"
+          },
+          "name": {
+            "S": "Amazon VPC Lattice - EKS"
+          },
+          "url": {
+            "S": "https://d2xbndf6m96kr7.cloudfront.net/videos/1_5_Amazon+VPC+Lattice+-+EKS.mp4"
+          },
+          "author": {
+            "S": "Tim Dormer"
+          },
+          "class_flag": {
+            "N": "10"
+          },
+          "description": {
+            "S": "Demonstration of EKS operation with VPC Lattice. Namespaces, Custom DNS and Custom Certs with EKS."
+          },
+          "image": {
+            "S": "https://d2xbndf6m96kr7.cloudfront.net/images/1_5_Amazon+VPC+Lattice+-+EKS.png"
+          },
+          "transcript":{
+            "S": "Hello. My name is Tim Dormer, Solutions Architect at AWS. Today we're going to dive into using namespaces along with custom DNS and custom certificates. In this example, we'll be using VPC lattice service in VPC. \n\nI have a Cloud9 client running on an EC2 instance. I'll use this both to control my cluster, deploy my YAML files, also to test access to the VPC lattice service. My EKS cluster will be running in VPC mode.\n\nWe'll start out by creating a customer certificate in AWS Certificate Manager. This needs to match the domain name we wish to use for the VPC lattice service itself. Then we'll create a gateway object in Kubernetes with the listener which references the ACM certificate. We do this by using the ARN of the certificate. \n\nNext, we'll create HTTPRoutes for the VPC lattice services. In these HTTPRoutes, we define the backend services, their namespace, and the custom domain name we wish to use. Wrapping up the configuration, we'll add a Route53 CNAME entry to map the custom domain name to the auto-generated VPC lattice domain name. Finally, we'll test the custom domain names to access the services.\n\nOkay, so opening up the console, select in Certificate Manager, we'll start out by requesting a certificate. I'm going to create a wildcard certificate. Let's request a certificate and do a refresh and you'll see it's pending validation. We can do that through DNS. Okay, let's refresh it again. Okay, we see the certificate is issued. Go and get the ARN for the certificate. We're going to use that in the next step.\n\nSo here's the gateway yaml file that I've created. We'll just type out the wildcard. Let's go and apply the gateway and we'll go and check that it's reconciled. Okay, it's reconciled. So we've got a few services here and the next step is that we're going to create HTTPRoutes that point to the backends. \n\nNow, you can see, I've got Hedgehog and Badger in England namespace and I've got one Bat and Dingo that are in the default namespace and we're going to create for both. Let's start out with the animals-australia. You can see that we've defined the custom hostname that we wish to use for this service and we've also referenced the wildcard, which refers back to the listener that we configured in the gateway. In those two lines, you can see that we've got the custom DNS configuration as well as the custom certificate configuration.\n\nIn the england-httproute configuration, you can see that we started to incorporate the namespaces. The backends in this case are both in the England namespace and the HTTPRoute itself is in the England namespace. We're referencing the same wildcard.\n\nOkay, let's go ahead and apply both of those and we can see that both the HTTPRoutes have been created. Switching back to the console, let's go and make sure that the target groups and the services have all been created. You can see the target groups and you notice that we've got a dash-england and a dash-default, which corresponds to the namespace. \n\nLet's make sure that the VPC where Cloud9 is, is also added to the service network. Let's go back to the services and just make sure that everything looks good. You can see that we've got the auto-generated domain. So let's select that and we're going to have to go and add that to Route53 or create a record in Route53.\n\nLet's add the name that we want, select CNAME and then paste in the URL here. And then we're going to have to create a record for the other one. Let's switch back, select CNAME and then paste that in.\n\nOkay, so we've got VPC lattice services set up across different namespaces where the backends are in different namespaces. Let's test that they work. Let's go and try the Australia one. \n\nOkay, so what we've seen is custom DNS, custom certificate, and we've had backend services in different namespaces and we published them into VPC lattice. We've had the default and the England namespace. Thank you for your time."
+          },
+          "createdAt": {
+            "S": "replace_time"
+          },
+          "updatedAt": {
+            "S": "replace_time"
           }
         }
-      },
-      {
-        "PutRequest": {
-          "Item": {
-            "id": {
-              "S": "17"
-            },
-            "courseId": {
-              "S": "4"
-            },
-            "name": {
-              "S": "Zero-Config Deploy of a Next.js 13 SSR App with AWS Amplify Hosting"
-            },
-            "url": {
-              "S": "https://d2xbndf6m96kr7.cloudfront.net/videos/4_3_Zero-Config+Deploy+of+a+Next.js+13+SSR+App+with+AWS+Amplify+Hosting.mp4"
-            },
-            "author": {
-              "S": "Mike Jerome"
-            },
-            "class_flag": {
-              "N": "0"
-            },
-            "description": {
-              "S": "This video walks through the process of deploying a Next.js 13 application with AWS Amplify Hosting. It highlights the zero-configuration onboarding experience of Amplify Hosting, where developers can easily connect their repository then simply click through a wizard to deploy their application."
-            },
-            "image": {
-              "S": "https://d2xbndf6m96kr7.cloudfront.net/images/4_3_Zero-Config+Deploy+of+a+Next.js+13+SSR+App+with+AWS+Amplify+Hosting.png"
-            },
-            "createdAt": {
-              "S": "replace_time"
-            },
-            "updatedAt": {
-              "S": "replace_time"
-            }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "id": {
+            "S": "6"
+          },
+          "courseId": {
+            "S": "1"
+          },
+          "name": {
+            "S": "Introduction to AWS Observability Accelerator for Amazon EKS"
+          },
+          "url": {
+            "S": "https://d2xbndf6m96kr7.cloudfront.net/videos/1_6_Introduction+to+AWS+Observability+Accelerator+for+Amazon+EKS.mp4"
+          },
+          "author": {
+            "S": "Amazon Web Services"
+          },
+          "class_flag": {
+            "N": "0"
+          },
+          "description": {
+            "S": "In this video, you'll get an introduction to AWS Observability Accelerator for Amazon Elastic Kubernetes Service (Amazon EKS). With this solution, you can easily deploy and configure an application-specific observability environment, use Terraform to create Amazon Managed Service for Prometheus and Amazon Managed Grafana resources, and conduct end-to-end monitoring of applications."
+          },
+          "image": {
+            "S": "https://d2xbndf6m96kr7.cloudfront.net/images/1_6_Introduction+to+AWS+Observability+Accelerator+for+Amazon+EKS.png"
+          },
+          "transcript": {
+            "S": "In this video, you'll get an introduction to AWS Observability Accelerator for Amazon Elastic Kubernetes Service or Amazon EKS. With this solution, you can easily deploy and configure an application-specific observability environment, use Terraform to create Amazon Managed Service for Prometheus and Amazon Managed Grafana resources, and conduct end-to-end monitoring of applications.\n\nWe'll begin by cloning a GitHub repository inside our AWS Cloud9 environment. The terraform-aws-observability-accelerator repository contains a collection of Terraform modules that make it easier and faster to configure Amazon EKS clusters with AWS observability services.\n\nNow let's open the directory we just created and navigate to the example called existing-cluster-with-base-and-infra. This is going to be the parent directory from which we'll be deploying the Terraform solution. Before we deploy the Terraform modules, let's export some variables so that we will be able to deploy the components in the right EKS cluster, store the metrics in the Amazon Managed Prometheus workspace, and visualize the metrics using Amazon Grafana.\n\nLet's first export the region. Next, we will export the EKS cluster ID. This will be the cluster where the AWS Distro for OpenTelemetry will be deployed and start collecting the metrics. Next, we will export the Amazon Managed Prometheus workspace ID and the Amazon Managed Grafana workspace. Finally, we will export the Amazon Grafana API key. We will use the CLI to generate the API key and provide it at runtime, which is a best practice.\n\nBefore we continue, let's take a quick look at the workspace we'll be using in Amazon Managed Service for Prometheus. Let's look at the Rules Management tab for this workspace. We have no rules yet. Let's look at the Alert Manager tab. We have no alert manager definitions either.\n\nNext, let's look at Amazon Managed Grafana. We have no saved dashboards. Let's go back to the terminal and deploy the solution by running Terraform. Terraform has been successfully initialized. Next, let's run Terraform plan to create a preview of the changes that Terraform will make in our infrastructure. We can see the different modules that will be created. Notice the module with the namespace called opentelemetry-operator-system, an AWS Distro for OpenTelemetry or ADOT Collector will be created to scrape metrics from the application running on the EKS cluster and ingest them into Amazon Managed Service for Prometheus. In all, we'll be creating 38 resources using the Terraform solution. Let's go ahead and apply the solution.\n\nIt might take a few minutes for all the deployed resources to appear. Let's go back to Amazon Managed Service for Prometheus and check the Alert Manager again. The Alert Manager is being created. Let's check the Grafana dashboards. Let's refresh the view. We now have a folder called Observability Accelerator dashboards. Let's return to Amazon Managed Service for Prometheus. The Alert Manager has been successfully created. The Rules Management tab is still empty.\n\nWe can open a separate terminal and see the parts of the solution as they get deployed. Let's go back to Amazon Managed Service for Prometheus and take a look at Rules Management again. Now, rules are being created. We have namespaces for recording rules and for alerting rules.\n\nLet's check on the Observability Accelerator dashboards folder in Grafana. The dashboards have been populated and appropriately tagged. We'll view these dashboards when the ADOT Collector fully deploys and metrics have been stored within Amazon Managed Service for Prometheus.\n\nNext, let's look at our data sources. We can see that the AWS Observability Accelerator workspace has been configured as a data source for Amazon Managed Grafana. Let's drill down. Let's save and test this data source. We've confirmed that the data source is working.\n\nLet's go back to the terminal. The Terraform apply is complete and 38 resources have been added. Let's check the deployment status of the ADOT Collector. The ADOT Collector has deployed successfully. There is also an EKS ADOT Managed Add-on Operator running on the Amazon EKS cluster.\n\nNow let's go to Amazon Managed Grafana and explore some dashboards. Let's view the Kubernetes Compute Resources Cluster dashboard. Metrics are already appearing on this dashboard. We can see information about workloads running on our Amazon EKS cluster and the corresponding CPU usage. There is also information about quotas including the CPU requests and CPU limits. We can also view memory request information and many other metrics.\n\nLet's look at another dashboard, we'll view the CLI dashboard. Three CLIs are running and we can see a great deal of information pertaining to their operation. This level of detail provides valuable insight into the workloads running on our Amazon EKS cluster.\n\nLet's look at one more dashboard. We'll examine networking at the cluster level. Here, we can see information about bytes received and transmitted by the cluster as well as metrics for specific namespaces. We can also view other information such as the rates of received packets and transmitted packets.\n\nYou've just seen an introduction to AWS Observability Accelerator for Amazon EKS. You can learn more about this topic in the description and links for this video. Thanks for watching. Now, it's your turn to try."
+          },
+          "createdAt": {
+            "S": "replace_time"
+          },
+          "updatedAt": {
+            "S": "replace_time"
           }
         }
-      },
-      {
-        "PutRequest": {
-          "Item": {
-            "id": {
-              "S": "18"
-            },
-            "courseId": {
-              "S": "4"
-            },
-            "name": {
-              "S": "Find Hardcoded Secrets Using the Amazon CodeGuru Reviewer Secrets Detector"
-            },
-            "url": {
-              "S": "https://d2xbndf6m96kr7.cloudfront.net/videos/4_4_Find+Hardcoded+Secrets+Using+the+Amazon+CodeGuru+Reviewer+Secrets+Detector.mp4"
-            },
-            "author": {
-              "S": "Amazon Web Services"
-            },
-            "class_flag": {
-              "N": "0"
-            },
-            "description": {
-              "S": "In this video, you’ll see how to find hardcoded secrets using the Amazon CodeGuru Reviewer secrets detector. With this tool, you can identify secrets in your application code, continually scan your repositories for new secrets, and secure any secrets you discover in AWS Secrets Manager."
-            },
-            "image": {
-              "S": "https://d2xbndf6m96kr7.cloudfront.net/images/4_4_Find+Hardcoded+Secrets+Using+the+Amazon+CodeGuru+Reviewer+Secrets+Detector.png"
-            },
-            "createdAt": {
-              "S": "replace_time"
-            },
-            "updatedAt": {
-              "S": "replace_time"
-            }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "id": {
+            "S": "7"
+          },
+          "courseId": {
+            "S": "2"
+          },
+          "name": {
+            "S": "Accelerate Modernization using AWS Proton and Refactor Spaces"
+          },
+          "url": {
+            "S": "https://d2xbndf6m96kr7.cloudfront.net/videos/2_1_Accelerate+Modernization+using+AWS+Proton+and+Refactor+Spaces.mp4"
+          },
+          "author": {
+            "S": "Amazon Web Services"
+          },
+          "class_flag": {
+            "N": "0"
+          },
+          "description": {
+            "S": "In this video, you’ll see how to accelerate modernization using AWS Proton and Refactor Spaces. With this solution, you can simplify the creation of refactoring environments, helping teams create a scalable platform that provides self-service capabilities to developers."
+          },
+          "image": {
+            "S": "https://d2xbndf6m96kr7.cloudfront.net/images/2_1_Accelerate+Modernization+using+AWS+Proton+and+Refactor+Spaces.png"
+          },
+          "transcript": {
+            "S": "In this video, you'll see how to accelerate modernization using AWS Proton and Refactor Spaces. With this solution, you can simplify the creation of refactoring environments, helping teams create a scalable platform that provides self-service capabilities to developers to get started.\n\nLet's navigate to AWS Migration Hub and open Refactor Spaces. Refactor Spaces is the starting point for incremental application refactoring to microservices in AWS. Let's create an environment. A refactor environment is a container for all the services and proxies that will be created for an application. Let's give this environment a name.\n\nNext, we'll create an application which we'll use to manage our existing application, add new services, and incrementally route traffic to the new services. Let's name our application 'unistore'. Next, we'll select the application's proxy VPC. The proxy lets the front-end application use a single endpoint to contact multiple services. If an application is made up of multiple AWS accounts, we can share the Refactor environment and its application with other AWS principals. We're going to create everything in a single account, so let's move on and create the environment.\n\nNow that our environment has been created, let's create a new service. We'll select the environment and application we just created. Let's name this service 'legacy'. Next, we'll select a VPC where the service resides and then specify the endpoint. We'll also specify the optional health check endpoint. Next, we'll set this service as the default route for the application and create the service. The service and route have been successfully submitted and are being provisioned as shown in this diagram. Refactor Spaces will provision the infrastructure with our Amazon API Gateway, Network Load Balancer, and AWS Transit Gateway, and all traffic will be routed to our application.\n\nNow, let's navigate to AWS Proton to create a microservice. AWS Proton is a fully managed delivery service for deploying container and serverless applications efficiently and consistently. First, let's create an environment template. In this case, we'll create a template for provisioning new environments. Let's enter a name and display name and then create the template.\n\nNow that we've created the environment template, let's publish it so that it's visible to our developer teams. The tooltip at the top of the screen gives us the option to create a service template. Let's do that. Now, in this case, we'll use a sample template bundle as our source. Next, we'll provide a name and display name for the template. Let's choose the environment template that we created earlier and create the service template.\n\nNow let's see how to create a Proton environment using our environment template. We can choose AWS Managed Provisioning or Self Managed Provisioning. In this case, we'll choose the first option for simplicity. We'll use the same AWS account. Let's name the environment. Next, we'll choose an existing service role in our account. We can configure custom settings. In this case, we'll leave the default values. Now, let's create the environment. The deployment has succeeded.\n\nNow, let's create a service. We'll use the service template we created earlier. Let's name the service. Next, let's choose a repository connection. For demonstration purposes, we'll select a CodeStar connection that has already been created. Next, we'll choose a repository and a branch. Next, we'll provide a name and environment for the new service instance, we can add up to nine instances. This diagram shows how AWS Proton deploys the service. Let's deploy it now.\n\nThe service is now active and the pipeline has been provisioned. The pipeline run is in progress. We can also see that the service instance has a deployment status of succeeded. Let's navigate to the service instance, we'll copy the service endpoint so we can use it to point this service to a microservice in Refactor Spaces.\n\nNow let's navigate to Refactor Spaces to create a service. We'll select the environment and application we created earlier. Next, we'll name the service. Let's select the new VPC we created and paste in the service endpoint we copied earlier. Next, we'll add a source path to the route. We can choose to include all child paths, in this case, we'll just start with '/'. Now, let's create the service. Our service has been created. Once the route finishes provisioning, we can use it to send traffic to the service.\n\nYou've just seen how to accelerate modernization using AWS Proton and Refactor Spaces. You can learn more about this topic in the description and links for this video. Thanks for watching. Now it's your turn to try."
+          },
+          "createdAt": {
+            "S": "replace_time"
+          },
+          "updatedAt": {
+            "S": "replace_time"
           }
         }
-      },
-      {
-        "PutRequest": {
-          "Item": {
-            "id": {
-              "S": "19"
-            },
-            "courseId": {
-              "S": "4"
-            },
-            "name": {
-              "S": "Accelerate Python Coding with Amazon CodeWhisperer"
-            },
-            "url": {
-              "S": "https://d2xbndf6m96kr7.cloudfront.net/videos/4_5_Accelerate+Python+Coding+with+Amazon+CodeWhisperer.mp4"
-            },
-            "author": {
-              "S": "Amazon Web Services"
-            },
-            "class_flag": {
-              "N": "0"
-            },
-            "description": {
-              "S": "In this video, you’ll see how to accelerate Python coding with Amazon CodeWhisperer."
-            },
-            "image": {
-              "S": "https://d2xbndf6m96kr7.cloudfront.net/images/4_5_Accelerate+Python+Coding+with+Amazon+CodeWhisperer.png"
-            },
-            "createdAt": {
-              "S": "replace_time"
-            },
-            "updatedAt": {
-              "S": "replace_time"
-            }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "id": {
+            "S": "8"
+          },
+          "courseId": {
+            "S": "2"
+          },
+          "name": {
+            "S": "Using a new project wizard to determine the migration target in AWS SCT"
+          },
+          "url": {
+            "S": "https://d2xbndf6m96kr7.cloudfront.net/videos/2_2_Using+a+new+project+wizard+to+determine+the+migration+target+in+AWS+SCT.mp4"
+          },
+          "author": {
+            "S": "Amazon Web Services"
+          },
+          "class_flag": {
+            "N": "0"
+          },
+          "description": {
+            "S": "This video shows how to use the new project wizard in the AWS Schema Conversion Tool (AWS SCT). This wizard estimates how complex a migration might be for all supported target destinations and assists you in determining your migration target. The wizard also produces a summary report for the migration of your database to different target destinations. You can use this report to compare possible target destinations and choose the optimal migration path."
+          },
+          "image": {
+            "S": "https://d2xbndf6m96kr7.cloudfront.net/images/2_2_Using+a+new+project+wizard+to+determine+the+migration+target+in+AWS+SCT.png"
+          },
+          "transcript": {
+            "S": "Customers looking to move their databases to the AWS cloud can use the AWS Schema Conversion Tool (AWS SCT) to determine the optimal migration target. The new project wizard in AWS SCT connects to your database and estimates the migration complexity for all supported target destinations. Next, AWS SCT produces a summary aggregated assessment report for the migration of your database to different target destinations. You can use this report to compare possible target destinations and choose the optimal migration path.\n\nIn this video, we show you how to use the new project wizard in AWS SCT for a source SQL Server database schema. First, we start AWS SCT and choose the new project wizard. Next, we enter the project name and the location of your project file. Now we choose the type of migration source, the database engine, and the migration strategy to compare the assessment reports for different migration destinations. We choose the combined report option.\n\nNext, we provide connection information for the source database. The database user must have appropriate permissions. For more information about these permissions, see the AWS SCT user guide. Now we choose a database schema to assess, we select the checkbox for the schema name. And then we choose the schema. AWS SCT highlights the schema name in blue and turns on the next button. To assess several database schemas, select the checkboxes for all schemas and choose the parent node. Otherwise, AWS SCT will assess only one schema. We proceed with one database schema.\n\nAWS SCT analyzes this database schema and creates a database migration assessment report for each supported migration target. The more database objects you have in your source database schemas, the more time AWS SCT needs to run the assessment. According to the report summary, Amazon RDS for PostgreSQL and Amazon Aurora PostgreSQL are the best target destinations for our schema.\n\nYou can review the reports for each supported migration target. Also, you can save a local copy of the reports for further analysis. Now we choose the target database platform and provide connection information for the target database because AWS SCT applies the converted code to the target database. The database user must have the required permissions. After we choose finish, AWS SCT creates a new project and adds the mapping rules.\n\nNow you can convert your database objects and apply them to your target database. This completes the overview of the new project wizard in AWS SCT. Thanks for watching this video."
+          },
+          "createdAt": {
+            "S": "replace_time"
+          },
+          "updatedAt": {
+            "S": "replace_time"
           }
         }
-      },
-      {
-        "PutRequest": {
-          "Item": {
-            "id": {
-              "S": "20"
-            },
-            "courseId": {
-              "S": "4"
-            },
-            "name": {
-              "S": "Start your software project fast with Amazon CodeCatalyst blueprints"
-            },
-            "url": {
-              "S": "https://d2xbndf6m96kr7.cloudfront.net/videos/4_6_Start+your+software+project+fast+with+Amazon+CodeCatalyst+blueprints.mp4"
-            },
-            "author": {
-              "S": "Amazon Web Services"
-            },
-            "class_flag": {
-              "N": "0"
-            },
-            "description": {
-              "S": "You can use Amazon CodeCatalyst blueprints to set up a new software project on AWS in minutes. Blueprints are used by CodeCatalyst to set up a code repository with a working sample app, define cloud infrastructure, and run pre-configured CI/CD workflows for your project. There are blueprints for different types of applications, and you can customize the deployment architecture and frameworks, infrastructure-as-code language, build steps, and AWS Regions you want to use. Watch this video to better understand how blueprints enable you to set up and customize a new software project in a complete software "
-            },
-            "image": {
-              "S": "https://d2xbndf6m96kr7.cloudfront.net/images/4_6_Start+your+software+project+fast+with+Amazon+CodeCatalyst+blueprints.png"
-            },
-            "createdAt": {
-              "S": "replace_time"
-            },
-            "updatedAt": {
-              "S": "replace_time"
-            }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "id": {
+            "S": "9"
+          },
+          "courseId": {
+            "S": "2"
+          },
+          "name": {
+            "S": "Introduction to the DMS Schema Conversion"
+          },
+          "url": {
+            "S": "https://d2xbndf6m96kr7.cloudfront.net/videos/2_3_Introduction+to+the+DMS+Schema+Conversion.mp4"
+          },
+          "author": {
+            "S": "Amazon Web Services"
+          },
+          "class_flag": {
+            "N": "10"
+          },
+          "description": {
+            "S": "AWS introduces  the Schema Conversion feature of AWS Database Migration Service. You can use DMS Schema Conversion to assess migration complexity, convert database objects to a format compatible with your target database engine, and apply the converted code to your target database. Watch this video to get started with the DMS Schema Conversion."
+          },
+          "image": {
+            "S": "https://d2xbndf6m96kr7.cloudfront.net/images/2_3_Introduction+to+the+DMS+Schema+Conversion.png"
+          },
+          "transcript": {
+            "S": "Meet the new Convert feature of AWS Database Migration Service (DMS). This new feature enables customers to run heterogeneous database migrations using a web-based interface. You can use the DMS Schema Conversion to assess migration complexity, convert source database objects to a format compatible with your target database engine, and apply the converted code to your target database.\n\nAt a high level, DMS Schema Conversion operates with the following three components. An instance profile specifies network and security settings. A data provider stores database connection credentials. A migration project contains data providers, an instance profile, and migration rules. AWS DMS uses data providers and an instance profile to create a process that converts database schemas and code objects.\n\nFirst of all, you create an instance profile where your migration project works. Here, you choose the virtual private cloud, its Subnet IDs, and the Amazon S3 bucket where the migration project stores information. Make sure that you turn on bucket versioning when you create your S3 bucket. To write data to this S3 bucket, add the appropriate IAM role.\n\nNext, you describe your source and target databases using DMS data providers. DMS doesn't store database credentials. You add the connection information to AWS Secrets Manager. You can use Oracle or SQL Server as a source for DMS Schema Conversion. In this video, we use SQL Server as a source data provider. DMS created the source data provider. \n\nNext, you create the target data provider. You can use a MySQL or PostgreSQL database hosted on the AWS as a target for DMS Schema Conversion. In this video, we use Amazon RDS for MySQL as a target data provider. DMS created the target data provider.\n\nNow you create your migration project. Here you choose the instance profile that you created before. For the source and target, you specify data providers, database credentials that you store in Secrets Manager, and the IAM role to read your secrets. You can apply name transformation rules for converted database objects. Use these rules to change the object name to lowercase or uppercase, add or remove a prefix or suffix, and rename objects. In this video, we create a rule that adds a suffix to the names of all converted tables for all schemas. DMS created the migration project.\n\nNow you can convert your source database objects. The first launch of the DMS Schema Conversion requires some setup and can take 10 to 15 minutes. After DMS launched the schema conversion, we choose the source database schema and create a database migration assessment report. This report shows the database objects that can be automatically converted to a format compatible with your target database. DMS Schema Conversion updates the report according to the selected database objects. You can see the conversion ratio for database storage and code objects. Also, you can review the SQL code of your source database objects. You can save a copy of the assessment report as a PDF or CSV file. DMS Schema Conversion writes the assessment report to your Amazon S3 bucket. For objects that the DMS Schema Conversion can't convert, this report includes recommended conversion actions.  \n\nNow we convert the source database schema. The conversion process can take a few minutes. DMS Schema Conversion converted the source database schema. As we already know from the assessment report, some objects require manual conversion. When you choose an object in the source database, DMS Schema Conversion displays its code as well as the converted code. You can see that DMS Schema Conversion added the suffix to the names of converted tables according to the name transformation rule that we created before. You can review the conversion action items and see the source code that you need to convert manually.\n\nWe select the converted schema and apply the code changes to the target database. This operation can take a few minutes. Schema Conversion successfully applied the converted code to the target MySQL database. To edit the converted code, you can save it as a SQL script. DMS Schema Conversion writes the SQL script to your Amazon S3 bucket. After you edit the SQL script, apply it to your target database manually.\n\nNow let us review the target database and check that DMS Schema Conversion applied the converted code. You can see that the tables with the converted suffix exist in our target MySQL database. \n\nThis covers the key features of DMS Schema Conversion. Thanks for watching this video."
+          },
+          "createdAt": {
+            "S": "replace_time"
+          },
+          "updatedAt": {
+            "S": "replace_time"
           }
         }
-      } 
-    ]
-  }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "id": {
+            "S": "10"
+          },
+          "courseId": {
+            "S": "2"
+          },
+          "name": {
+            "S": "Enabling AWS Support with Atlassian Jira Service Management"
+          },
+          "url": {
+            "S": "https://d2xbndf6m96kr7.cloudfront.net/videos/2_4_Enabling+AWS+Support+with+Atlassian+Jira+Service+Management.mp4"
+          },
+          "author": {
+            "S": "Amazon Web Services"
+          },
+          "class_flag": {
+            "N": "0"
+          },
+          "description": {
+            "S": "In this video, you’ll see how to create and manage AWS support cases in Jira Service Management. With the AWS Service Management Connector for Jira Service Management, you can leverage the Jira incident management process throughout the AWS support case lifecycle and synchronize case-related communication between the two services."
+          },
+          "image": {
+            "S": "https://d2xbndf6m96kr7.cloudfront.net/images/2_4_Enabling+AWS+Support+with+Atlassian+Jira+Service+Management.png"
+          },
+          "transcript": {
+            "S": "In this video, you'll see how to enable AWS Support with Atlassian Jira Service Management with the AWS Service Management Connector for Jira Service Management. You can leverage the Jira incident management process throughout the AWS support case life cycle and synchronize case-related communication between the two services.\n\nThis is our Jira Service Management account which is already configured with the AWS Service Management Connector. To get started, let's sign in. As you can see, the connector has been installed in this Jira Service Management instance. \n\nLet's check on our AWS accounts. Our account has been onboarded. Next, let's review the connector settings. Notice that the AWS Support checkbox is selected. This setting allows us to seamlessly open support incidents with AWS Support using Jira Service Management. Here, we can see that JSMTEST, the JSM test project for which we're going to use AWS Support integration, has been enabled for the connector under support configuration. We can confirm that the JSM test project has been associated with the account.\n\nNext, let's open the project and create a support case from Jira Service Management. Notice that incident is selected as the issue type. We'll begin by filling in the Jira issue fields. We'll specify the severity of the AWS Support case by setting the priority of the incident. For our purposes, we'll select the lowest priority.\n\nNext, let's configure the AWS Support fields. We'll select the checkbox to create an AWS Support case and then specify the AWS Support service and category. For AWS service, we'll select Alexa Services. For category, we'll specify Other. Let's create the incident.\n\nNow that the incident has been created, let's look at the record. Notice that an AWS Support case has been created and the AWS Case ID and AWS Status fields have been populated. \n\nNext, let's go to the AWS Support dashboard and check for our support case there. Here's the case we just created. Let's open it from this page. We can correspond with Jira. Let's reply to the initial message about the issue. We can respond through the web, by chat, or by phone. We can also attach files. We'll use the web option to submit the correspondence directly to Jira Service Management.\n\nNow we'll go back to the Jira incident and find the correspondence we just submitted. Let's refresh the page. As you can see, the correspondence sent from AWS Support appears in the Jira incident record.\n\nNow let's add correspondence in Jira this time, we'll include an attachment. Let's return to the AWS Support case. We'll do a quick refresh, the correspondence including the attachment has been synced back into the support case.\n\nNow let's go back to the Jira incident to resolve it. In the workflow dropdown list, we'll select Resolve. Next, we'll specify the resolution and resolve the incident. \n\nLet's go back to the AWS Support case and refresh the page. The AWS Support case has been resolved.\n\nYou've just seen how to enable AWS Support with Atlassian Jira Service Management. You can learn more about this topic in the description and links for this video. Thanks for watching. Now it's your turn to try."
+          },
+          "createdAt": {
+            "S": "replace_time"
+          },
+          "updatedAt": {
+            "S": "replace_time"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "id": {
+            "S": "11"
+          },
+          "courseId": {
+            "S": "3"
+          },
+          "name": {
+            "S": "Bring Your Own Custom ML Models with Amazon SageMaker"
+          },
+          "url": {
+            "S": "https://d2xbndf6m96kr7.cloudfront.net/videos/3_1_Bring+Your+Own+Custom+ML+Models+with+Amazon+SageMaker.mp4"
+          },
+          "author": {
+            "S": "Amazon Web Services"
+          },
+          "class_flag": {
+            "N": "0"
+          },
+          "description": {
+            "S": "With Amazon SageMaker, you have the flexibility to bring in your own model and leverage the capabilities of the service. In this video, we will dive deep into how you can bring your own model into SageMaker."
+          },
+          "image": {
+            "S": "https://d2xbndf6m96kr7.cloudfront.net/images/3_1_Bring+Your+Own+Custom+ML+Models+with+Amazon+SageMaker.png"
+          },
+          "transcript": {
+            "S": "Hi, my name is Emily Webber and I'm a machine learning specialist at Amazon Web Services. Today, we're gonna be talking about Amazon SageMaker. I hope you enjoyed our previous two videos. First, we learned about notebook instances, then we learned about using the built-in algorithms. Now we're gonna learn about bringing your own model. This is your deep dive.\n\nSo first, there are many ways to train models on SageMaker, right? And so the first one is using the built-in algorithms, but it just grows from there. There's also a technique called script mode. You can bring your own docker container, you can leverage a solution on the AWS Machine Learning Marketplace, or you can just train on your notebook instance. \n\nIn this scenario, we're going to learn about options number 2, 3, and 4. First off, script mode. So script mode means that Amazon SageMaker is managing a docker container that is an AWS managed container that lives in ECR already. How do you want to write your own model? That's pretty much the primary question you need to ask when you're using script mode. And then you're going to want to pick one of the open source containers that we are actively managing. So that's going to cover MXNet, TensorFlow, PyTorch, Scikit-learn, SparkML, and Chainer. \n\nWe're going to be managing those containers. You write the code for your model and then you put it inside those containers and then it can run on the SageMaker training jobs in particular. First, you want to point to the AWS managed container of your choice, write your model, which can be a single file or a bundle of files, specify your entry point within the SageMaker estimator. And so that's the location of your file. So if your file is sitting two directories above or if it's the name of the file and it's in the same directory, then just take the name of the file and then you'll just put that straight in the SageMaker estimator include any extra libraries that you're gonna have with the requirements.txt file. And then when you use the script mode managed containers, you're also gonna get to use our web server. So when you're interested in running inference with that model, you're gonna be able to leverage and manage web server.\n\nOK, when you bring your own Docker file, this is what it's going to look like. You're going to import from the SageMaker examples, you can install any libraries that you need to, you can run additional installations. And then in this case, there's a copy, right? So there's a copy on Mars.R into opt/ml and then this copy of plumber.R into opt/ml. And so everything with inside SageMaker is looking inside /opt/ml. So it's going to be looking directly within that location for both your model and your inference code. And then in this case, we're specifying the entry point as Mars.R.\n\nSo just to walk through that when you bring your own Docker file, that means you as a customer are managing the creation of that container and the registry within ECR. That means that you can write your model however you please. You'll want to point to your model within your Docker file. You want to register that container on ECR and you want to point to your container's address in ECR within your SageMaker estimator and then don't forget to implement a serve function. So even if you're just doing the training, we're still going to check for a function that's called serve. And so make sure you have something implemented there.\n\nGreat. So we talked about script mode, then we covered bring your own Docker container. The AWS Machine Learning Marketplace is a way that you can access other algorithms to train on SageMaker, both algorithms and models. An algorithm means it's a set of code that you can train on your data set. A model means it's a pre-trained model artifact and you're just going to access it and then use it within your environment. Both of those are available on a subscription model and the good news for us is that there is absolutely a free tier. So you can absolutely check out some of the solutions for free. Many of them are going to fall into a number of these categories. So whether that's image, audio, vision, text and there are over 230 solutions that are available on the AWS Machine Learning Marketplace today.\n\nOK, let's take a look at an example. So in this case, we're just gonna cruise down here. So I'm at the SageMaker examples tab under advanced functionality. I'm going to select R bring your own, going to hit use on that. We're going to create a copy. And then same scenario, I'm just gonna enter an S3 bucket here.\n\nNow, we're going to import SageMaker and then our bucket is gonna be sagemaker.Session.default_bucket. Let's make sure that's looking good. Great. OK? Then I'm just gonna run everything below.\n\nAll right. So this is an example where we're bringing our own R model and the flow is pretty similar. We're importing SageMaker, we've got our bucket and our session. We need some permissions. I'm gonna open up the R model so you can see it and here's our new folder and here is the R model that we're actually looking at. So that's m.R, you'll notice that the prefix is /opt/ml. We've got our input_output_model_path, channel_name. We're going to learn about that in the next session. And then here's our training function. So we've got our parameters, we've got our target, we're gonna read in our training files. We've got our model right here. Then we're gonna fit it and write success and there's also the serve function right here. And that's actually using plumber and then just to check out the Docker file. So we are pulling from the SageMaker example maintainer, installing those R libraries, copying it into /opt/ml and specifying that entry point. \n\nAnd then just to show you the estimator here while this example is running. So this is the set where it's actually publishing an ECR and then down here are the training parameters. So this is the actual image, right? And so it's actually within ECR. Here's our training cluster also going to learn about in a second here. All right, then we call model.fit.\n\nSo there we go a couple of pro tips. So again, the three ways that we're learning about your script mode, bring your own Docker file and machine learning marketplace. Certainly the script mode is going to be a lot faster to train your own model. You are going to be limited to those managed options. So if you need to maximize your flexibility, go ahead and bring your own Docker file. It can be a little bit more time consuming because you actually have to build that entire Docker file. However, you can absolutely test it locally. So you can test the creation of your Docker file on your notebook instance before actually setting it up to ECR.\n\nAnd then obviously on the Machine Learning Marketplace, you can move very quickly. There are hundreds of options that are available on the marketplace. You can find one and get to use it right away. Just remember that SageMaker within the container is going to read from /opt/ml. And definitely find an example that fits your needs whether that's using R, TensorFlow, MXNet, PyTorch or any specific framework or scenario that you're looking at, find that example, run through it and make sure that you understand how it works and then just modify it and it will absolutely work.\n\nSo, thank you very much. That's all I got. My name is Emily Weber. I'm a machine learning specialist at Amazon Web Services. Thank you for your time. Go ahead and check out our GitHub site, amazon-sagemaker-examples."
+          },
+          "createdAt": {
+            "S": "replace_time"
+          },
+          "updatedAt": {
+            "S": "replace_time"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "id": {
+            "S": "12"
+          },
+          "courseId": {
+            "S": "3"
+          },
+          "name": {
+            "S": "Centrally track and manage your model versions in Amazon SageMaker"
+          },
+          "url": {
+            "S": "https://d2xbndf6m96kr7.cloudfront.net/videos/3_2_Centrally+track+and+manage+your+model+versions+in+Amazon+SageMaker.mp4"
+          },
+          "author": {
+            "S": "Amazon Web Services"
+          },
+          "class_flag": {
+            "N": "0"
+          },
+          "description": {
+            "S": "Building an ML application involves developing models, data pipelines, training pipelines, inference pipelines, and validation tests. With the Amazon SageMaker Model Registry, you can track model versions, their metadata such as use case grouping, and model performance metrics baselines in a central repository where it is easy to choose the right model for deployment based on your business requirements. Model Registry automatically logs the approval workflows for audit and compliance."
+          },
+          "image": {
+            "S": "https://d2xbndf6m96kr7.cloudfront.net/images/3_2_Centrally+track+and+manage+your+model+versions+in+Amazon+SageMaker.png"
+          },
+          "transcript": {
+            "S": "Building an ML application involves developing models, data pipelines, training pipelines, inference pipelines, and a set of validation tests. In this video, we will explore how you can manage your models using SageMaker's Model Registry.\n\nWith the SageMaker Model Registry, you can track model versions, the metadata, group models by use case, and track model performance metric baselines in a central repository where it's easy to choose the right model for deployment based on your business requirements. This is often a key feature to enable transitioning the ML workflow from data scientists to ML engineers.\n\nWhen data scientists are working in their notebook or using training pipelines, they can register the models they train in a model group. In SageMaker's Model Registry, model groups will typically contain multiple versions of a model, each corresponding to an iteration of model training. These new versions could correspond to a new set of hyperparameters that was used to train a model or a new version of a dataset.\n\nWhen models are in the registry, ML engineers can pick which models make it to production by reviewing the performance metrics. Then they can approve models for deployment and they can integrate this approval workflow with their CI/CD pipelines and have automated model deployment. They can view the lineage of these models as well, all from a single place.\n\nNow, let's look at a notebook where we take a model that we've already trained and cataloged in the Model Registry. When we register our model in the Model Registry, we first create the model by providing the model artifact that's stored in S3. And then we specify which group the model needs to be added to in the Model Registry. Along with specifying the group, we can provide information such as custom metadata properties. For example, here, I'm specifying the model type and the CNN. We specify our model metrics. And finally, we specify an approval status. The approval status typically indicates whether or not the model is a candidate for deployment. When registering our model, we register it with a state pending manual approval, which means in the Model Registry, users have the ability to through the UI approve or reject a model for deployment.\n\nNow, I'm going to run all of the cells in this notebook and then we can take a look at what our new version of the model looks like in the Model Registry. Now that the notebook is done, let's look at our model. We open the model group within the Model Registry and I can see there is one new version of the model that's been added. I have two previous versions, both have been approved and this newly added version is in a state pending. When I double click on this, I can see some activity associated with the model. I can see my model metrics and under settings, I have lineage tracking of my model automatically taken care of. This trial component corresponds to the trial component in the experiment that was used to train this model. And that information is automatically captured in the Model Registry. Along with that, I see the custom properties that I've added as well.\n\nNow assuming this model is a good candidate for deployment, I can update the status and set it as approved. And this action can be used to trigger subsequent pipelines for deployment. All of the actions that you take in the Model Registry are integrated with EventBridge, giving you the flexibility to string together complex workflows for your model deployment. \n\nNow that this model has been approved, I see a new activity that's been logged to the model. And when I go back to this list of model versions, I can see now this third version that we added just now has been approved.\n\nThe Model Registry serves as a good handoff point between data scientists and ML engineers or people that are focused on model training and people that are focused on model deployment. I encourage you all to explore SageMaker Model Registry as a central place to catalog and manage all of your models."
+          },
+          "createdAt": {
+            "S": "replace_time"
+          },
+          "updatedAt": {
+            "S": "replace_time"
+          }
+        }
+      }
+    }
+    ,
+    {
+      "PutRequest": {
+        "Item": {
+          "id": {
+            "S": "13"
+          },
+          "courseId": {
+            "S": "3"
+          },
+          "name": {
+            "S": "Introducing Amazon Bedrock"
+          },
+          "url": {
+            "S": "https://d2xbndf6m96kr7.cloudfront.net/videos/3_3_Introducing+Amazon+Bedrock.mp4"
+          },
+          "author": {
+            "S": "Amazon Web Services"
+          },
+          "class_flag": {
+            "N": "10"
+          },
+          "description": {
+            "S": "Amazon Bedrock is a fully managed service that offers a choice of high-performing foundation models from leading AI companies, along with a broad set of capabilities to build generative AI applications, simplifying development while maintaining privacy and security. See how customers across industries are leveraging Amazon Bedrock to create new generative AI applications to accelerate productivity and drive innovation."
+          },
+          "image": {
+            "S": "https://d2xbndf6m96kr7.cloudfront.net/images/3_3_Introducing+Amazon+Bedrock.png"
+          },
+          "transcript": {
+            "S": "Generative AI is delivering entirely new experiences and driving greater levels of productivity. Unlocking more potential for innovation, transformation, efficiency and productivity than we have seen since the earliest days of the internet. Organizations of all sizes are already building with generative AI and seeing the excitement of their users. But customers tell us they want to do more and they are asking for the tools and capabilities to get there.\n\nIntroducing Amazon Bedrock, the easy way to build and scale generative AI applications. Amazon Bedrock is a fully managed service that offers leading foundation models along with a broad set of capabilities to build generative AI applications privately and securely. What sets Bedrock apart from other services is the choice of foundation models that we offer from both Amazon and leading AI companies. Also, the tooling that developers need to generate to create foundation model applications.\n\nThe game of golf has changed drastically over the last 20 years. We are now collecting data on and off the course and that has changed the level of the game in competition. Eventually, what we're gonna be able to do with Bedrock is have our players interact with a generative AI platform that asks them how I perform today. Bedrock will enable us to customize that response for those players.\n\nBedrock is unique because you can look at their libraries and models and see which one has the best performance without knowing much about data science. And it's easy to deploy these models into production. Customer data that is used with Bedrock is kept private to the customer. We don't use any of that data to train the base models. Neither do we share it with any third parties or use it ourselves to improve our own models.\n\nThe most exciting part of Bedrock is the customer traction. Just the diversity of use cases that customers are enabling on top of Bedrock from developing new ways to discover life-saving drugs to delivering the most delightful customer experiences. Bedrock helps businesses unlock the potential of generative AI."
+          },
+          "createdAt": {
+            "S": "replace_time"
+          },
+          "updatedAt": {
+            "S": "replace_time"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "id": {
+            "S": "14"
+          },
+          "courseId": {
+            "S": "3"
+          },
+          "name": {
+            "S": "Build ML models at scale with Amazon SageMaker Studio Notebooks"
+          },
+          "url": {
+            "S": "https://d2xbndf6m96kr7.cloudfront.net/videos/3_4_Build+ML+models+at+scale+with+Amazon+SageMaker+Studio+Notebooks.mp4"
+          },
+          "author": {
+            "S": "Amazon Web Services"
+          },
+          "class_flag": {
+            "N": "0"
+          },
+          "description": {
+            "S": "Amazon SageMaker Studio Notebooks are quick start, collaborative notebooks that integrate with purpose-built ML tools in SageMaker and other AWS services for your end-to-end ML development, from prepare data at peta-byte scale using Spark on Amazon EMR, train and debug models, track experiments, deploy and monitor models and manage pipelines – all in Amazon SageMaker Studio – a fully integrated development environment (IDE) for ML. Easily dial up or down compute resources without interrupting your work. Share notebooks easily with your team using a sharable link."
+          },
+          "image": {
+            "S": "https://d2xbndf6m96kr7.cloudfront.net/images/3_4_Build+ML+models+at+scale+with+Amazon+SageMaker+Studio+Notebooks.png"
+          },
+          "transcript": {
+            "S": "Machine learning development is complex and costly. But with Amazon SageMaker Studio notebooks, it doesn't have to be. Introducing the fully managed Jupyter notebooks for machine learning. It allows you to prepare data, build, train, deploy and operate machine learning all from a single web-based visual interface.\n\nAmazon SageMaker Studio notebooks are one-click Jupyter notebooks. No need to set up compute instances or file storage beforehand. So you can start to browse your code and notebooks without having to wait for compute instances to spin up. And the underlying compute resources are fully elastic, enabling you to easily dial your available resources up or down. So you only pay for what you need. Changes are automatic, taking place in the background. So your work isn't interrupted.\n\nYou can generate reproducible links without manually tracking dependencies, allowing you to reproduce the notebook code with minimal effort. With one click, you can share your notebooks with others. They'll be able to quickly reproduce your results and collaborate while building models and exploring your data.\n\nBuild machine learning models at scale, increase your productivity, share your progress with others with Amazon SageMaker Studio notebooks."
+          },
+          "createdAt": {
+            "S": "replace_time"
+          },
+          "updatedAt": {
+            "S": "replace_time"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "id": {
+            "S": "15"
+          },
+          "courseId": {
+            "S": "4"
+          },
+          "name": {
+            "S": "How to use multiple DynamoDB tables with GraphQL"
+          },
+          "url": {
+            "S": "https://d2xbndf6m96kr7.cloudfront.net/videos/4_1_How+to+use+multiple+DynamoDB+tables+with+GraphQL.mp4"
+          },
+          "author": {
+            "S": "Alex DeBrie"
+          },
+          "class_flag": {
+            "N": "0"
+          },
+          "description": {
+            "S": "This video shows how to build a GraphQL application with multiple DynamoDB tables using AWS AppSync. Many DynamoDB data modeling patterns use a single table to hold multiple entities from your application; however, this single-table design pattern may not be desirable when using DynamoDB with GraphQL applications. In using multiple tables, we are able to create simpler, more focused GraphQL resolvers with more flexible querying."
+          },
+          "image": {
+            "S": "https://d2xbndf6m96kr7.cloudfront.net/images/4_1_How+to+use+multiple+DynamoDB+tables+with+GraphQL.png"
+          },
+          "transcript": {
+            "S": "Hey folks, I'm Alex DeBrie. And today we're gonna talk about using DynamoDB in your GraphQL APIs, specifically, this video is gonna focus on using multiple DynamoDB tables in your API.\n\nI think there's a debate on, 'Hey, should I use a single table? Should I use multi-table with my GraphQL APIs?' The key trade-off here is, do you want to have less complexity in your resolver or do you want to have a little more performance on your actual queries? So in this one, we'll be looking at using multiple DynamoDB tables. I'm gonna be using AppSync. I'm gonna be doing a lot in the AWS console, but we also have an accompanying repo for this. So if you want to see how this looks using infrastructure as code, go ahead and check out that repo.\n\nLet's start off with the intro of the application we're going to build here. Imagine we're building a SaaS application that allows users to come in, create their own blog, right? So a user will sign up, they'll create their site, associate a domain with that site if they want to start their blog. Now as they start writing, they'll write posts on their blog. So we have a one-to-many relationship between that site they've created and the blog posts they've written for their site. And then other readers can come, they can view those posts, but they can also comment on those posts. So posts will have a one-to-many relationship with comments in this application.\n\nSo we have three entities here: sites, posts, and comments. Again, since we're doing that multi-table design with DynamoDB, each one of those entities is going to get their own DynamoDB table. So next, we're going to go into the AWS console and set up the DynamoDB tables for each of these entities.\n\nSo I create this table, go to the DynamoDB section of the AWS console and click that create table button. That'll drop us into that table creation wizard. And remember we're creating one table for each entity in our application. So we can start off with our sites table. We can give it a primary key that's unique to that actual entity. So give it domain for the partition key there. We'll keep most of the settings the same. We do want to customize and change it to on-demand billing mode. It's just a little more cost-friendly for us there. And then you can scroll down to the bottom and hit create table.\n\nSo you can see that that's created the sites table. We also want to create tables for our two other entities, posts and comments. We'll zoom through that here as well. Create the posts table, set that to on-demand and create that comments table as well. Again, each of those are going to have primary keys that are unique to those entities, specific to those entities. So we're not using that PK/SK pattern you might see in single table design.\n\nAfter we've got our three tables ready and active, we can move on to the next step. All right, the next step we're going to do here is set up our GraphQL API. And to do that, you need to go to the AppSync section of the AWS console. Once you're there, click that create API button to set up your API. There are a few different wizards and guides to get going here, but we have our own GraphQL schema. So we're actually just gonna build it from scratch and hit that start button.\n\nFirst thing you need to do is give your API a name. So I'll just give it 'multi-table-blog' here to indicate we're using multiple tables. Once I'm in there, I want to edit my GraphQL schema because I've already defined my schema in this application, right? So I can delete what's in there and paste my existing schema. \n\nLet's just take a quick look at that. You know, we've got our schema root which has both those query and mutation fields on it. You can see those in there. If you look at our query type, we have two main queries we're going to use there - getSite and getPostsForSite, right? So someone can go check out our site, get the posts for a site. We also have that mutation type that's going to allow us to do things like createSite, createPost, createComment. If you look further down in our schema, we have our different types defined - Site, Post, Comment, connections, all that stuff.\n\nSo once you're good with that, go ahead and hit that save schema. And the next thing we're going to do is set up our data sources. So go over here on the left-hand side and click that data sources button. Now what data sources are is just a way to register DynamoDB tables or OpenSearch domains with GraphQL so that you can use them in your AppSync domain.\n\nSo we'll create our first one here. Give it a name of 'SitesTables'. We're just gonna register that first table for us here. It's of type 'Amazon DynamoDB table', choose the region it's in and actually choose the table that we just created. So we created all those tables earlier. Now, we're just registering them with our AppSync domain here. \n\nSo I'll do the same thing with 'posts' and 'comments' really quickly here to make sure that we have all our data sources registered. So we didn't just create them in DynamoDB, we also registered them in AppSync with these data sources.\n\nWith those data sources hooked up, let's go actually configure some resolvers. To do that, let's go back to our schema view that we had before. And if you look on the right-hand side there, there's this resolver section where we can attach different resolvers to elements in our schema. Let's do it.\n\nNow, I'm gonna scroll down to the query root and find that getSite field and click that 'Attach' button to attach a resolver.\n\nTo configure the resolver, I need to choose a data source. I'm gonna go directly to one of those DynamoDB tables we configured. If you're going directly to a DynamoDB table, you need to set up what's called request mapping and response mapping templates. So you're gonna pass in some VTL here.\n\nYou can see this is a pretty straightforward template which is nice. You know, we're doing a GetItem operation, we're passing in an argument. This is the benefit of using that multi-table approach - we have pretty simple resolvers where we don't have to be thinking about a lot and doing a lot in our VTL.\n\nNow, if you don't like VTL, you don't have to use it. You can use Lambda functions instead of going directly to your DynamoDB tables if you like, then you can write it in Node, Python, Java, whatever your language of choice is.\n\nSo once you've configured that first resolver, go ahead and hit save. I want to do one more resolver here. So let's head back to your schema. You know, we started with our query root. That's great. But if you go look at that Site type, you know, it has those site properties, but it also has this posts property, right? A one-to-many relationship. We have that PostsConnection here. \n\nLet's show how to resolve a field off of one of our different types. So go find that Site type and find that posts field. And let's attach a resolver here. We're going to use that 'posts' table and now we'll paste in the request mapping template here.\n\nAgain, this is a pretty straightforward template. We're doing a Query operation against DynamoDB. We're looking for all the posts with a particular siteId and notice that when we're pasting in that siteId, we're using the context.source object that's passed into that query there. What that's saying is, 'Hey, we know this is a second or later step in a GraphQL query. There's already a parent item that's being fetched. And based on that item we retrieved, we can pass in that siteId in order to fetch the posts for this.'\n\nWe'll also paste in our response mapping template. Again, pretty straightforward here, we'll pass in the cursor, we'll pass in the items we get back.\n\nOnce you're done, go ahead and hit that 'Save Resolver' button to save this resolver. And then let's go ahead and navigate back to that schema view.\n\nOne last thing we want to do before we start running queries is to enable X-Ray. So go ahead and go into the settings and scroll down and click 'Enable X-Ray', hit save. What X-Ray is going to do is give you distributed tracing. So when you make a request to your GraphQL API, it'll show you all the different resolvers that went through, how long that took - just give us real nice visibility into our API.\n\nSo we have everything configured. Let's go actually run some queries against our API. To do so, go to the 'Queries' section on the side of that API sidebar there. And what it's gonna give you is a little playground for you to actually write some queries in, run those and execute them.\n\nSo first thing I want to do here is create our first site, right? So I'll do a createSite mutation, giving an input. I'm creating the 'AWS Amazon Blog', create that. You can see I got my data back. I got an id, I got a domain, everything I want there.\n\nNow, I've done that. Let's go ahead and let's actually create a post, right? So I'm creating a post, I put in my siteId, I have my title, my content for my blog post and that was able to create as well.\n\nYou know, one post is nice, but maybe I want to have a little bit of consistency here. So I want to have a second post here as well. I'll paste that in, a second post. I'll create that one.\n\nSo now we have a user that's created a site, they've created two posts. Let's go ahead and fetch all that using the power of GraphQL to fetch that related data in a single query here. So we'll get away from our mutations, we'll actually do a query. We're doing a getSite query where we're fetching that site itself. But we're also fetching that nested data, that posts data in reverse chronological order so we can show our latest posts to people that want to view it.\n\nI'll run that query there. And when I get that, you can see, I've got all my data back that I requested in a single request. I got that site data indicating the information about that site. But I've also got my posts - what are the IDs, what are the titles for those particular posts there.\n\nAnd the last thing I want to do is just look at the flow of data here, what happened? And that's where we enabled Amazon X-Ray earlier. I want to show that. So let's go to settings. If you go back to that X-Ray settings, you can click 'View Traces in X-Ray' and it'll take you right to your service here.\n\nWhat I wanna do, you can see a lot of different traces listed. I wanna just find the most recent one because that was the last query I ran. So you can go that one that happened 27 seconds ago. I'll click on that and what it's showing me is the whole flow of that request.\n\nSo it hits my API, it's running that first resolver which reaches out to DynamoDB. You can see that first DynamoDB request there to get the item from the sites table. But then there's that second DynamoDB request, that query against the posts table. So I have two different requests going to DynamoDB and notice that they're sequential because I have to get the site first. Once that's resolved, then I can go get the other one.\n\nThis result in X-Ray really shows the main takeaway we want to have here. If you're using that multiple table approach in your GraphQL API, you're gonna have simpler, less complex resolvers. However, when a client comes with a query that has a lot of nested data, the performance might be a little slower as you have to sequentially work through each of those different resolvers.\n\nIf you go check out our single table video, you can see this exact same design but using that single table approach. There's more complexity in the resolvers, but the performance is a little faster for those well-known optimized queries.\n\nThanks for watching this. Hope you enjoyed it."
+          },
+          "createdAt": {
+            "S": "replace_time"
+          },
+          "updatedAt": {
+            "S": "replace_time"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "id": {
+            "S": "16"
+          },
+          "courseId": {
+            "S": "4"
+          },
+          "name": {
+            "S": "How to use single-table DynamoDB design with GraphQL"
+          },
+          "url": {
+            "S": "https://d2xbndf6m96kr7.cloudfront.net/videos/4_2_How+to+use+single-table+DynamoDB+design+with+GraphQL.mp4"
+          },
+          "author": {
+            "S": "Alex DeBrie"
+          },
+          "class_flag": {
+            "N": "10"
+          },
+          "description": {
+            "S": "This video shows how to use single-table DynamoDB design with GraphQL. Single-table is a DynamoDB pattern in which multiple entities for an application are combined into a single DynamoDB table. Using AWS AppSync, we set up a blog hosting application that contains Sites, Posts, and Comments in a single table. You will learn how to use “lookaheads” in your GraphQL resolvers to understand the nested relations that are requested in your queries. After watching this video, you will understand the tradeoffs of using single-table design in your GraphQL application."
+          },
+          "image": {
+            "S": "https://d2xbndf6m96kr7.cloudfront.net/images/4_2_How+to+use+single-table+DynamoDB+design+with+GraphQL.png"
+          },
+          "transcript": {
+            "S": "Hey folks, I'm Alex DeBrie. And today we're gonna talk about using DynamoDB with your GraphQL APIs. Now, a lot of DynamoDB advice recommends using single table design for your DynamoDB applications. And there's some debate about how well that works with GraphQL. In this video, we're gonna show how to use single table design with your GraphQL API. \n\nThe key trade-off to know here is this is gonna add a little bit more complexity in your resolver, but you're gonna have better performance on your queries. So we're gonna build this using AWS AppSync. I'm gonna show the key points in the AWS console. But if you want to see how this is done using infrastructure as code, go ahead and check out the repo that's accompanying this project.\n\nNow, before we get started, I just want to talk about the guiding application that we're going to use for this example. Imagine we have some sort of SaaS blog hosting platform, right? So users can come in, they can set up a site. So we have a site entity in our application. Once they've created a site, they can blog on that site, add lots of different posts. So there's a one-to-many relationship between sites and posts. Also, when other users and readers come and look at those posts, they can comment on those posts if they want. So we have a one-to-many relationship between posts and comments.\n\nNow, the key point here is even though we have three separate entities, they're all gonna be going into that single DynamoDB table that we're gonna be using for this application. The first thing we're gonna do is create that DynamoDB table. So head to the DynamoDB section of the AWS console and click that create table button to get started.\n\nWhen you give our table a name. Since we're just using a single table here, we'll just give it a name like, you know, 'AppsyncSingleTable' or something. And then we need to choose the primary key for our table. Since we're using single table design, we'll use that generic PK/SK values for our partition key and our sort key there. We'll keep most of the settings the same. The only thing we want to change here is go to on-demand mode. We don't really need to worry about our capacity for this and scroll down and hit that create table button. We'll just give it a second and wait for our table to be created.\n\nAnd as soon as it's created, we can go on and create our AppSync API. To do that, we want to head to the AWS AppSync section of the AWS console, go there and click that create API button. There are a few different wizards and guides, ways we can set up our schema, but we already have a schema. So we'll just do the 'Build from scratch' option and click start.\n\nNext thing we need to do is give our API a name, so we'll give it the name 'SingleTableBlog' and hit that create button. So now we've created our API, what we need to do is edit our schema. So let's click that edit schema button and we'll just paste in our schema that we already have defined for that.\n\nI want to take a quick look at that. You know, you can see the schema root which has both query and mutation on it. Within our query, you can see we have a few different top-level queries - getSite, getPostsForSite, things that are really common in our application. We also have the different mutations that we have - createSite, createPost, createComment, things like that. Additionally, we have all of our types defined.\n\nYou can hit save schema to save that schema to your API. One last thing I want to do here, head over to data sources and we're going to register our DynamoDB table that we created, right? So we created our DynamoDB table, we want to register it for use here. We'll give it a name of 'DynamoDBTable' and indicate that it's of type 'Amazon DynamoDB table'. We'll look up the region that we created it in and then we should be able to see our 'AppsyncSingleTable' table. Once you've done that, hit that create button and you're good to go, you've now registered your table within your API and you can use it in a resolver.\n\nLet's go create one of these resolvers now. So what I want to do is head back to my schema that I've already entered. And if you look at your schema on the right-hand side, there's a resolver section where you can attach different resolvers to different fields in your schema. I'm gonna scroll down to the mutation resolver and do that createSite, sort of the top-level resolver in my application. I'll configure a data source and because I'm going directly to a DynamoDB table, I'll use what's called VTL templates. So this is a templating language to interact directly with my DynamoDB table. If you don't like VTL, you can use a Lambda function directly instead and work with your DynamoDB table that way. But I'm gonna be working with VTL in this particular example.\n\nSo I'll paste in both the request mapping and the response mapping. One thing, if you look at the request mapping, just notice the key we're using. Now, we're using PK and SK for that primary key value for our item, we also have a type attribute. These are common DynamoDB single table design principles here.\n\nSo we'll just do that. We'll save this resolver here and we've configured our first resolver on our DynamoDB table. I want to set up one more resolver for our schema because it's a little more complex and it's gonna show off that single table design.\n\nSo let's go down and find our Site type in our schema. You can see that it has some properties - id, name, domain, but it also has this posts property which is a type PostsConnection, which is going to include a cursor plus a posts array of other posts. So what that includes is if someone comes and gets our site, they can also fetch the posts with it. We're going to show how to use single table design with our GraphQL schema here.\n\nSo let's go set up our getSite resolver here. We'll find that query and attach a resolver. So DynamoDB table again, we have to do that request mapping template, response mapping template. I'm gonna put in the request mapping template here. One thing to note is just look at the top there. We're doing some interesting work where we're looking at the selectionSet list. So this is basically saying what attributes are they looking at in this particular resolver? And if it contains posts, we're going to fetch more items, we're gonna fetch 11 items. So the site plus 10 posts, whereas if we're fetching just the site, then we'll just get that one site item.\n\nLikewise, let's go down into the response mapping template section down here. This is complex as well. You know, at the beginning, we're saying, 'Hey, if we don't get anything back, we'll just return that.' But if we do get some items back now, we need to iterate through that result set and sort of deserialize those, figure out what they are. If it's a site, we'll set that as our site item. If it's a type post, we'll add it to this posts array. And then later on, we'll add those posts to our site as an attribute, include both the cursor and those posts and then return it back to our calling client.\n\nSo again, the VTL is a little more complex here, but you can still use those single table principles with AppSync with GraphQL and DynamoDB. I'm gonna set the rest of the resolvers up on my own time, but there's one last thing I want to do. Let's set up X-Ray on our GraphQL API. So go to settings and then you can scroll down and click 'Enable X-Ray' and save those settings. And what X-Ray is going to give you is just visibility into what's happening on a particular request. So you can see all the different resolvers that were hit, all the different APIs that were called as part of a request.\n\nAll right, with X-Ray configured with all our resolvers set up, it's time to actually run some queries. So let's go over to the left-hand side here, click that queries button. And what this is inside AppSync, you get a little query browser that you can run some queries directly in there.\n\nSo the first thing we want to do is create our first site. We'll do that createSite mutation and just create a blog for 'aws.amazon.com'. So we'll send that in. We were able to create that site, but a site is only as good as the posts that are on it. So let's create a few posts as well. We'll use that createPost mutation there using that 'aws.amazon.com' domain and send in our first blog post. Hey, whoa that succeeded. We got one blog post in there.\n\nLet's do one more blog post because we don't want to have just one as we're showing this. So let's get a second blog post in there and we have our second post. This was able to create a second post.\n\nSo now we've created these things. Let's actually query them back and that's where we're going to see the power of this single table design. We'll do a getSite query here and let's just look at the structure of that query, right? It's a multi-level query where we're doing that getSite operation, getting that site back. But as part of that, we're also fetching the posts that are related to that, right? So we have a one-to-many relationship, multiple levels of entities and you can see it returned all that data back to us in a pretty quick and snappy and responsive way.\n\nSo now that we've seen that, let's see what actually happened on that last query because we got to see the magic of single table design here. So let's head to X-Ray and it's got a few different traces in here. We're going to find that the most recent one to see our last query and just click on that particular trace.\n\nIf you scroll down to the bottom, you can see all the different requests that were happening as part of that. And if you look in that, it only makes one request to DynamoDB. So even though we're getting two different types of entities, our site entity, our post entity, only making one request. It's also a pretty quick operation. This is about half the time that that same GraphQL query took in our multi-table approach. So it's quicker there because it's only making that single request to DynamoDB.\n\nI think this was able to show some of the tradeoffs of using single table design with your GraphQL API. You know, on the one hand, it added some complexity to our resolvers. As we have to do lookahead in our queries to see what fields they're fetching. We also have to do some additional parsing of that DynamoDB query result to deserialize into the different item types. On the other hand, our response had much lower latency than doing it in a multi-table sequential approach.  \n\nYou need to think about what's best for your needs and apply the right design patterns. Be sure to check out the same application using multiple DynamoDB tables for comparison. Thanks for watching. Hope you enjoyed it."
+          },
+          "createdAt": {
+            "S": "replace_time"
+          },
+          "updatedAt": {
+            "S": "replace_time"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "id": {
+            "S": "17"
+          },
+          "courseId": {
+            "S": "4"
+          },
+          "name": {
+            "S": "Zero-Config Deploy of a Next.js 13 SSR App with AWS Amplify Hosting"
+          },
+          "url": {
+            "S": "https://d2xbndf6m96kr7.cloudfront.net/videos/4_3_Zero-Config+Deploy+of+a+Next.js+13+SSR+App+with+AWS+Amplify+Hosting.mp4"
+          },
+          "author": {
+            "S": "Mike Jerome"
+          },
+          "class_flag": {
+            "N": "0"
+          },
+          "description": {
+            "S": "This video walks through the process of deploying a Next.js 13 application with AWS Amplify Hosting. It highlights the zero-configuration onboarding experience of Amplify Hosting, where developers can easily connect their repository then simply click through a wizard to deploy their application."
+          },
+          "image": {
+            "S": "https://d2xbndf6m96kr7.cloudfront.net/images/4_3_Zero-Config+Deploy+of+a+Next.js+13+SSR+App+with+AWS+Amplify+Hosting.png"
+          },
+          "transcript": {
+            "S": "Hey, this is a quick demo showing deploying a Next.js app on AWS Amplify Serverless.\n\nSo we start at the Amplify console and we choose to host web app from here. I'm going to choose GitHub as my repo provider. Once I'm authenticated with GitHub, I can see all of my repos and I am going to select one here and choose my main branch. \n\nI click next and we've been able to automatically detect that this is a Next.js app. So it's filled in the right build and test settings for me. And further down here, I am going to choose to create and use a new service role. So this has changed from AWS Amplify Standard. In AWS Amplify Standard, you would have to open a new tab, go to the IAM console and then follow a (I think it is) a five-step workflow to create and set up a role and then select that role from a list. But with the new system, we can just leave it on the default value of 'Create a new service role'. So that's already saved a couple of minutes and several screens.\n\nClick next to see a summary and then choose 'Save and deploy'. Okay, so my app creation is in process and then I have shown my main branch is going to go through the provision, build and deploy steps.\n\nOkay, the app is now fully provisioned, built and deployed. If I check out the details of my main branch, you can see the build duration took 2 minutes, 46 seconds. That's about 10 times faster than AWS Amplify Standard. It would have taken about 20 minutes on AWS Amplify Standard.\n\nAnother cool thing is if I open the app and just call this API route that just returns a piece of JSON with the date, in the source code for that simple JSON return, we also write a log. So we write 'this is a console log from the handler in API'. You can take a copy of that.\n\nAnd if I go back over to the Amplify console, choose monitoring for my app and then take a look at my logs, we can get a direct link to CloudWatch, which is where we're outputting all of the logs for the apps. So here you can see the log groups and log streams that are associated with this Amplify app. \n\nAnd if I do a search and I search for that particular event, 'this is a console log from handler in API', click search, then I can drill in and I can see where that has been outputted to the log. So I've called the API four times here.\n\nJump back over, refresh, do another search. We should see that update to be five times. So all of the output is going directly into CloudWatch. We did not have to do anything because the permissions were set up when we created the service role as part of creating the app. So it's a super slick integration with another AWS service."
+          },
+          "createdAt": {
+            "S": "replace_time"
+          },
+          "updatedAt": {
+            "S": "replace_time"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "id": {
+            "S": "18"
+          },
+          "courseId": {
+            "S": "4"
+          },
+          "name": {
+            "S": "Find Hardcoded Secrets Using the Amazon CodeGuru Reviewer Secrets Detector"
+          },
+          "url": {
+            "S": "https://d2xbndf6m96kr7.cloudfront.net/videos/4_4_Find+Hardcoded+Secrets+Using+the+Amazon+CodeGuru+Reviewer+Secrets+Detector.mp4"
+          },
+          "author": {
+            "S": "Amazon Web Services"
+          },
+          "class_flag": {
+            "N": "0"
+          },
+          "description": {
+            "S": "In this video, you’ll see how to find hardcoded secrets using the Amazon CodeGuru Reviewer secrets detector. With this tool, you can identify secrets in your application code, continually scan your repositories for new secrets, and secure any secrets you discover in AWS Secrets Manager."
+          },
+          "image": {
+            "S": "https://d2xbndf6m96kr7.cloudfront.net/images/4_4_Find+Hardcoded+Secrets+Using+the+Amazon+CodeGuru+Reviewer+Secrets+Detector.png"
+          },
+          "transcript": {
+            "S": "In this video, you'll see how to find hard-coded secrets using the Amazon CodeGuru Reviewer Secrets Detector. With this tool, you can identify secrets in your application code, continually scan your repositories for new secrets, and secure any secrets you discover in AWS Secrets Manager.\n\nTo get started, let's navigate to AWS Secrets Manager. Secrets Manager allows you to easily store, rotate, and retrieve database credentials, API keys, and other secrets throughout their lifecycle. Secrets Manager can be integrated with Amazon CodeGuru to help ensure that these secrets are not accidentally hard-coded into your repositories.\n\nFrom here, we can scroll down to related services and click Amazon CodeGuru to associate a repository with CodeGuru Reviewer. Before we associate our repository, let's take a quick look at this demo repository to see an example of how CodeGuru Reviewer can find hard-coded secrets in our application code. This demo application has some secrets hard-coded into it. And this repository analysis page shows how CodeGuru Reviewer will display those findings.\n\nNow let's associate a real repository with CodeGuru Reviewer and analyze it for hard-coded secrets. We'll start by forking this repository into our GitHub account. Next, we'll go back to CodeGuru Reviewer and connect to our GitHub account. Now that the account is connected, let's select the repository we saw earlier for analysis.\n\nSince we are doing a full repository analysis, we must specify the branch we want analyzed. In this case, we'll analyze the master branch. We can optionally specify a code review name. Otherwise, one will be generated automatically. We can also add tags if needed. For our purposes, let's associate the repository and run the analysis.\n\nNow that the analysis is finished, let's take a look at it. We'll filter the CodeGuru recommendations so that they only pertain to secrets discovered in the code. As you can see, one file contains a hard-coded AWS access key ID and another contains a hard-coded password.\n\nLet's select the .travis.yml file to open our repository and see exactly where the secret is in our code. Notice that the relevant code is highlighted. Let's go back, the 'Protect credential' button will take us to AWS Secrets Manager where we can secure the credential in question. Keys and tokens are categorized as 'other' type of secret.\n\nLet's copy the key ID in GitHub and paste it in here. We'll give the secret a name and proceed to the next step. We won't be rotating this secret, so let's move on. Secrets Manager has given us code snippets to pull this credential from Secrets Manager at runtime. We can copy this code and use it to make the code change in our application.\n\nAs you can see, the secret has been successfully stored. You've just seen how to find hard-coded secrets using the Amazon CodeGuru Reviewer Secrets Detector. You can learn more about this topic in the description and links for this video. Thanks for watching. Now it's your turn to try."
+          },
+          "createdAt": {
+            "S": "replace_time"
+          },
+          "updatedAt": {
+            "S": "replace_time"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "id": {
+            "S": "19"
+          },
+          "courseId": {
+            "S": "4"
+          },
+          "name": {
+            "S": "Accelerate Python Coding with Amazon CodeWhisperer"
+          },
+          "url": {
+            "S": "https://d2xbndf6m96kr7.cloudfront.net/videos/4_5_Accelerate+Python+Coding+with+Amazon+CodeWhisperer.mp4"
+          },
+          "author": {
+            "S": "Amazon Web Services"
+          },
+          "class_flag": {
+            "N": "0"
+          },
+          "description": {
+            "S": "In this video, you’ll see how to accelerate Python coding with Amazon CodeWhisperer."
+          },
+          "image": {
+            "S": "https://d2xbndf6m96kr7.cloudfront.net/images/4_5_Accelerate+Python+Coding+with+Amazon+CodeWhisperer.png"
+          },
+          "transcript": {
+            "S": "In this video, you'll see how to accelerate Python coding with Amazon CodeWhisperer. With this AI-powered tool, you can increase developer productivity to accomplish coding tasks quickly and allow more time to focus on differentiated value creation.\n\nFor demonstration purposes, we've created a Python file with some imports, an S3 bucket, and a comment. Let's begin by pressing enter on our keyboard which will trigger CodeWhisperer to create a function based on our comment. CodeWhisperer suggested a function definition. To accept it, we'll press our tab key.\n\nNext, let's press enter to prompt CodeWhisperer to complete the function. CodeWhisperer can provide up to five responses. We'll cycle through the suggestions using our arrow keys. Let's accept this one. We now have a function that gets a file from a URL with a try and except statement.\n\nNext, CodeWhisperer suggests a comment based on the above context. We'll accept the suggestion and proceed with creating a function that uploads a file to S3. We accept the suggested function definition. To complete the function, we'll cycle through the responses and accept the one we like most.\n\nNow let's create a function for binary search. We accept CodeWhisperer's suggested code. Now let's create another function for binary search but provide CodeWhisperer with some additional context. We'll tell CodeWhisperer to create a function using the recursive method. CodeWhisperer generated a function that meets our requirements. Let's accept it.\n\nNow, let's look at another example that shows why context matters. First, we'll use CodeWhisperer to generate a function that creates a DynamoDB table. CodeWhisperer tells us that if we accept this suggestion, boto3 will be added. Additionally, the generated code is similar to reference code that is under the MIT license. Let's accept the suggestion. CodeWhisperer logs the acceptance and corresponding licensing information in the reference log. Let's quickly take a look.\n\nNow let's create a function to create a DynamoDB table again but provide CodeWhisperer with additional context. This time we'll tell CodeWhisperer to set the employee id as the primary key and to set read capacity units and write capacity units at specific values. CodeWhisperer generated code that creates a DynamoDB table. But this time, the code contains the values we specified in our comment.\n\nNow let's use CodeWhisperer to populate tables with fake user data. CodeWhisperer uses the context from the file to generate suggestions for additional users. We'll accept the suggestions. Once we have enough data, we can close off the table.\n\nLet's quickly add some fake data to the next table. Next, let's see how we can use CodeWhisperer to autocomplete a function that we've already started. In this case, we've started a function to get the standard deviation of our data. Let's press enter and cycle through CodeWhisperer's suggestions for completing the function. We'll accept this one.\n\nNow, let's look at another example of CodeWhisperer in action. We can also use multi-line comments to create a function. We'll accept CodeWhisperer's suggested code. Next, let's add a comment to tell CodeWhisperer to write a unit test. As we're typing, CodeWhisperer autocompletes the comment and test function.\n\nNow let's write a function to verify email addresses. Note that we've already imported the regular expressions or re module. We'll accept the suggested function which uses the re module.\n\nNow let's create a function to verify email addresses again. But this time, we'll import the boto3 library and create an Amazon Simple Email Service or Amazon SES client. CodeWhisperer considered the context we provided and suggested a function that calls the ses.verify_email_identity method to verify the email address.\n\nWhen generating code suggestions, CodeWhisperer not only gets context from your comments, it gets context from code above and below your cursor as well.\n\nYou've just seen how to accelerate Python coding with Amazon CodeWhisperer. You can learn more about this topic in the description and links for this video. Thanks for watching. Now it's your turn to try."
+          },
+          "createdAt": {
+            "S": "replace_time"
+          },
+          "updatedAt": {
+            "S": "replace_time"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "id": {
+            "S": "20"
+          },
+          "courseId": {
+            "S": "4"
+          },
+          "name": {
+            "S": "Start your software project fast with Amazon CodeCatalyst blueprints"
+          },
+          "url": {
+            "S": "https://d2xbndf6m96kr7.cloudfront.net/videos/4_6_Start+your+software+project+fast+with+Amazon+CodeCatalyst+blueprints.mp4"
+          },
+          "author": {
+            "S": "Amazon Web Services"
+          },
+          "class_flag": {
+            "N": "0"
+          },
+          "description": {
+            "S": "You can use Amazon CodeCatalyst blueprints to set up a new software project on AWS in minutes. Blueprints are used by CodeCatalyst to set up a code repository with a working sample app, define cloud infrastructure, and run pre-configured CI/CD workflows for your project. There are blueprints for different types of applications, and you can customize the deployment architecture and frameworks, infrastructure-as-code language, build steps, and AWS Regions you want to use. Watch this video to better understand how blueprints enable you to set up and customize a new software project in a complete software "
+          },
+          "image": {
+            "S": "https://d2xbndf6m96kr7.cloudfront.net/images/4_6_Start+your+software+project+fast+with+Amazon+CodeCatalyst+blueprints.png"
+          },
+          "transcript": {
+            "S": "In this video, you'll see how to start building software with Amazon CodeCatalyst blueprints. With this fully managed software development service, you can configure blueprints to meet your specific needs, use blueprints to deploy complete software projects in minutes, and use infrastructure as code (IaC) or IAC generated by blueprints to create new environments.\n\nTo get started, let's create a new project. In CodeCatalyst, we can start a project from scratch or from a blueprint. Blueprints are project templates that include everything a builder needs to deploy complex architectures for various use cases. Let's select this blueprint that creates a simple to-do web application. In the right pane, we can review the blueprint's architecture, resources, and required permissions. Let's proceed to the next step in the creation process.\n\nWe'll enter a name for the project. We also need to select the appropriate AWS Identity and Access Management (IAM) role to deploy the web application. We already have a development admin role for this account, so let's select it. Each blueprint has different configuration options available. Let's view some of the options in this blueprint. We can view the code and change the programming language of the application. Let's change the front-end CDK programming language from TypeScript to Python. Notice that the CDK folder now has different contents. Let's go ahead and create the project. In just minutes, our project is created.\n\nEverything we need to get started has been created, including a source control repo, CI/CD workflows, and issue management. Our first CI/CD pipeline execution runs automatically. The summary page provides helpful information on workflows, pull requests, and more to help organize work on this project.\n\nLet's go to our source repository which contains the code generated from the blueprint. Here's the CodeCatalyst workflow. We can open this .yaml file to see the options and configurations specified during project creation synthesized into the code. For example, we can see the account name and CDK deployment role we specified.\n\nNext, let's view our CI/CD workflow. We'll select the recent run which has made it to the project's creation. The steps and actions in this workflow file include the process of building and testing our code. We can select an action and see its log outputs, test results, and other information. The workflow also generated a URL for our deployed application. Let's navigate to it. Here's our new to-do app. If we click this button, we can see that the app is functional.\n\nYou've just seen how to start building software with Amazon CodeCatalyst blueprints. You can learn more about this topic in the description and links for this video. Thanks for watching, now it's your turn to try."
+          },
+          "createdAt": {
+            "S": "replace_time"
+          },
+          "updatedAt": {
+            "S": "replace_time"
+          }
+        }
+      }
+    } 
+  ]
+}
