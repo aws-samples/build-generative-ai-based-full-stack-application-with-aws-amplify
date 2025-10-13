@@ -1,5 +1,5 @@
 # Build a full-stack application with Cloudscape and AWS Amplify
-This is an example shows how to build rapidly a e-learning service with Cloudscape and AWS Amplify and AWS serverless services, such as AWS Cognito, AWS AppSync, Amazon DynamoDB.
+This is an example shows how to build rapidly a e-learning service with Cloudscape and AWS Amplify and AWS serverless services, such as AWS Cognito, AWS AppSync, Amazon DynamoDB..
 
 **Application**\
 ![aws-reinvent2023-arc330-catalog](images/aws-reinvent2023-arc330-catalog.png)
