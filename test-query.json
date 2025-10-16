@@ -1,0 +1,7 @@
+{
+  "query": "query SearchWithAgent($query: String!, $sessionId: String) { searchWithAgent(query: $query, sessionId: $sessionId) { response } }",
+  "variables": {
+    "query": "EKS roadmap",
+    "sessionId": "test-session-123"
+  }
+}

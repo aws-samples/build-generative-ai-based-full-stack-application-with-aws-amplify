@@ -1,0 +1,311 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: 'Bedrock Agent with Action Group and Lambda Function for Course Search'
+
+Parameters:
+  AgentName:
+    Type: String
+    Default: 'CourseSearchAgent'
+    Description: 'Name of the Bedrock Agent'
+  
+  ModelId:
+    Type: String
+    Default: 'anthropic.claude-3-sonnet-20240229-v1:0'
+    Description: 'Foundation model ID for the agent'
+  
+  DynamoDBTableName:
+    Type: String
+    Default: 'Class'
+    Description: 'DynamoDB table name containing course data'
+
+Resources:
+  # IAM Role for Bedrock Agent
+  BedrockAgentRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: !Sub '${AgentName}-BedrockAgentRole'
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: bedrock.amazonaws.com
+            Action: sts:AssumeRole
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/AmazonBedrockFullAccess
+      Policies:
+        - PolicyName: BedrockAgentPolicy
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action:
+                  - bedrock:InvokeModel
+                  - bedrock:InvokeModelWithResponseStream
+                Resource: !Sub 'arn:aws:bedrock:${AWS::Region}::foundation-model/${ModelId}'
+
+  # IAM Role for Lambda Function
+  LambdaExecutionRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: !Sub '${AgentName}-LambdaExecutionRole'
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+            Action: sts:AssumeRole
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+      Policies:
+        - PolicyName: DynamoDBReadPolicy
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action:
+                  - dynamodb:Query
+                  - dynamodb:Scan
+                  - dynamodb:GetItem
+                Resource: !Sub 'arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/${DynamoDBTableName}'
+
+  # Lambda Function for Course Search
+  CourseSearchFunction:
+    Type: AWS::Lambda::Function
+    Properties:
+      FunctionName: !Sub '${AgentName}-CourseSearch'
+      Runtime: python3.9
+      Handler: index.lambda_handler
+      Role: !GetAtt LambdaExecutionRole.Arn
+      Timeout: 30
+      Environment:
+        Variables:
+          DYNAMODB_TABLE_NAME: !Ref DynamoDBTableName
+      Code:
+        ZipFile: |
+          import json
+          import boto3
+          import os
+          from boto3.dynamodb.conditions import Key, Attr
+          
+          dynamodb = boto3.resource('dynamodb')
+          table = dynamodb.Table(os.environ['DYNAMODB_TABLE_NAME'])
+          
+          def lambda_handler(event, context):
+              try:
+                  # Parse the input from Bedrock Agent
+                  agent_input = event.get('inputText', '')
+                  session_id = event.get('sessionId', '')
+                  
+                  # Extract search parameters
+                  parameters = event.get('parameters', [])
+                  search_query = ''
+                  
+                  for param in parameters:
+                      if param.get('name') == 'query':
+                          search_query = param.get('value', '')
+                  
+                  if not search_query:
+                      search_query = agent_input
+                  
+                  # Search in DynamoDB
+                  response = table.scan(
+                      FilterExpression=Attr('name').contains(search_query) | 
+                                     Attr('description').contains(search_query) |
+                                     Attr('searchableText').contains(search_query),
+                      Limit=10
+                  )
+                  
+                  courses = response.get('Items', [])
+                  
+                  # Format response for Bedrock Agent
+                  if courses:
+                      course_list = []
+                      for course in courses:
+                          course_info = {
+                              'title': course.get('name', 'Unknown'),
+                              'description': course.get('description', ''),
+                              'url': course.get('url', ''),
+                              'author': course.get('author', ''),
+                              'difficulty': course.get('difficulty', 'Unknown')
+                          }
+                          course_list.append(course_info)
+                      
+                      result = {
+                          'courses_found': len(course_list),
+                          'courses': course_list
+                      }
+                  else:
+                      result = {
+                          'courses_found': 0,
+                          'message': f'No courses found for query: {search_query}'
+                      }
+                  
+                  return {
+                      'statusCode': 200,
+                      'body': json.dumps(result)
+                  }
+                  
+              except Exception as e:
+                  return {
+                      'statusCode': 500,
+                      'body': json.dumps({'error': str(e)})
+                  }
+
+  # Lambda Permission for Bedrock Agent
+  LambdaInvokePermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      FunctionName: !Ref CourseSearchFunction
+      Action: lambda:InvokeFunction
+      Principal: bedrock.amazonaws.com
+      SourceArn: !Sub 'arn:aws:bedrock:${AWS::Region}:${AWS::AccountId}:agent/*'
+
+  # Bedrock Agent
+  BedrockAgent:
+    Type: AWS::Bedrock::Agent
+    Properties:
+      AgentName: !Ref AgentName
+      Description: 'AI Agent for searching and recommending AWS courses'
+      FoundationModel: !Ref ModelId
+      AgentResourceRoleArn: !GetAtt BedrockAgentRole.Arn
+      Instruction: |
+        당신은 AWS 학습 영상 검색 전문가입니다.
+
+        사용자가 질문하면:
+        1. 질문에서 핵심 키워드를 추출하세요 (예: Bedrock, EKS, Lambda, DynamoDB 등)
+        2. search_classes 함수를 호출하여 DynamoDB Class 테이블에서 관련 영상을 검색하세요
+        3. 인터넷에서 관련된 영상을 같이 검색해줘 (예: youtube, AWS Skill Builder website 등)
+        4. 검색된 영상들을 분석하여 사용자 질문과 가장 관련성이 높은 영상들을 추천하세요
+
+        응답은 반드시 다음 JSON 형태로만 제공하세요:
+
+        {
+          "title": "응답 제목",
+          "sections": [
+            {
+              "type": "header",
+              "level": 1,
+              "content": "메인 섹션 제목"
+            },
+            {
+              "type": "text",
+              "content": "설명 텍스트"
+            },
+            {
+              "type": "course",
+              "title": "강의 제목",
+              "difficulty": "초급|중급|고급",
+              "instructor": "강사명",
+              "description": "강의 설명",
+              "link": "강의 URL",
+              "reason": "추천 이유"
+            }
+          ]
+        }
+
+        JSON 형태가 아닌 다른 형태의 응답은 절대 하지 마세요. 반드시 유효한 JSON만 반환하세요.
+      ActionGroups:
+        - ActionGroupName: 'CourseSearchActionGroup'
+          Description: 'Search for courses in DynamoDB'
+          ActionGroupExecutor:
+            Lambda: !GetAtt CourseSearchFunction.Arn
+          ApiSchema:
+            Payload: |
+              {
+                "openapi": "3.0.0",
+                "info": {
+                  "title": "Course Search API",
+                  "version": "1.0.0",
+                  "description": "API for searching courses in DynamoDB"
+                },
+                "paths": {
+                  "/search_classes": {
+                    "post": {
+                      "summary": "Search for classes/courses",
+                      "description": "Search for classes or courses based on query parameters",
+                      "operationId": "search_classes",
+                      "requestBody": {
+                        "required": true,
+                        "content": {
+                          "application/json": {
+                            "schema": {
+                              "type": "object",
+                              "properties": {
+                                "query": {
+                                  "type": "string",
+                                  "description": "Search query for finding relevant courses"
+                                }
+                              },
+                              "required": ["query"]
+                            }
+                          }
+                        }
+                      },
+                      "responses": {
+                        "200": {
+                          "description": "Successful response",
+                          "content": {
+                            "application/json": {
+                              "schema": {
+                                "type": "object",
+                                "properties": {
+                                  "courses_found": {
+                                    "type": "integer"
+                                  },
+                                  "courses": {
+                                    "type": "array",
+                                    "items": {
+                                      "type": "object",
+                                      "properties": {
+                                        "title": {"type": "string"},
+                                        "description": {"type": "string"},
+                                        "url": {"type": "string"},
+                                        "author": {"type": "string"},
+                                        "difficulty": {"type": "string"}
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+
+  # Bedrock Agent Alias
+  BedrockAgentAlias:
+    Type: AWS::Bedrock::AgentAlias
+    Properties:
+      AgentId: !Ref BedrockAgent
+      AgentAliasName: 'DRAFT'
+      Description: 'Draft alias for the course search agent'
+
+Outputs:
+  AgentId:
+    Description: 'Bedrock Agent ID'
+    Value: !Ref BedrockAgent
+    Export:
+      Name: !Sub '${AWS::StackName}-AgentId'
+  
+  AgentAliasId:
+    Description: 'Bedrock Agent Alias ID'
+    Value: !GetAtt BedrockAgentAlias.AgentAliasId
+    Export:
+      Name: !Sub '${AWS::StackName}-AgentAliasId'
+  
+  LambdaFunctionArn:
+    Description: 'Lambda Function ARN'
+    Value: !GetAtt CourseSearchFunction.Arn
+    Export:
+      Name: !Sub '${AWS::StackName}-LambdaArn'
+  
+  AgentArn:
+    Description: 'Bedrock Agent ARN'
+    Value: !Sub 'arn:aws:bedrock:${AWS::Region}:${AWS::AccountId}:agent/${BedrockAgent}'
+    Export:
+      Name: !Sub '${AWS::StackName}-AgentArn'

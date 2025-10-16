@@ -1,0 +1,608 @@
+schema {
+  query: Query
+  mutation: Mutation
+  subscription: Subscription
+}
+
+type BedrockAgentResponse @aws_cognito_user_pools @aws_iam {
+  response: String
+}
+
+type Class @aws_cognito_user_pools @aws_iam {
+  author: String
+  class_flag: Int
+  comments: String
+  course: Course
+  courseId: ID
+  createdAt: AWSDateTime!
+  description: String
+  difficulty: String
+  id: ID!
+  image: String
+  name: String!
+  searchableText: String
+  tags: [String]
+  transcript: String
+  updatedAt: AWSDateTime!
+  url: String
+}
+
+type Comment @aws_cognito_user_pools @aws_iam {
+  classId: String
+  commentVersion: String
+  content: String
+  createdAt: AWSDateTime!
+  id: ID!
+  updatedAt: AWSDateTime!
+}
+
+type Course @aws_cognito_user_pools @aws_iam {
+  classes(filter: ModelClassFilterInput, limit: Int, nextToken: String, sortDirection: ModelSortDirection): ModelClassConnection
+  createdAt: AWSDateTime!
+  id: ID!
+  name: String!
+  updatedAt: AWSDateTime!
+}
+
+type ModelClassConnection @aws_cognito_user_pools @aws_iam {
+  items: [Class]!
+  nextToken: String
+}
+
+type ModelCommentConnection @aws_cognito_user_pools @aws_iam {
+  items: [Comment]!
+  nextToken: String
+}
+
+type ModelCourseConnection @aws_cognito_user_pools @aws_iam {
+  items: [Course]!
+  nextToken: String
+}
+
+type ModelProfileConnection @aws_cognito_user_pools @aws_iam {
+  items: [Profile]!
+  nextToken: String
+}
+
+type ModelRewardConnection @aws_cognito_user_pools @aws_iam {
+  items: [Reward]!
+  nextToken: String
+}
+
+type Mutation {
+  createClass(condition: ModelClassConditionInput, input: CreateClassInput!): Class @aws_cognito_user_pools @aws_iam
+  createComment(condition: ModelCommentConditionInput, input: CreateCommentInput!): Comment @aws_cognito_user_pools @aws_iam
+  createCourse(condition: ModelCourseConditionInput, input: CreateCourseInput!): Course @aws_cognito_user_pools @aws_iam
+  createProfile(condition: ModelProfileConditionInput, input: CreateProfileInput!): Profile @aws_cognito_user_pools @aws_iam
+  createReward(condition: ModelRewardConditionInput, input: CreateRewardInput!): Reward @aws_cognito_user_pools @aws_iam
+  deleteClass(condition: ModelClassConditionInput, input: DeleteClassInput!): Class @aws_cognito_user_pools @aws_iam
+  deleteComment(condition: ModelCommentConditionInput, input: DeleteCommentInput!): Comment @aws_cognito_user_pools @aws_iam
+  deleteCourse(condition: ModelCourseConditionInput, input: DeleteCourseInput!): Course @aws_cognito_user_pools @aws_iam
+  deleteProfile(condition: ModelProfileConditionInput, input: DeleteProfileInput!): Profile @aws_cognito_user_pools @aws_iam
+  deleteReward(condition: ModelRewardConditionInput, input: DeleteRewardInput!): Reward @aws_cognito_user_pools @aws_iam
+  updateClass(condition: ModelClassConditionInput, input: UpdateClassInput!): Class @aws_cognito_user_pools @aws_iam
+  updateComment(condition: ModelCommentConditionInput, input: UpdateCommentInput!): Comment @aws_cognito_user_pools @aws_iam
+  updateCourse(condition: ModelCourseConditionInput, input: UpdateCourseInput!): Course @aws_cognito_user_pools @aws_iam
+  updateProfile(condition: ModelProfileConditionInput, input: UpdateProfileInput!): Profile @aws_cognito_user_pools @aws_iam
+  updateReward(condition: ModelRewardConditionInput, input: UpdateRewardInput!): Reward @aws_cognito_user_pools @aws_iam
+}
+
+type Profile @aws_cognito_user_pools @aws_iam {
+  createdAt: AWSDateTime!
+  email: String
+  id: String!
+  name: String
+  organization: String
+  owner: String
+  point: Int
+  updatedAt: AWSDateTime!
+  userId: String
+}
+
+type Query @aws_iam {
+  getClass(id: ID!): Class @aws_cognito_user_pools @aws_iam
+  getComment(id: ID!): Comment @aws_cognito_user_pools @aws_iam
+  getCourse(id: ID!): Course @aws_cognito_user_pools @aws_iam
+  getProfile(id: String!): Profile @aws_cognito_user_pools @aws_iam
+  getReward(id: String!): Reward @aws_cognito_user_pools @aws_iam
+  listClasses(filter: ModelClassFilterInput, id: ID, limit: Int, nextToken: String, sortDirection: ModelSortDirection): ModelClassConnection @aws_cognito_user_pools @aws_iam
+  listComments(filter: ModelCommentFilterInput, id: ID, limit: Int, nextToken: String, sortDirection: ModelSortDirection): ModelCommentConnection @aws_cognito_user_pools @aws_iam
+  listCourses(filter: ModelCourseFilterInput, id: ID, limit: Int, nextToken: String, sortDirection: ModelSortDirection): ModelCourseConnection @aws_cognito_user_pools @aws_iam
+  listProfiles(filter: ModelProfileFilterInput, id: String, limit: Int, nextToken: String, sortDirection: ModelSortDirection): ModelProfileConnection @aws_cognito_user_pools @aws_iam
+  listRewards(filter: ModelRewardFilterInput, id: String, limit: Int, nextToken: String, sortDirection: ModelSortDirection): ModelRewardConnection @aws_cognito_user_pools @aws_iam
+  searchWithAgent(query: String!, sessionId: String): BedrockAgentResponse @aws_cognito_user_pools @aws_iam
+}
+
+type Reward @aws_cognito_user_pools @aws_iam {
+  classId: String
+  createdAt: AWSDateTime!
+  id: String!
+  owner: String
+  point: Int
+  updatedAt: AWSDateTime!
+  userId: String
+}
+
+type Subscription {
+  onCreateClass(filter: ModelSubscriptionClassFilterInput): Class @aws_cognito_user_pools @aws_iam @aws_subscribe(mutations : ["createClass"])
+  onCreateComment(filter: ModelSubscriptionCommentFilterInput): Comment @aws_cognito_user_pools @aws_iam @aws_subscribe(mutations : ["createComment"])
+  onCreateCourse(filter: ModelSubscriptionCourseFilterInput): Course @aws_cognito_user_pools @aws_iam @aws_subscribe(mutations : ["createCourse"])
+  onCreateProfile(filter: ModelSubscriptionProfileFilterInput, owner: String): Profile @aws_cognito_user_pools @aws_iam @aws_subscribe(mutations : ["createProfile"])
+  onCreateReward(filter: ModelSubscriptionRewardFilterInput, owner: String): Reward @aws_cognito_user_pools @aws_iam @aws_subscribe(mutations : ["createReward"])
+  onDeleteClass(filter: ModelSubscriptionClassFilterInput): Class @aws_cognito_user_pools @aws_iam @aws_subscribe(mutations : ["deleteClass"])
+  onDeleteComment(filter: ModelSubscriptionCommentFilterInput): Comment @aws_cognito_user_pools @aws_iam @aws_subscribe(mutations : ["deleteComment"])
+  onDeleteCourse(filter: ModelSubscriptionCourseFilterInput): Course @aws_cognito_user_pools @aws_iam @aws_subscribe(mutations : ["deleteCourse"])
+  onDeleteProfile(filter: ModelSubscriptionProfileFilterInput, owner: String): Profile @aws_cognito_user_pools @aws_iam @aws_subscribe(mutations : ["deleteProfile"])
+  onDeleteReward(filter: ModelSubscriptionRewardFilterInput, owner: String): Reward @aws_cognito_user_pools @aws_iam @aws_subscribe(mutations : ["deleteReward"])
+  onUpdateClass(filter: ModelSubscriptionClassFilterInput): Class @aws_cognito_user_pools @aws_iam @aws_subscribe(mutations : ["updateClass"])
+  onUpdateComment(filter: ModelSubscriptionCommentFilterInput): Comment @aws_cognito_user_pools @aws_iam @aws_subscribe(mutations : ["updateComment"])
+  onUpdateCourse(filter: ModelSubscriptionCourseFilterInput): Course @aws_cognito_user_pools @aws_iam @aws_subscribe(mutations : ["updateCourse"])
+  onUpdateProfile(filter: ModelSubscriptionProfileFilterInput, owner: String): Profile @aws_cognito_user_pools @aws_iam @aws_subscribe(mutations : ["updateProfile"])
+  onUpdateReward(filter: ModelSubscriptionRewardFilterInput, owner: String): Reward @aws_cognito_user_pools @aws_iam @aws_subscribe(mutations : ["updateReward"])
+}
+
+enum ModelAttributeTypes {
+  _null
+  binary
+  binarySet
+  bool
+  list
+  map
+  number
+  numberSet
+  string
+  stringSet
+}
+
+enum ModelSortDirection {
+  ASC
+  DESC
+}
+
+input AmplifyAIConversationTurnErrorInput {
+  errorType: String!
+  message: String!
+}
+
+input CreateClassInput {
+  author: String
+  class_flag: Int
+  comments: String
+  courseId: ID
+  description: String
+  difficulty: String
+  id: ID
+  image: String
+  name: String!
+  searchableText: String
+  tags: [String]
+  transcript: String
+  url: String
+}
+
+input CreateCommentInput {
+  classId: String
+  commentVersion: String
+  content: String
+  id: ID
+}
+
+input CreateCourseInput {
+  id: ID
+  name: String!
+}
+
+input CreateProfileInput {
+  email: String
+  id: String
+  name: String
+  organization: String
+  point: Int
+  userId: String
+}
+
+input CreateRewardInput {
+  classId: String
+  id: String
+  point: Int
+  userId: String
+}
+
+input DeleteClassInput {
+  id: ID!
+}
+
+input DeleteCommentInput {
+  id: ID!
+}
+
+input DeleteCourseInput {
+  id: ID!
+}
+
+input DeleteProfileInput {
+  id: String!
+}
+
+input DeleteRewardInput {
+  id: String!
+}
+
+input ModelBooleanInput {
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+  eq: Boolean
+  ne: Boolean
+}
+
+input ModelClassConditionInput {
+  and: [ModelClassConditionInput]
+  author: ModelStringInput
+  class_flag: ModelIntInput
+  comments: ModelStringInput
+  courseId: ModelIDInput
+  createdAt: ModelStringInput
+  description: ModelStringInput
+  difficulty: ModelStringInput
+  image: ModelStringInput
+  name: ModelStringInput
+  not: ModelClassConditionInput
+  or: [ModelClassConditionInput]
+  searchableText: ModelStringInput
+  tags: ModelStringInput
+  transcript: ModelStringInput
+  updatedAt: ModelStringInput
+  url: ModelStringInput
+}
+
+input ModelClassFilterInput {
+  and: [ModelClassFilterInput]
+  author: ModelStringInput
+  class_flag: ModelIntInput
+  comments: ModelStringInput
+  courseId: ModelIDInput
+  createdAt: ModelStringInput
+  description: ModelStringInput
+  difficulty: ModelStringInput
+  id: ModelIDInput
+  image: ModelStringInput
+  name: ModelStringInput
+  not: ModelClassFilterInput
+  or: [ModelClassFilterInput]
+  searchableText: ModelStringInput
+  tags: ModelStringInput
+  transcript: ModelStringInput
+  updatedAt: ModelStringInput
+  url: ModelStringInput
+}
+
+input ModelCommentConditionInput {
+  and: [ModelCommentConditionInput]
+  classId: ModelStringInput
+  commentVersion: ModelStringInput
+  content: ModelStringInput
+  createdAt: ModelStringInput
+  not: ModelCommentConditionInput
+  or: [ModelCommentConditionInput]
+  updatedAt: ModelStringInput
+}
+
+input ModelCommentFilterInput {
+  and: [ModelCommentFilterInput]
+  classId: ModelStringInput
+  commentVersion: ModelStringInput
+  content: ModelStringInput
+  createdAt: ModelStringInput
+  id: ModelIDInput
+  not: ModelCommentFilterInput
+  or: [ModelCommentFilterInput]
+  updatedAt: ModelStringInput
+}
+
+input ModelCourseConditionInput {
+  and: [ModelCourseConditionInput]
+  createdAt: ModelStringInput
+  name: ModelStringInput
+  not: ModelCourseConditionInput
+  or: [ModelCourseConditionInput]
+  updatedAt: ModelStringInput
+}
+
+input ModelCourseFilterInput {
+  and: [ModelCourseFilterInput]
+  createdAt: ModelStringInput
+  id: ModelIDInput
+  name: ModelStringInput
+  not: ModelCourseFilterInput
+  or: [ModelCourseFilterInput]
+  updatedAt: ModelStringInput
+}
+
+input ModelFloatInput {
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+  between: [Float]
+  eq: Float
+  ge: Float
+  gt: Float
+  le: Float
+  lt: Float
+  ne: Float
+}
+
+input ModelIDInput {
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+  beginsWith: ID
+  between: [ID]
+  contains: ID
+  eq: ID
+  ge: ID
+  gt: ID
+  le: ID
+  lt: ID
+  ne: ID
+  notContains: ID
+  size: ModelSizeInput
+}
+
+input ModelIntInput {
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+  between: [Int]
+  eq: Int
+  ge: Int
+  gt: Int
+  le: Int
+  lt: Int
+  ne: Int
+}
+
+input ModelProfileConditionInput {
+  and: [ModelProfileConditionInput]
+  createdAt: ModelStringInput
+  email: ModelStringInput
+  name: ModelStringInput
+  not: ModelProfileConditionInput
+  or: [ModelProfileConditionInput]
+  organization: ModelStringInput
+  owner: ModelStringInput
+  point: ModelIntInput
+  updatedAt: ModelStringInput
+  userId: ModelStringInput
+}
+
+input ModelProfileFilterInput {
+  and: [ModelProfileFilterInput]
+  createdAt: ModelStringInput
+  email: ModelStringInput
+  id: ModelStringInput
+  name: ModelStringInput
+  not: ModelProfileFilterInput
+  or: [ModelProfileFilterInput]
+  organization: ModelStringInput
+  owner: ModelStringInput
+  point: ModelIntInput
+  updatedAt: ModelStringInput
+  userId: ModelStringInput
+}
+
+input ModelRewardConditionInput {
+  and: [ModelRewardConditionInput]
+  classId: ModelStringInput
+  createdAt: ModelStringInput
+  not: ModelRewardConditionInput
+  or: [ModelRewardConditionInput]
+  owner: ModelStringInput
+  point: ModelIntInput
+  updatedAt: ModelStringInput
+  userId: ModelStringInput
+}
+
+input ModelRewardFilterInput {
+  and: [ModelRewardFilterInput]
+  classId: ModelStringInput
+  createdAt: ModelStringInput
+  id: ModelStringInput
+  not: ModelRewardFilterInput
+  or: [ModelRewardFilterInput]
+  owner: ModelStringInput
+  point: ModelIntInput
+  updatedAt: ModelStringInput
+  userId: ModelStringInput
+}
+
+input ModelSizeInput {
+  between: [Int]
+  eq: Int
+  ge: Int
+  gt: Int
+  le: Int
+  lt: Int
+  ne: Int
+}
+
+input ModelStringInput {
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+  beginsWith: String
+  between: [String]
+  contains: String
+  eq: String
+  ge: String
+  gt: String
+  le: String
+  lt: String
+  ne: String
+  notContains: String
+  size: ModelSizeInput
+}
+
+input ModelSubscriptionBooleanInput {
+  eq: Boolean
+  ne: Boolean
+}
+
+input ModelSubscriptionClassFilterInput {
+  and: [ModelSubscriptionClassFilterInput]
+  author: ModelSubscriptionStringInput
+  class_flag: ModelSubscriptionIntInput
+  comments: ModelSubscriptionStringInput
+  courseId: ModelSubscriptionIDInput
+  createdAt: ModelSubscriptionStringInput
+  description: ModelSubscriptionStringInput
+  difficulty: ModelSubscriptionStringInput
+  id: ModelSubscriptionIDInput
+  image: ModelSubscriptionStringInput
+  name: ModelSubscriptionStringInput
+  or: [ModelSubscriptionClassFilterInput]
+  searchableText: ModelSubscriptionStringInput
+  tags: ModelSubscriptionStringInput
+  transcript: ModelSubscriptionStringInput
+  updatedAt: ModelSubscriptionStringInput
+  url: ModelSubscriptionStringInput
+}
+
+input ModelSubscriptionCommentFilterInput {
+  and: [ModelSubscriptionCommentFilterInput]
+  classId: ModelSubscriptionStringInput
+  commentVersion: ModelSubscriptionStringInput
+  content: ModelSubscriptionStringInput
+  createdAt: ModelSubscriptionStringInput
+  id: ModelSubscriptionIDInput
+  or: [ModelSubscriptionCommentFilterInput]
+  updatedAt: ModelSubscriptionStringInput
+}
+
+input ModelSubscriptionCourseFilterInput {
+  and: [ModelSubscriptionCourseFilterInput]
+  createdAt: ModelSubscriptionStringInput
+  id: ModelSubscriptionIDInput
+  name: ModelSubscriptionStringInput
+  or: [ModelSubscriptionCourseFilterInput]
+  updatedAt: ModelSubscriptionStringInput
+}
+
+input ModelSubscriptionFloatInput {
+  between: [Float]
+  eq: Float
+  ge: Float
+  gt: Float
+  in: [Float]
+  le: Float
+  lt: Float
+  ne: Float
+  notIn: [Float]
+}
+
+input ModelSubscriptionIDInput {
+  beginsWith: ID
+  between: [ID]
+  contains: ID
+  eq: ID
+  ge: ID
+  gt: ID
+  in: [ID]
+  le: ID
+  lt: ID
+  ne: ID
+  notContains: ID
+  notIn: [ID]
+}
+
+input ModelSubscriptionIntInput {
+  between: [Int]
+  eq: Int
+  ge: Int
+  gt: Int
+  in: [Int]
+  le: Int
+  lt: Int
+  ne: Int
+  notIn: [Int]
+}
+
+input ModelSubscriptionProfileFilterInput {
+  and: [ModelSubscriptionProfileFilterInput]
+  createdAt: ModelSubscriptionStringInput
+  email: ModelSubscriptionStringInput
+  id: ModelSubscriptionStringInput
+  name: ModelSubscriptionStringInput
+  or: [ModelSubscriptionProfileFilterInput]
+  organization: ModelSubscriptionStringInput
+  owner: ModelStringInput
+  point: ModelSubscriptionIntInput
+  updatedAt: ModelSubscriptionStringInput
+  userId: ModelSubscriptionStringInput
+}
+
+input ModelSubscriptionRewardFilterInput {
+  and: [ModelSubscriptionRewardFilterInput]
+  classId: ModelSubscriptionStringInput
+  createdAt: ModelSubscriptionStringInput
+  id: ModelSubscriptionStringInput
+  or: [ModelSubscriptionRewardFilterInput]
+  owner: ModelStringInput
+  point: ModelSubscriptionIntInput
+  updatedAt: ModelSubscriptionStringInput
+  userId: ModelSubscriptionStringInput
+}
+
+input ModelSubscriptionStringInput {
+  beginsWith: String
+  between: [String]
+  contains: String
+  eq: String
+  ge: String
+  gt: String
+  in: [String]
+  le: String
+  lt: String
+  ne: String
+  notContains: String
+  notIn: [String]
+}
+
+input UpdateClassInput {
+  author: String
+  class_flag: Int
+  comments: String
+  courseId: ID
+  description: String
+  difficulty: String
+  id: ID!
+  image: String
+  name: String
+  searchableText: String
+  tags: [String]
+  transcript: String
+  url: String
+}
+
+input UpdateCommentInput {
+  classId: String
+  commentVersion: String
+  content: String
+  id: ID!
+}
+
+input UpdateCourseInput {
+  id: ID!
+  name: String
+}
+
+input UpdateProfileInput {
+  email: String
+  id: String!
+  name: String
+  organization: String
+  point: Int
+  userId: String
+}
+
+input UpdateRewardInput {
+  classId: String
+  id: String!
+  point: Int
+  userId: String
+}

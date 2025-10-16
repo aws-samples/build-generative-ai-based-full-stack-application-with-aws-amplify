@@ -1,0 +1,8 @@
+{
+  "name": "bedrock-agent",
+  "version": "1.0.0",
+  "main": "handler.ts",
+  "dependencies": {
+    "@aws-sdk/client-bedrock-agent-runtime": "^3.911.0"
+  }
+}

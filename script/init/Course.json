@@ -1,16 +1,16 @@
 {
-    "Course": [
+    "Course-5qxjh6fh5bhwfed4raqh6m2foi-NONE": [
         {"PutRequest": 
-            {"Item":{"id":{"S":"1"},"name":{"S":"Container"},"createdAt":{"S":"replace_time"}, "updatedAt":{"S":"replace_time"}}}
+            {"Item":{"id":{"S":"1"},"name":{"S":"Container"},"createdAt":{"S":"2025-09-18T03:17:52Z"}, "updatedAt":{"S":"2025-09-18T03:17:52Z"}}}
         },
         {"PutRequest": 
-            {"Item":{"id":{"S":"2"},"name":{"S":"Modernization"},"createdAt":{"S":"replace_time"}, "updatedAt":{"S":"replace_time"}}}
+            {"Item":{"id":{"S":"2"},"name":{"S":"Modernization"},"createdAt":{"S":"2025-09-18T03:17:52Z"}, "updatedAt":{"S":"2025-09-18T03:17:52Z"}}}
         },
         {"PutRequest": 
-            {"Item":{"id":{"S":"3"},"name":{"S":"AI/ML"},"createdAt":{"S":"replace_time"}, "updatedAt":{"S":"replace_time"}}}
+            {"Item":{"id":{"S":"3"},"name":{"S":"AI/ML"},"createdAt":{"S":"2025-09-18T03:17:52Z"}, "updatedAt":{"S":"2025-09-18T03:17:52Z"}}}
         },
         {"PutRequest": 
-            {"Item":{"id":{"S":"4"},"name":{"S":"DevOps"},"createdAt":{"S":"replace_time"}, "updatedAt":{"S":"replace_time"}}}
+            {"Item":{"id":{"S":"4"},"name":{"S":"DevOps"},"createdAt":{"S":"2025-09-18T03:17:52Z"}, "updatedAt":{"S":"2025-09-18T03:17:52Z"}}}
         }
     ]
 }

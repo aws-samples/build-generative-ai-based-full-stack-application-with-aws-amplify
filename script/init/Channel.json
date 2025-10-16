@@ -1,7 +1,7 @@
 {
-    "Channel": [
+    "Channel-5qxjh6fh5bhwfed4raqh6m2foi-NONE": [
         {"PutRequest": 
-            {"Item":{"id":{"S":"8979563f-54f6-4013-8409-ae3a821630d9"},"icon":{"S":"icon"},"name":{"S":"welcome"},"createdAt":{"S":"replace_time"}, "updatedAt":{"S":"replace_time"}}}
+            {"Item":{"id":{"S":"8979563f-54f6-4013-8409-ae3a821630d9"},"icon":{"S":"icon"},"name":{"S":"welcome"},"createdAt":{"S":"2025-09-18T03:17:52Z"}, "updatedAt":{"S":"2025-09-18T03:17:52Z"}}}
         }
     ]
 }

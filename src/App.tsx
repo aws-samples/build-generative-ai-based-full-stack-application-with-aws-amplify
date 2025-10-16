@@ -7,6 +7,7 @@ import "./styles/app.scss";
 import NotFound from "./pages/not-found.tsx";
 import ProfilePage from './pages/profile.tsx';
 import Catalog from "./pages/catalog.tsx";
+import AgentSearch from "./pages/agent-search.tsx";
 
 import { Authenticator } from "@aws-amplify/ui-react";
 import { Amplify } from 'aws-amplify';
@@ -56,6 +57,10 @@ const WorkshopApp = ({ signOut, user = defaultUser }: WorkshopAppProps) => {
               element={signOut ? <Catalog /> : <NotFound />}
             />
             <Route
+              path="/agent-search"
+              element={signOut ? <AgentSearch /> : <NotFound />}
+            />
+            <Route
               path="/profile"
               element={signOut ? <ProfilePage {...getProfileProps(user)} /> : <NotFound />}
             />
@@ -69,18 +74,14 @@ const WorkshopApp = ({ signOut, user = defaultUser }: WorkshopAppProps) => {
 };
 
 export default function App() {
-  // This parameter will be used in the workshop
-  const signOut = undefined;
-  const user = defaultUser;
-
   return (
-    // <Authenticator>
-    //   {({ signOut, user }) => (
+    <Authenticator>
+      {({ signOut, user }) => (
         <WorkshopApp
           signOut={signOut}
           user={user ? convertAuthToUserType(user) : defaultUser}
         />
-    //   )}
-    // </Authenticator>
+      )}
+    </Authenticator>
   );
 }
