@@ -1,5 +1,4 @@
-import { useState, useCallback } from "react";
-import ReactPlayer from 'react-player/lazy';
+import { useState, useCallback, useEffect, useRef } from "react";
 import {
   Box, Container, SpaceBetween,
 } from "@cloudscape-design/components";
@@ -18,17 +17,36 @@ interface PlayerProps {
   title: string;
   author: string;
   desc: string;
+  subtitle?: string;
 }
 
 interface VideoProgress {
   playedSeconds: number;
 }
 
-export function Player({ url, user, classId, title, author, desc }: PlayerProps) {
+export function Player({ url, user, classId, title, author, desc, subtitle }: PlayerProps) {
+  const videoRef = useRef<HTMLVideoElement>(null);
   const [played, setPlayed] = useState(0);
   const [marker, setMarker] = useState(0);
   const [duration, setDuration] = useState(0);
+  const [subtitleBlobUrl, setSubtitleBlobUrl] = useState<string>('');
   const INTERVAL = 30;
+
+  useEffect(() => {
+    if (!subtitle) return;
+
+    fetch(subtitle)
+      .then(res => res.blob())
+      .then(blob => {
+        const blobUrl = URL.createObjectURL(blob);
+        setSubtitleBlobUrl(blobUrl);
+      })
+      .catch(err => console.error('자막 로드 실패:', err));
+
+    return () => {
+      if (subtitleBlobUrl) URL.revokeObjectURL(subtitleBlobUrl);
+    };
+  }, [subtitle]);
 
   const updateReward = useCallback(async () => {
     try {
@@ -89,21 +107,29 @@ export function Player({ url, user, classId, title, author, desc }: PlayerProps)
   return (
     <Container>
       <Box>
-        <ReactPlayer
+        <video
+          ref={videoRef}
           className='react-player'
-          url={url}
-          width='100%'
-          loop={false}
-          playing={true}
-          muted={true}
-          controls={true}
-          light={false}
-          pip={false}
+          style={{ width: '100%' }}
+          controls
+          autoPlay
+          muted
+
           onPlay={handlePlay}
           onEnded={handleEnded}
-          onDuration={handleDuration}
-          onProgress={handleProgress}
-        />
+          onLoadedMetadata={(e) => handleDuration(e.currentTarget.duration)}
+          onTimeUpdate={(e) => handleProgress({ playedSeconds: e.currentTarget.currentTime })}
+        >
+          <source src={url} type="video/mp4" />
+          {subtitleBlobUrl && (
+            <track
+              kind="captions"
+              src={subtitleBlobUrl}
+              srcLang="en"
+              label="English"
+            />
+          )}
+        </video>
       </Box>
       <SpaceBetween direction="vertical" size="s">
         <VideoInfo title={title} author={author} description={desc} />

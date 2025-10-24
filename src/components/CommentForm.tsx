@@ -89,9 +89,10 @@ export const CommentForm = ({
       Format your response as follows:
 
       📚 Summary:
-      [Provide a concise summary of the overall sentiment and main points]
+      [Provide a concise summary of the positive and negative sentiment]
 
-      ⭐️ Overall Score : [_/5]
+      ⭐️ Number of positive comment :
+      ⭐️ Number of Negative comment :
 
       💫 Key Reason:
       [Main reason for the score]`;
