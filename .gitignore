@@ -33,3 +33,8 @@ amplify_outputs.json
 amplify/.DS_Store
 dist
 .DS_Store
+amplify/
+
+# amplify
+amplify_outputs*
+amplifyconfiguration*

@@ -21,6 +21,7 @@ export default function Catalog(props: any) {
   const [activeClass, setActiveClass] = useState<Schema["Class"]["type"]>();
   const [activeCourse, setActiveCourse] = useState<Schema["Course"]["type"]>();
   const [courses, setCourses] = useState<Array<Schema["Course"]["type"]>>([]);
+  const [userProfile, setUserProfile] = useState<Schema["Profile"]["type"] | null>(null);
   
   const fetchCourse = async () => {
     const {data: items } = await client.models.Course.list();
@@ -31,8 +32,20 @@ export default function Catalog(props: any) {
     }
   };
 
+  const fetchUserProfile = async () => {
+    try {
+      const { data: profiles } = await client.models.Profile.list();
+      if (profiles && profiles.length > 0) {
+        setUserProfile(profiles[0]);
+      }
+    } catch (error) {
+      console.error('Error fetching profile:', error);
+    }
+  };
+
   useEffect(() => {
     fetchCourse();
+    fetchUserProfile();
   }, []);
 
   return (
@@ -58,7 +71,7 @@ export default function Catalog(props: any) {
                 (activeClass && activeClass != null && activeClass.class_flag != null && activeClass.class_flag <= 0) ? (
                   <Class activeClass={activeClass} userName={props.user} userId={props.uid} />
                 ) : (
-                  <ClassCatalog activeCourse={activeCourse} setActiveClass={setActiveClass} />
+                  <ClassCatalog activeCourse={activeCourse} setActiveClass={setActiveClass} userProfile={userProfile} />
                 )
               }
             </Grid>

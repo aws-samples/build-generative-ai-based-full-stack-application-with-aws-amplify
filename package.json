@@ -15,7 +15,7 @@
     "@cloudscape-design/components": "^3.0.611",
     "@cloudscape-design/design-tokens": "^3.0.35",
     "@cloudscape-design/global-styles": "^1.0.27",
-    "aws-amplify": "^6.5.1",
+    "aws-amplify": "^6.15.7",
     "moment": "^2.30.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -23,8 +23,8 @@
     "react-router-dom": "^6.22.0"
   },
   "devDependencies": {
-    "@aws-amplify/backend": "^1.1.1",
-    "@aws-amplify/backend-cli": "^1.2.4",
+    "@aws-amplify/backend": "^1.16.1",
+    "@aws-amplify/backend-cli": "^1.8.0",
     "@types/react": "^18.2.66",
     "@types/react-dom": "^18.2.22",
     "@typescript-eslint/eslint-plugin": "^7.2.0",
@@ -32,16 +32,16 @@
     "@vitejs/plugin-react": "^4.2.1",
     "autoprefixer": "^10.4.17",
     "aws-cdk": "^2.153.0",
-    "aws-cdk-lib": "^2.153.0",
-    "constructs": "^10.3.0",
+    "aws-cdk-lib": "^2.204.0",
+    "constructs": "^10.4.2",
     "esbuild": "^0.20.2",
     "eslint": "^8.57.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.6",
     "postcss": "^8.4.35",
     "sass": "^1.70.0",
-    "tsx": "^4.17.0",
-    "typescript": "^5.5.4",
+    "tsx": "^4.20.6",
+    "typescript": "^5.9.3",
     "vite": "^5.4.11"
   }
 }

@@ -19,7 +19,7 @@ const Class = ({
   return (
     <>
       <SpaceBetween size="l">
-        <Player classId={activeClass.id} title={activeClass.name} desc={activeClass.description} author={activeClass.author} url={activeClass.url} user={userName} uid={userId} />
+        <Player classId={activeClass.id} title={activeClass.name} desc={activeClass.description} author={activeClass.author} url={activeClass.url} user={userName} uid={userId} subtitle={activeClass.subtitle} />
         
         <Bot transcript={activeClass.transcript}></Bot>
         

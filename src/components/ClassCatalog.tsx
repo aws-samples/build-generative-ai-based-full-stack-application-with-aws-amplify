@@ -1,25 +1,31 @@
 import { useEffect, useState } from "react";
 import {
-  Cards, Link, StatusIndicator, Box, Pagination, Header
+  Cards, Link, StatusIndicator, Box, Pagination, Header, Button, Modal
 } from "@cloudscape-design/components";
 
 // api
 import { generateClient } from 'aws-amplify/data';
 import { Schema } from '../../amplify/data/resource';
+import { CreateClassWizard } from './CreateClassWizard';
 
 const client = generateClient<Schema>();
 
 const ClassCatalog = ({
   activeCourse,
   setActiveClass,
+  userProfile,
 }: { 
   activeCourse: any, 
-  setActiveClass: any 
+  setActiveClass: any,
+  userProfile: any
 }) => {
   const [classes, setClasses] = useState<Array<Schema["Class"]["type"]>>([]);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 4; 
+  const itemsPerPage = 4;
+  
+  // Wizard state
+  const [showWizard, setShowWizard] = useState(false); 
 
   useEffect(() => {
     const fetchClasses = async () => {
@@ -43,8 +49,13 @@ const ClassCatalog = ({
 
   const pagesCount = Math.ceil(classes.length / itemsPerPage);
 
+  const handleClassCreated = (newClass: Schema["Class"]["type"]) => {
+    setClasses([...classes, newClass]);
+  };
+
   return (
-    <Cards
+    <>
+      <Cards
       ariaLabels={{
         itemSelectionLabel: (_, n) => `select ${n.name}`,
         selectionGroupLabel: "Item selection"
@@ -103,7 +114,19 @@ const ClassCatalog = ({
         </Box>
       }
       header={activeCourse && activeCourse != null ? (
-        <Header>{activeCourse.name}</Header>
+        <Header
+          actions={
+            <Button
+              variant="primary"
+              iconName="add-plus"
+              onClick={() => setShowWizard(true)}
+            >
+              Add Class
+            </Button>
+          }
+        >
+          {activeCourse.name}
+        </Header>
       ) : (
         <div />
       )}
@@ -117,6 +140,22 @@ const ClassCatalog = ({
         />
       }
     />
+
+      <Modal
+        visible={showWizard}
+        onDismiss={() => setShowWizard(false)}
+        size="max"
+        header="Create New Class"
+      >
+        <CreateClassWizard
+          visible={showWizard}
+          onDismiss={() => setShowWizard(false)}
+          activeCourse={activeCourse}
+          onComplete={handleClassCreated}
+          userProfile={userProfile}
+        />
+      </Modal>
+    </>
   );
 }
 
