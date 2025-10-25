@@ -1,6 +1,6 @@
 import { useState, useCallback, useEffect, useRef } from "react";
 import {
-  Box, Container, SpaceBetween,
+  Box, Container, SpaceBetween, Header, ColumnLayout, Icon
 } from "@cloudscape-design/components";
 import '../static/css/Videoplayer.css';
 
@@ -145,11 +145,31 @@ interface VideoInfoProps {
 }
 
 const VideoInfo = ({ title, author, description }: VideoInfoProps) => (
-  <>
-    <SpaceBetween direction="vertical" size="xxs">
-      <Box variant="h2">{title}</Box>
-      <Box variant="small">{author}</Box>
+  <Container>
+    <SpaceBetween size="l">
+      <Box variant="h1" fontSize="heading-xl" fontWeight="bold">
+        {title}
+      </Box>
+      
+      <Box>
+        <SpaceBetween direction="horizontal" size="xs">
+          <Icon name="user-profile" />
+          <Box variant="span" color="text-body-secondary" fontSize="body-m">
+            {author}
+          </Box>
+        </SpaceBetween>
+      </Box>
+
+      <Box>
+        <SpaceBetween size="xs">
+          <Box variant="h3" fontSize="heading-s" fontWeight="bold">
+            Description
+          </Box>
+          <Box variant="p" color="text-body-secondary" fontSize="body-m">
+            {description}
+          </Box>
+        </SpaceBetween>
+      </Box>
     </SpaceBetween>
-    <div>{description}</div>
-  </>
+  </Container>
 );
