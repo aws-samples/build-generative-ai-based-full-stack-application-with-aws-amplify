@@ -38,3 +38,6 @@ amplify/
 # amplify
 amplify_outputs*
 amplifyconfiguration*
+
+# env files
+.env.*

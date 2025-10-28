@@ -1,0 +1,178 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: 'Step Functions State Machine for Video Understanding with Transcription and Bedrock'
+
+Parameters:
+  StateMachineName:
+    Type: String
+    Default: 'amplify-video-understanding-machine'
+    Description: 'Name of the Step Functions State Machine'
+
+Resources:
+  StepFunctionsExecutionRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: states.amazonaws.com
+            Action: sts:AssumeRole
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/CloudWatchLogsFullAccess
+      Policies:
+        - PolicyName: StepFunctionsExecutionPolicy
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action:
+                  - transcribe:StartTranscriptionJob
+                  - transcribe:GetTranscriptionJob
+                Resource: '*'
+              - Effect: Allow
+                Action:
+                  - s3:GetObject
+                  - s3:PutObject
+                Resource: 'arn:aws:s3:::*/*'
+              - Effect: Allow
+                Action:
+                  - bedrock:InvokeModel
+                  - bedrock:InvokeModelWithResponseStream
+                Resource: '*'
+
+  VideoUnderstandingStateMachine:
+    Type: AWS::StepFunctions::StateMachine
+    Properties:
+      StateMachineName: !Ref StateMachineName
+      RoleArn: !GetAtt StepFunctionsExecutionRole.Arn
+      StateMachineType: STANDARD
+      DefinitionString: |
+        {
+          "Comment": "Video Understanding with Transcription and Bedrock",
+          "StartAt": "StartTranscriptionJob",
+          "States": {
+            "StartTranscriptionJob": {
+              "Type": "Task",
+              "Arguments": {
+                "Media": {
+                  "MediaFileUri": "{% 's3://' & $states.input.BucketName & '/video-origin/' & $states.input.VideoKey %}"
+                },
+                "TranscriptionJobName": "{% $states.context.Execution.Name %}",
+                "LanguageCode": "en-US",
+                "OutputBucketName": "{% $states.input.BucketName %}",
+                "OutputKey": "{% 'output/' & $states.input.TranscriptionKey & '/' & $states.input.TranscriptionKey %}",
+                "Subtitles": {
+                  "Formats": ["vtt"],
+                  "OutputStartIndex": 0
+                }
+              },
+              "Resource": "arn:aws:states:::aws-sdk:transcribe:startTranscriptionJob",
+              "Assign": {
+                "jobId": "{% $states.result.TranscriptionJob.TranscriptionJobName %}",
+                "BucketName": "{% $states.input.BucketName %}",
+                "VideoKey": "{% $states.input.VideoKey %}",
+                "TranscriptionKey": "{% $states.input.TranscriptionKey %}",
+                "SummarizedTextFileKey": "{% $states.input.SummarizedTextFileKey %}",
+                "Languages": "{% $states.input.Languages %}"
+              },
+              "Next": "Wait"
+            },
+            "Wait": {
+              "Type": "Wait",
+              "Seconds": 5,
+              "Next": "GetTranscriptionJob"
+            },
+            "GetTranscriptionJob": {
+              "Type": "Task",
+              "Arguments": {
+                "TranscriptionJobName": "{% $jobId %}"
+              },
+              "Resource": "arn:aws:states:::aws-sdk:transcribe:getTranscriptionJob",
+              "Assign": {
+                "jobStatus": "{% $states.result.TranscriptionJob.TranscriptionJobStatus %}"
+              },
+              "Next": "CheckTranscriptionJobStatus"
+            },
+            "CheckTranscriptionJobStatus": {
+              "Type": "Choice",
+              "Choices": [
+                {
+                  "Condition": "{% $jobStatus = 'FAILED' %}",
+                  "Next": "Fail"
+                },
+                {
+                  "Condition": "{% $jobStatus = 'COMPLETED' %}",
+                  "Next": "GetTranscriptionJobResult"
+                }
+              ],
+              "Default": "Wait"
+            },
+            "GetTranscriptionJobResult": {
+              "Type": "Task",
+              "Arguments": {
+                "Bucket": "{% $BucketName %}",
+                "Key": "{% 'output/' & $TranscriptionKey & '/' & $TranscriptionKey %}"
+              },
+              "Resource": "arn:aws:states:::aws-sdk:s3:getObject",
+              "Next": "Converse",
+              "Output": "{% $parse($states.result.Body) %}"
+            },
+            "Converse": {
+              "Type": "Task",
+              "Arguments": {
+                "ModelId": "us.anthropic.claude-sonnet-4-20250514-v1:0",
+                "Messages": [
+                  {
+                    "Role": "user",
+                    "Content": [
+                      {
+                        "Text": "{% 'Please analyze the following transcript and provide:\n1. A concise title (within 100 characters)\n2. A summary (within 500 characters)\n\nFormat your response as:\nTitle: [your title here]\nSummary: [your summary here]\n\n<transcript>' & $states.input.results.transcripts[0].transcript & '</transcript>' %}"
+                      }
+                    ]
+                  }
+                ],
+                "InferenceConfig": {
+                  "MaxTokens": 1500
+                }
+              },
+              "Resource": "arn:aws:states:::aws-sdk:bedrockruntime:converse",
+              "Next": "PutObject",
+              "Assign": {
+                "transcript": "{% $states.input.results.transcripts[0].transcript %}",
+                "response": "{% $states.result.Output.Message.Content[0].Text %}",
+                "title": "{% $substringAfter($substringBefore($states.result.Output.Message.Content[0].Text, 'Summary:'), 'Title:') ~> $trim %}",
+                "description": "{% $substringAfter($states.result.Output.Message.Content[0].Text, 'Summary:') ~> $trim %}",
+                "subtitle": "{% 'https://' & $BucketName & '.s3.us-east-1.amazonaws.com/output/' & $TranscriptionKey & '/' & $TranscriptionKey & '.vtt' %}"
+              }
+            },
+            "PutObject": {
+              "Type": "Task",
+              "Arguments": {
+                "Body": "{% $states.input %}",
+                "Bucket": "{% $BucketName %}",
+                "Key": "{% 'output/' & $TranscriptionKey & '/' & $SummarizedTextFileKey %}"
+              },
+              "Resource": "arn:aws:states:::aws-sdk:s3:putObject",
+              "Output": "{% {'transcript': $transcript, 'title': $title, 'description': $description, 'subtitle': $subtitle} %}",
+              "End": true
+            },
+            "Fail": {
+              "Type": "Fail"
+            }
+          },
+          "QueryLanguage": "JSONata"
+        }
+
+Outputs:
+  StateMachineArn:
+    Description: 'Step Functions State Machine ARN'
+    Value: !Ref VideoUnderstandingStateMachine
+    Export:
+      Name: !Sub '${AWS::StackName}-StateMachineArn'
+  
+  StateMachineName:
+    Description: 'Step Functions State Machine Name'
+    Value: !Ref StateMachineName
+    Export:
+      Name: !Sub '${AWS::StackName}-StateMachineName'

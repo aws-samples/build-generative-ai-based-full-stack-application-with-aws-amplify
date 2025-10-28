@@ -17,7 +17,8 @@ export default function NavigationPanel() {
     const items: SideNavigationProps.Item[] = [
       { type: "link", text: "🏠 Home", href: "/" },
       { type: "link", text: "👤 Profile", href: "/profile" },
-      { type: "link", text: "📚 Catalog", href: "/catalog" }
+      { type: "link", text: "📚 Catalog", href: "/catalog" },
+      { type: "link", text: "🧠 Search", href: "/agent-search" }
     ];
 
     items.push(

@@ -7,6 +7,7 @@ import "./styles/app.scss";
 import NotFound from "./pages/not-found.tsx";
 import ProfilePage from './pages/profile.tsx';
 import Catalog from "./pages/catalog.tsx";
+import AgentSearch from "./pages/agent-search.tsx";
 
 import { Authenticator } from "@aws-amplify/ui-react";
 import { Amplify } from 'aws-amplify';
@@ -51,6 +52,10 @@ const WorkshopApp = ({ signOut, user = defaultUser }: WorkshopAppProps) => {
             <Route path="/absproxy/5173" element={<HomePage />} />
             <Route path="/proxy/5173/absproxy/5173" element={<HomePage />} />
 
+            <Route
+              path="/agent-search"
+              element={signOut ? <AgentSearch /> : <NotFound />}
+            />
             <Route
               path="/catalog"
               element={signOut ? <Catalog /> : <NotFound />}
