@@ -19,6 +19,7 @@ interface Course {
   description: string;
   link: string;
   reason: string;
+  thumbnail: string;
 }
 
 interface RoadmapStep {
@@ -79,13 +80,14 @@ export default function AgentSearch() {
   const [loading, setLoading] = useState(false);
   const [streamingMessageId, setStreamingMessageId] = useState<string | null>(null);
   const [processingSteps, setProcessingSteps] = useState<string[]>([]);
+  const [courseThumbnails, setCourseThumbnails] = useState<Record<string, string>>({});
   const sessionId = useRef(`session-${Date.now()}`);
 
   const processingMessages = [
-    "🔍 질문을 분석하고 있습니다...",
-    "📚 관련 강의를 검색하고 있습니다...",
-    "🤖 AI가 최적의 답변을 생성하고 있습니다...",
-    "✨ 결과를 정리하고 있습니다..."
+    "🔍 Analyzing your question...",
+    "📚 Searching for relevant courses...",
+    "🤖 AI is generating the best answer...",
+    "✨ Organizing results..."
   ];
 
   useEffect(() => {
@@ -217,16 +219,55 @@ export default function AgentSearch() {
     return { elements, links };
   };
 
+  const loadCourseThumbnails = async (jsonText: string) => {
+    // Lambda already returns image URLs in the response, no need to query DynamoDB
+    console.log('ℹ️ Thumbnails are included in Agent response');
+    return;
+  };
+
+  const convertJsonToMarkdown = (jsonText: string): string => {
+    try {
+      const parsed: AgentResponse = JSON.parse(jsonText);
+      let markdown = `# ${parsed.title}\n\n`;
+      
+      parsed.sections.forEach(section => {
+        if (section.type === 'header') {
+          markdown += `${'#'.repeat(section.level + 1)} ${section.content}\n\n`;
+        } else if (section.type === 'text') {
+          markdown += `${section.content}\n\n`;
+        } else if (section.type === 'course') {
+          markdown += `### ${section.title}\n`;
+          markdown += `**Difficulty:** ${section.difficulty} | **Instructor:** ${section.instructor}\n\n`;
+          markdown += `${section.description}\n\n`;
+          markdown += `💡 **Reason:** ${section.reason}\n\n`;
+          markdown += `[View Course](${section.link})\n\n`;
+        }
+      });
+      
+      return markdown;
+    } catch {
+      return jsonText;
+    }
+  };
+
   const simulateStreaming = (text: string, messageId: string, traces: string[] = []) => {
-    const words = text.split(' ');
+    const markdownText = convertJsonToMarkdown(text);
+    const words = markdownText.split(' ');
     let currentText = '';
     
-    // First show traces if available
+    // Parse JSON response
+    let parsedData: AgentResponse | undefined;
+    try {
+      parsedData = JSON.parse(text);
+    } catch (e) {
+      // Not JSON, use markdown
+    }
+    
     if (traces.length > 0) {
       setMessages(prev => 
         prev.map(msg => 
           msg.id === messageId 
-            ? { ...msg, traces }
+            ? { ...msg, traces, parsedResponse: parsedData }
             : msg
         )
       );
@@ -238,25 +279,24 @@ export default function AgentSearch() {
         setMessages(prev => 
           prev.map(msg => 
             msg.id === messageId 
-              ? { ...msg, content: currentText }
+              ? { ...msg, content: currentText, parsedResponse: parsedData }
               : msg
           )
         );
         
         if (index === words.length - 1) {
           setStreamingMessageId(null);
-          // Parse markdown and extract links
           const { elements, links } = parseMarkdownResponse(currentText);
           
           setMessages(prev => 
             prev.map(msg => 
               msg.id === messageId 
-                ? { ...msg, links, content: currentText }
+                ? { ...msg, links, content: currentText, parsedResponse: parsedData }
                 : msg
             )
           );
         }
-      }, index * 50); // 50ms delay between words
+      }, index * 50);
     });
   };
 
@@ -287,22 +327,43 @@ export default function AgentSearch() {
     setStreamingMessageId(agentMessageId);
     
     try {
-      console.log('🔍 Calling searchWithAgent:', { query, sessionId: sessionId.current });
+      // Use new session for each query to prevent token accumulation
+      const newSessionId = `session-${Date.now()}`;
+      console.log('🔍 Calling searchWithAgent:', { query, sessionId: newSessionId });
 
       const result = await client.queries.searchWithAgent({
         query: query,
-        sessionId: sessionId.current
+        sessionId: newSessionId
       });
       
       console.log('✅ searchWithAgent result:', result);
       console.log('📦 result.data:', result.data);
       console.log('⚠️ result.errors:', result.errors);
 
+      if (result.errors && result.errors.length > 0) {
+        console.error('❌ GraphQL Errors:', result.errors);
+        console.error('❌ Full Error Details:', JSON.stringify(result.errors, null, 2));
+        const errorMessages = result.errors.map(e => e.message).join('\n');
+        const errorType = result.errors[0]?.errorType || 'Unknown';
+        setMessages(prev => 
+          prev.map(msg => 
+            msg.id === agentMessageId 
+              ? { ...msg, content: `⚠️ Error occurred (${errorType}):\n${errorMessages}\n\nPlease try again.` }
+              : msg
+          )
+        );
+        setStreamingMessageId(null);
+        return;
+      }
+
       const responseText = result.data?.response || 'No response received';
       const traces = result.data?.traces || [];
       
       console.log('📝 Response text:', responseText);
       console.log('🔎 Traces:', traces);
+      
+      // Load thumbnails
+      await loadCourseThumbnails(responseText);
       
       // Start streaming simulation
       simulateStreaming(responseText, agentMessageId, traces);
@@ -325,7 +386,10 @@ export default function AgentSearch() {
     }
   };
 
-  const renderSection = (section: Section, index: number) => {
+  const renderSection = (section: Section, index: number, courseNumber?: number) => {
+    // Count course sections for numbering
+    const courseIndex = index;
+    
     switch (section.type) {
       case 'header':
         const variant = section.level === 1 ? 'h2' : section.level === 2 ? 'h3' : 'h4';
@@ -343,26 +407,70 @@ export default function AgentSearch() {
         );
       
       case 'course':
+        const thumbnail = courseThumbnails[section.link] || section.thumbnail;
         return (
-          <Box key={index} padding="s" variant="div" style={{ border: '1px solid #e9ebed', borderRadius: '8px' }}>
+          <Box 
+            key={index} 
+            padding="l" 
+            variant="div" 
+            style={{ 
+              border: '3px solid #d1d5db', 
+              borderRadius: '16px',
+              backgroundColor: '#ffffff',
+              boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
+              marginBottom: '24px',
+              marginTop: '16px',
+              position: 'relative'
+            }}
+          >
+            {courseNumber && (
+              <Box 
+                style={{
+                  position: 'absolute',
+                  top: '-12px',
+                  left: '20px',
+                  backgroundColor: '#ffffff',
+                  borderRadius: '8px',
+                  padding: '8px 16px',
+                  fontSize: '24px',
+                  fontWeight: 'bold',
+                  boxShadow: '0 2px 8px rgba(0,0,0,0.2)',
+                  zIndex: 1,
+                  border: '2px solid #e9ebed'
+                }}
+              >
+                🎬 {courseNumber}
+              </Box>
+            )}
             <SpaceBetween size="s">
+              {thumbnail && (
+                <Link href={section.link} external>
+                  <img 
+                    src={thumbnail} 
+                    alt={section.title}
+                    style={{ 
+                      width: '100%',
+                      maxWidth: '500px',
+                      borderRadius: '8px', 
+                      cursor: 'pointer'
+                    }}
+                  />
+                </Link>
+              )}
               <Header variant="h4">{section.title}</Header>
               <SpaceBetween size="xs" direction="horizontal">
                 <Badge color={
-                  section.difficulty === '초급' ? 'green' : 
-                  section.difficulty === '중급' ? 'blue' : 'red'
+                  section.difficulty === 'beginner' ? 'green' : 
+                  section.difficulty === 'intermediate' ? 'blue' : 'red'
                 }>
                   {section.difficulty}
                 </Badge>
-                <Box fontSize="body-s">강사: {section.instructor}</Box>
+                <Box fontSize="body-s">Instructor: {section.instructor}</Box>
               </SpaceBetween>
               <Box fontSize="body-s">{section.description}</Box>
               <Box fontSize="body-s" color="text-status-info">
                 💡 {section.reason}
               </Box>
-              <Link external href={section.link}>
-                강의 보기 →
-              </Link>
             </SpaceBetween>
           </Box>
         );
@@ -379,7 +487,7 @@ export default function AgentSearch() {
                     <Box fontSize="body-s">{step.description}</Box>
                     {step.courses.length > 0 && (
                       <Box fontSize="body-s">
-                        <strong>관련 강의:</strong> {step.courses.join(', ')}
+                        <strong>Related Courses:</strong> {step.courses.join(', ')}
                       </Box>
                     )}
                   </SpaceBetween>
@@ -447,14 +555,13 @@ export default function AgentSearch() {
             🤖 Agent {streamingMessageId === message.id && (
               <SpaceBetween size="xs" direction="horizontal">
                 <Spinner size="small" />
-                <span>응답 생성 중...</span>
+                <span>Generating response...</span>
               </SpaceBetween>
             )}
           </Box>
           
-          {/* Show traces if available */}
           {message.traces && message.traces.length > 0 && (
-            <ExpandableSection headerText={`🔍 처리 단계 (${message.traces.length}개)`} variant="container">
+            <ExpandableSection headerText={`🔍 Processing Steps (${message.traces.length})`} variant="container">
               <SpaceBetween size="xs">
                 {message.traces.map((trace, index) => (
                   <Box key={index} padding="xs" style={{ backgroundColor: '#f0f8ff', borderRadius: '4px', fontSize: '12px' }}>
@@ -465,39 +572,24 @@ export default function AgentSearch() {
             </ExpandableSection>
           )}
           
-          {/* Render markdown content */}
-          <SpaceBetween size="m">
-            {parseMarkdownResponse(message.content).elements}
-          </SpaceBetween>
-          
-          {/* Show links at the bottom */}
-          {message.links && message.links.length > 0 && (
-            <Container>
-              <Header variant="h4">🔗 관련 링크 ({message.links.length}개)</Header>
-              <SpaceBetween size="xs">
-                {message.links.map((link, index) => (
-                  <Box 
-                    key={index}
-                    padding="s"
-                    style={{ 
-                      backgroundColor: '#f8f9fa', 
-                      borderRadius: '8px',
-                      border: '1px solid #e9ecef'
-                    }}
-                  >
-                    <SpaceBetween size="xs" direction="horizontal" alignItems="center">
-                      <Badge color="blue">{index + 1}</Badge>
-                      <Link external href={link.url} fontSize="body-s">
-                        {link.title}
-                      </Link>
-                    </SpaceBetween>
-                  </Box>
-                ))}
-              </SpaceBetween>
-            </Container>
+          {/* Render structured response if available */}
+          {message.parsedResponse ? (
+            <SpaceBetween size="m">
+              {message.parsedResponse.sections.map((section, index) => {
+                // Calculate course number
+                const courseNumber = message.parsedResponse!.sections
+                  .slice(0, index)
+                  .filter(s => s.type === 'course').length + 1;
+                return renderSection(section, index, section.type === 'course' ? courseNumber : undefined);
+              })}
+            </SpaceBetween>
+          ) : (
+            <SpaceBetween size="m">
+              {parseMarkdownResponse(message.content).elements}
+            </SpaceBetween>
           )}
           
-          <ExpandableSection headerText="원본 응답 보기" variant="footer">
+          <ExpandableSection headerText="View Original Response" variant="footer">
             <Box padding="s" style={{ backgroundColor: '#fff', borderRadius: '4px' }}>
               <pre style={{ whiteSpace: 'pre-wrap', fontSize: '12px' }}>{message.content}</pre>
             </Box>
@@ -554,7 +646,7 @@ export default function AgentSearch() {
                   <Header variant="h3">
                     <SpaceBetween size="s" direction="horizontal" alignItems="center">
                       <Spinner size="large" />
-                      <span>🤖 Agent가 작업 중입니다</span>
+                      <span>🤖 Agent is working</span>
                     </SpaceBetween>
                   </Header>
                   

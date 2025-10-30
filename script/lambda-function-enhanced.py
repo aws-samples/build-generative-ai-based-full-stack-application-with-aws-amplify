@@ -91,21 +91,21 @@ def lambda_handler(event, context):
         return error_response
 
 def search_classes(dynamodb, query):
-    """DynamoDB에서 영상 검색 - 향상된 검색 로직"""
+    """DynamoDB에서 영상 검색 - description 기반 간단 검색"""
     
     print(f"🔍 검색 쿼리: {query}")
     
     # 검색어를 개별 키워드로 분리
-    search_terms = [term.strip() for term in query.split() if term.strip()] if query else []
+    search_terms = [term.strip().lower() for term in query.split() if term.strip()] if query else []
     
     print(f"🔎 검색어: {search_terms}")
     
-    table_name = os.environ.get('DYNAMODB_TABLE_NAME', 'Class-7445a6ztsfdylpiczrn5hdh3ry-NONE')
+    table_name = os.environ['DYNAMODB_TABLE_NAME']
     
     try:
         table = dynamodb.Table(table_name)
         
-        # 검색어가 없으면 빈 결과 반환 (전체 스캔 방지)
+        # 검색어가 없으면 빈 결과 반환
         if not search_terms:
             print("⚠️ 검색어 없음 - 빈 결과 반환")
             return {
@@ -117,47 +117,35 @@ def search_classes(dynamodb, query):
                 }, ensure_ascii=False)
             }
         
-        # 활성 영상만 조회 (class_flag != 10)
+        # 활성 영상만 조회
         base_filter = Attr('class_flag').ne(10) & (Attr('class_flag').eq(0) | Attr('class_flag').not_exists())
         
-        if search_terms:
-            # 각 검색어에 대해 name과 description에서 검색
-            search_conditions = []
-            for term in search_terms:
-                # 대소문자 구분 없이 검색
-                term_lower = term.lower()
-                term_upper = term.upper()
-                term_title = term.title()
-                
-                # name 필드에서 검색
-                search_conditions.extend([
-                    Contains(Attr('name'), term),
-                    Contains(Attr('name'), term_lower),
-                    Contains(Attr('name'), term_upper),
-                    Contains(Attr('name'), term_title)
-                ])
-                
-                # description 필드에서 검색
-                search_conditions.extend([
-                    Contains(Attr('description'), term),
-                    Contains(Attr('description'), term_lower),
-                    Contains(Attr('description'), term_upper),
-                    Contains(Attr('description'), term_title)
-                ])
+        # name과 description 필드에서 대소문자 구분 없이 검색
+        search_conditions = []
+        for term in search_terms:
+            term_lower = term.lower()
+            term_upper = term.upper()
+            term_title = term.title()
             
-            # OR 조건으로 결합
-            if search_conditions:
-                search_filter = search_conditions[0]
-                for condition in search_conditions[1:]:
-                    search_filter = search_filter | condition
-                
-                final_filter = base_filter & search_filter
-            else:
-                final_filter = base_filter
-        else:
-            final_filter = base_filter
+            search_conditions.append(
+                Contains(Attr('name'), term) |
+                Contains(Attr('name'), term_lower) |
+                Contains(Attr('name'), term_upper) |
+                Contains(Attr('name'), term_title) |
+                Contains(Attr('description'), term) |
+                Contains(Attr('description'), term_lower) |
+                Contains(Attr('description'), term_upper) |
+                Contains(Attr('description'), term_title)
+            )
         
-        # 스캔 실행 (타임아웃 방지를 위해 Limit 감소)
+        # OR 조건으로 결합
+        search_filter = search_conditions[0]
+        for condition in search_conditions[1:]:
+            search_filter = search_filter | condition
+        
+        final_filter = base_filter & search_filter
+        
+        # 스캔 실행
         response = table.scan(
             FilterExpression=final_filter,
             Limit=20
@@ -165,58 +153,27 @@ def search_classes(dynamodb, query):
         
         print(f"📊 스캔 결과: {len(response.get('Items', []))}개 항목")
         
-        # 결과 포맷팅 - 더 자세한 정보 포함
+        # 결과 포맷팅 - thumbnail과 URL만 포함
         classes = []
         for item in response.get('Items', []):
-            class_flag = item.get('class_flag', 0)
-            if isinstance(class_flag, Decimal):
-                class_flag = int(class_flag)
-            
-            if class_flag != 10:  # 비활성이 아닌 것만
-                class_info = {
-                    'id': str(item.get('id', '')),
-                    'name': str(item.get('name', '')),
-                    'description': str(item.get('description', '')),
-                    'author': str(item.get('author', '')),
-                    'difficulty': str(item.get('difficulty', 'intermediate')),
-                    'url': str(item.get('url', '')),
-                    'image': str(item.get('image', '')),
-                    'courseId': str(item.get('courseId', ''))
-                }
-                
-                # 검색어와의 관련성 점수 계산 (간단한 매칭)
-                relevance_score = 0
-                name_lower = class_info['name'].lower()
-                desc_lower = class_info['description'].lower()
-                
-                for term in search_terms:
-                    term_lower = term.lower()
-                    if term_lower in name_lower:
-                        relevance_score += 10  # 제목 매칭은 높은 점수
-                    if term_lower in desc_lower:
-                        relevance_score += 5   # 설명 매칭은 중간 점수
-                
-                class_info['relevance_score'] = relevance_score
-                classes.append(class_info)
+            class_info = {
+                'title': str(item.get('name', '')),
+                'description': str(item.get('description', ''))[:150] + '...' if len(str(item.get('description', ''))) > 150 else str(item.get('description', '')),
+                'url': str(item.get('url', '')),
+                'thumbnail': str(item.get('image', '')),
+                'author': str(item.get('author', '')),
+                'difficulty': str(item.get('difficulty', 'intermediate'))
+            }
+            classes.append(class_info)
         
-        # 관련성 점수로 정렬 (높은 점수 우선)
-        classes.sort(key=lambda x: x['relevance_score'], reverse=True)
-        
-        # 상위 5개만 반환 (스트리밍 성능 개선)
+        # 상위 5개만 반환
         top_classes = classes[:5]
         
-        # 결과가 없을 때 메시지 추가
         message = f"'{' '.join(search_terms)}' 관련 강의 {len(top_classes)}개를 찾았습니다." if top_classes else f"'{' '.join(search_terms)}' 관련 강의를 찾지 못했습니다."
         
         result_data = {
             'courses_found': len(top_classes),
-            'courses': [{
-                'title': c['name'],
-                'description': c['description'][:150] + '...' if len(c['description']) > 150 else c['description'],
-                'url': c['url'],
-                'author': c['author'],
-                'difficulty': c['difficulty']
-            } for c in top_classes],
+            'courses': top_classes,
             'message': message,
             'traces': [
                 {'type': 'preprocessing', 'content': f"🔍 '{' '.join(search_terms)}' 검색 시작", 'timestamp': ''},
