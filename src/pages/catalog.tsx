@@ -1,12 +1,12 @@
-// ui
 import { useEffect, useState } from "react";
-import "../static/css/ProfileCard.css";
 import {
-  Container, Grid, SpaceBetween
+  Container, 
+  SpaceBetween,
+  Tabs,
+  Header
 } from "@cloudscape-design/components";
 
 // component
-import { Course } from "../components/Course.tsx";
 import { Class } from "../components/Class.tsx";
 import { ClassCatalog } from "../components/ClassCatalog.tsx";
 
@@ -21,62 +21,61 @@ export default function Catalog(props: any) {
   const [activeClass, setActiveClass] = useState<Schema["Class"]["type"]>();
   const [activeCourse, setActiveCourse] = useState<Schema["Course"]["type"]>();
   const [courses, setCourses] = useState<Array<Schema["Course"]["type"]>>([]);
-  const [userProfile, setUserProfile] = useState<Schema["Profile"]["type"] | null>(null);
+  const [activeTabId, setActiveTabId] = useState<string>("");
   
   const fetchCourse = async () => {
     const {data: items } = await client.models.Course.list();
     setCourses(items);
-    if (!activeCourse) {
-      const course = items[0];
-      setActiveCourse(course);
-    }
-  };
-
-  const fetchUserProfile = async () => {
-    try {
-      const { data: profiles } = await client.models.Profile.list();
-      if (profiles && profiles.length > 0) {
-        setUserProfile(profiles[0]);
-      }
-    } catch (error) {
-      console.error('Error fetching profile:', error);
+    if (!activeCourse && items.length > 0) {
+      setActiveCourse(items[0]);
+      setActiveTabId(items[0].id);
     }
   };
 
   useEffect(() => {
     fetchCourse();
-    fetchUserProfile();
   }, []);
+
+  const handleTabChange = (detail: { activeTabId: string }) => {
+    const selectedCourse = courses.find(c => c.id === detail.activeTabId);
+    if (selectedCourse) {
+      setActiveCourse(selectedCourse);
+      setActiveClass(undefined); // Reset active class when changing course
+      setActiveTabId(detail.activeTabId);
+    }
+  };
 
   return (
     <BaseAppLayout
       content={
-        <SpaceBetween size="s">
-          <Container>
-            <Grid gridDefinition={[{ colspan: 2 }, { colspan: 10 }]}>
-              <Container>
-                {
-                  courses.map(course =>
-                    <Course
-                      key={course.id}
-                      course={course}
-                      activeCourse={activeCourse}
-                      setActiveCourse={setActiveCourse}
-                      setActiveClass={setActiveClass}
-                    />
-                  )
-                }
-              </Container>
-              {
-                (activeClass && activeClass != null && activeClass.class_flag != null && activeClass.class_flag <= 0) ? (
-                  <Class activeClass={activeClass} userName={props.user} userId={props.uid} />
-                ) : (
-                  <ClassCatalog activeCourse={activeCourse} setActiveClass={setActiveClass} userProfile={userProfile} />
+        <Container>
+          <SpaceBetween size="l">
+            <Header
+              variant="h1"
+              description="Browse our comprehensive learning catalog by category"
+            >
+              Learning Catalog
+            </Header>
+            
+            <Tabs
+              activeTabId={activeTabId}
+              onChange={({ detail }) => handleTabChange(detail)}
+              tabs={courses.map(course => ({
+                id: course.id,
+                label: course.name || "Unknown Course",
+                content: (
+                  <Container>
+                    {(activeClass && activeClass != null && activeClass.class_flag != null && activeClass.class_flag <= 0) ? (
+                      <Class activeClass={activeClass} userName={props.user} userId={props.uid} />
+                    ) : (
+                      <ClassCatalog activeCourse={course} setActiveClass={setActiveClass} />
+                    )}
+                  </Container>
                 )
-              }
-            </Grid>
-          </Container>
-        </SpaceBetween>
+              }))}
+            />
+          </SpaceBetween>
+        </Container>
       }
     />
   );

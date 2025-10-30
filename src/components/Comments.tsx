@@ -93,14 +93,19 @@ export function Comments({ classId }: CommentsProps) {
   }, []);
 
   return (
-    <Container header={<Header variant='h3'>Comments</Header>}>
-      <Box>
-        <SpaceBetween size="xl">
-          <CommentForm 
-            classId={classId}
-            createCommentApi={createCommentApi}
-          />
-          <SpaceBetween size="xs">
+    <Container header={<Header variant='h3'>Comments & AI Summary</Header>}>
+      <SpaceBetween size="l">
+        <CommentForm 
+          classId={classId}
+          createCommentApi={createCommentApi}
+        />
+        
+        <SpaceBetween size="s">
+          <Header variant="h4" description={`${comments.length} comments`}>
+            Discussion
+          </Header>
+          
+          <SpaceBetween size="s">
             {comments.length > 0 ? (
               comments
                 .filter(comment => comment.classId === classId)
@@ -116,7 +121,7 @@ export function Comments({ classId }: CommentsProps) {
             )}
           </SpaceBetween>
         </SpaceBetween>
-      </Box>
+      </SpaceBetween>
     </Container>
   );
 }

@@ -71,18 +71,30 @@ const ClassCatalog = ({
               }
             }
           >
-            {item.name}
+            <div style={{ 
+              wordBreak: 'break-word',
+              lineHeight: '1.4'
+            }}>
+              {item.name}
+            </div>
           </Link>
         ),
         sections: [
           {
             id: "image",
-            content: item => (<img src={item.image || '#'} alt={item.name} width='100%' />)
+            content: item => (<img src={item.image || '#'} alt={item.name} width='100%' style={{ borderRadius: '4px' }} />)
           },
           {
             id: "description",
             header: "Description",
-            content: item => item.description
+            content: item => (
+              <div style={{ 
+                wordBreak: 'break-word',
+                lineHeight: '1.5'
+              }}>
+                {item.description}
+              </div>
+            )
           },
           {
             id: 'state',

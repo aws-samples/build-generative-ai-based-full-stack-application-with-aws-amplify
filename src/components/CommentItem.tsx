@@ -5,18 +5,26 @@ import {
   Modal,
   SpaceBetween,
   TextContent,
+  Container,
+  StatusIndicator
 } from "@cloudscape-design/components";
 import moment from 'moment';
 import { NewLineToBr } from './utils/NewLineToBr';
 
 export const NoComment = () => (
   <Box
-    padding={{ bottom: "s" }}
-    fontSize="heading-s"
+    padding="l"
     textAlign="center"
-    color="inherit"
+    color="text-body-secondary"
   >
-    <b>No Contents</b>
+    <SpaceBetween size="s" alignItems="center">
+      <StatusIndicator type="info">
+        No comments yet
+      </StatusIndicator>
+      <TextContent>
+        <p>Be the first to share your thoughts about this class!</p>
+      </TextContent>
+    </SpaceBetween>
   </Box>
 );
 
@@ -47,27 +55,38 @@ export const Comment = ({
   };
 
   return (
-    <Box
+    <Box 
       padding="s"
+      style={{
+        border: '1px solid #e9ebed',
+        borderRadius: '8px',
+        backgroundColor: '#fafbfc'
+      }}
     >
-      <SpaceBetween direction="vertical" size="xs">
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <TextContent>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <Box variant="small" color="text-body-secondary">
-                {moment(comment.updatedAt).fromNow()}
-              </Box>
-              <Button 
-                iconName="remove" 
-                variant="icon" 
-                onClick={() => setConfirmVisible(true)}
-              />
-            </div>
-          </TextContent>
-        </div>
+      <SpaceBetween direction="vertical" size="s">
+        <Box>
+          <SpaceBetween direction="horizontal" size="s" alignItems="center">
+            <Box variant="small" color="text-body-secondary">
+              {moment(comment.updatedAt).fromNow()}
+            </Box>
+            <Button 
+              iconName="remove" 
+              variant="icon" 
+              onClick={() => setConfirmVisible(true)}
+              ariaLabel="Delete comment"
+            />
+          </SpaceBetween>
+        </Box>
         
         <Box>
-          <NewLineToBr>{comment.content || ''}</NewLineToBr>
+          <TextContent>
+            <div style={{ 
+              wordBreak: 'break-word',
+              lineHeight: '1.5'
+            }}>
+              <NewLineToBr>{comment.content || ''}</NewLineToBr>
+            </div>
+          </TextContent>
         </Box>
       </SpaceBetween>
 
@@ -76,7 +95,7 @@ export const Comment = ({
         visible={confirmVisible}
         closeAriaLabel="Close modal"
         size="small"
-        header="Delete Confirmation"
+        header="Delete Comment"
         footer={
           <Box float="right">
             <SpaceBetween direction="horizontal" size="xs">
@@ -97,7 +116,9 @@ export const Comment = ({
           </Box>
         }
       >
-        Are you sure to delete the message?
+        <TextContent>
+          <p>Are you sure you want to delete this comment? This action cannot be undone.</p>
+        </TextContent>
       </Modal>
     </Box>
   );

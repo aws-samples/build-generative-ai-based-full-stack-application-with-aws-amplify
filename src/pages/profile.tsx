@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
 import peccy from "../static/images/peccy.png";
-import "../static/css/ProfileCard.css";
 import {
   Box, 
   Container,
   Grid, 
   Header, 
-  SpaceBetween
+  SpaceBetween,
+  ColumnLayout,
+  Badge,
+  Cards
 } from "@cloudscape-design/components";
 import { Rewards } from "../components/Rewards.tsx";
 import { generateClient } from 'aws-amplify/data';
@@ -47,36 +49,68 @@ export default function ProfilePage({ user, email, attributes }: ProfilePageProp
     fetchProfileInfo();
   }, [user]);
 
+  const profileCards = [
+    {
+      title: "Personal Information",
+      content: (
+        <ColumnLayout columns={2} variant="text-grid">
+          <div>
+            <Box variant="awsui-key-label">Username</Box>
+            <div>{user}</div>
+          </div>
+          <div>
+            <Box variant="awsui-key-label">Email</Box>
+            <div>{email}</div>
+          </div>
+          <div>
+            <Box variant="awsui-key-label">Organization</Box>
+            <div>{profileInfo.organization || "Not set"}</div>
+          </div>
+          <div>
+            <Box variant="awsui-key-label">Learning Points</Box>
+            <Badge color="green">{totalPoints} points</Badge>
+          </div>
+        </ColumnLayout>
+      )
+    }
+  ];
+
   return (
     <BaseAppLayout
       content={
-        <SpaceBetween size="s">
-          <Container header={<Header variant="h2">My Profile</Header>}>
-            <Grid gridDefinition={[{ colspan: 4 }, { colspan: 8 }]}>
-              <Box padding="s">
+        <SpaceBetween size="l">
+          <Container header={<Header variant="h1">My Profile</Header>}>
+            <Grid gridDefinition={[{ colspan: 3 }, { colspan: 9 }]}>
+              <Box textAlign="center" padding="l">
                 <img 
                   src={peccy} 
                   alt={`${user}'s avatar`}
-                  width="100px" 
-                  id="avatar" 
+                  style={{
+                    width: "120px",
+                    height: "120px", 
+                    borderRadius: "8px",
+                    objectFit: "cover",
+                    border: "2px solid #e9ebed"
+                  }}
                 />
-                <div style={{ marginTop: "1rem" }}>
-                  <div style={{ marginBottom: "0.5rem" }}>
-                    <strong>Organization: </strong> 
-                    <span>{profileInfo.organization || "Not set"}</span>
-                  </div>
-                  <div style={{ marginBottom: "0.5rem" }}>
-                    <strong>Email: </strong> 
-                    <span>{email}</span>
-                  </div>
-                  <div>
-                    <strong>Total Points: </strong> 
-                    <span>{totalPoints}</span>
-                  </div>
-                </div>
               </Box>
+              
+              <Cards
+                cardDefinition={{
+                  header: item => item.title,
+                  sections: [
+                    {
+                      id: "content",
+                      content: item => item.content
+                    }
+                  ]
+                }}
+                items={profileCards}
+                cardsPerRow={[{ cards: 1 }]}
+              />
             </Grid>
           </Container>
+          
           <Rewards onPointsUpdate={handleTotalPointsUpdate} />
         </SpaceBetween>
       }  
