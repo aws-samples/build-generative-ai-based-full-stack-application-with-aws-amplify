@@ -2,6 +2,7 @@ import { useState } from 'react';
 import {
   Box,
   Button,
+  Container,
   Header,
   SpaceBetween,
   Textarea,
@@ -36,35 +37,35 @@ export function Bot({ transcript }: BotProps) {
   };
 
   return (
-    <Box>
-      <SpaceBetween size="m">
+    <Container
+      header={
         <Header 
           variant="h3"
           description="Ask questions about this video content"
         >
           Ask AI Assistant
         </Header>
+      }
+    >
+      <SpaceBetween size="s">
+        <Textarea
+          placeholder="Ask a question about this video content..."
+          value={query}
+          onChange={({ detail }) => setQuery(detail.value)}
+          rows={3}
+        />
         
-        <SpaceBetween size="s">
-          <Textarea
-            placeholder="Ask a question about this video content..."
-            value={query}
-            onChange={({ detail }) => setQuery(detail.value)}
-            rows={3}
-          />
-          
-          <Box>
-            <Button
-              variant="primary"
-              onClick={handleAskAI}
-              disabled={!query.trim() || isLoading}
-              loading={isLoading}
-              iconName="gen-ai"
-            >
-              Ask AI
-            </Button>
-          </Box>
-        </SpaceBetween>
+        <Box>
+          <Button
+            variant="primary"
+            onClick={handleAskAI}
+            disabled={!query.trim() || isLoading}
+            loading={isLoading}
+            iconName="gen-ai"
+          >
+            Ask AI
+          </Button>
+        </Box>
 
         {response && (
           <Box 
@@ -85,6 +86,6 @@ export function Bot({ transcript }: BotProps) {
           </Box>
         )}
       </SpaceBetween>
-    </Box>
+    </Container>
   );
 }

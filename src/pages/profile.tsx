@@ -89,7 +89,7 @@ export default function ProfilePage({ user, email, attributes }: ProfilePageProp
                     width: "120px",
                     height: "120px", 
                     borderRadius: "8px",
-                    objectFit: "cover",
+                    objectFit: "contain",
                     border: "2px solid #e9ebed"
                   }}
                 />

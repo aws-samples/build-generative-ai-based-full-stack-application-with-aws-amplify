@@ -55,40 +55,33 @@ export const Comment = ({
   };
 
   return (
-    <Box 
-      padding="s"
-      style={{
-        border: '1px solid #e9ebed',
-        borderRadius: '8px',
-        backgroundColor: '#fafbfc'
-      }}
-    >
-      <SpaceBetween direction="vertical" size="s">
-        <Box>
-          <SpaceBetween direction="horizontal" size="s" alignItems="center">
-            <Box variant="small" color="text-body-secondary">
-              {moment(comment.updatedAt).fromNow()}
-            </Box>
-            <Button 
-              iconName="remove" 
-              variant="icon" 
-              onClick={() => setConfirmVisible(true)}
-              ariaLabel="Delete comment"
-            />
-          </SpaceBetween>
-        </Box>
-        
-        <Box>
-          <TextContent>
-            <div style={{ 
-              wordBreak: 'break-word',
-              lineHeight: '1.5'
-            }}>
-              <NewLineToBr>{comment.content || ''}</NewLineToBr>
-            </div>
-          </TextContent>
-        </Box>
-      </SpaceBetween>
+    <div style={{ 
+      padding: '12px 0',
+      borderBottom: '1px solid #eee'
+    }}>
+      <div style={{ 
+        fontSize: '13px',
+        color: '#666',
+        marginBottom: '4px',
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center'
+      }}>
+        <span>{moment(comment.updatedAt).fromNow()}</span>
+        <Button 
+          iconName="remove" 
+          variant="icon" 
+          onClick={() => setConfirmVisible(true)}
+          ariaLabel="Delete"
+        />
+      </div>
+      <div style={{ 
+        fontSize: '14px',
+        lineHeight: '1.4',
+        wordBreak: 'break-word'
+      }}>
+        <NewLineToBr>{comment.content || ''}</NewLineToBr>
+      </div>
 
       <Modal
         onDismiss={() => setConfirmVisible(false)}
@@ -120,6 +113,6 @@ export const Comment = ({
           <p>Are you sure you want to delete this comment? This action cannot be undone.</p>
         </TextContent>
       </Modal>
-    </Box>
+    </div>
   );
 };

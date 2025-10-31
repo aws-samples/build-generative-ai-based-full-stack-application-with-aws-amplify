@@ -93,34 +93,36 @@ export function Comments({ classId }: CommentsProps) {
   }, []);
 
   return (
-    <Container header={<Header variant='h3'>Comments & AI Summary</Header>}>
-      <SpaceBetween size="l">
+    <Container 
+      header={
+        <Header 
+          variant="h3" 
+          counter={comments.length > 0 ? `(${comments.length})` : undefined}
+          description="Share your thoughts and engage with other learners"
+        >
+          Comments
+        </Header>
+      }
+    >
+      <SpaceBetween size="m">
         <CommentForm 
           classId={classId}
           createCommentApi={createCommentApi}
         />
         
-        <SpaceBetween size="s">
-          <Header variant="h4" description={`${comments.length} comments`}>
-            Discussion
-          </Header>
-          
-          <SpaceBetween size="s">
-            {comments.length > 0 ? (
-              comments
-                .filter(comment => comment.classId === classId)
-                .map(comment => (
-                  <Comment
-                    key={comment.id}
-                    comment={comment}
-                    deleteCommentApi={deleteCommentApi}
-                  />
-                ))
-            ) : (
-              <NoComment />
-            )}
-          </SpaceBetween>
-        </SpaceBetween>
+        {comments.length > 0 ? (
+          comments
+            .filter(comment => comment.classId === classId)
+            .map(comment => (
+              <Comment
+                key={comment.id}
+                comment={comment}
+                deleteCommentApi={deleteCommentApi}
+              />
+            ))
+        ) : (
+          <NoComment />
+        )}
       </SpaceBetween>
     </Container>
   );

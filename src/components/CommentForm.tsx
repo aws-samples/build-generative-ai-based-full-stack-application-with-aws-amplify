@@ -112,7 +112,7 @@ export const CommentForm = ({
   return (
     <form onSubmit={submitHandler}>
       <Form>
-        <SpaceBetween size="m">
+        <SpaceBetween size="l">
           <SpaceBetween size="s">
             <Box>
               <Button 
@@ -163,33 +163,22 @@ export const CommentForm = ({
 
           <SpaceBetween size="s">
             <Header variant="h4">Add Comment</Header>
+            <Textarea
+              placeholder="Share your thoughts about this class..."
+              onChange={({ detail }) => setPost(detail.value)}
+              value={post}
+              rows={Math.max(3, post.split(/\r\n|\r|\n/).length)}
+            />
             
-            <SpaceBetween size="s">
-              <Textarea
-                placeholder="Share your thoughts about this class..."
-                onChange={({ detail }) => setPost(detail.value)}
-                value={post}
-                rows={Math.max(3, post.split(/\r\n|\r|\n/).length)}
-              />
-              
-              <SpaceBetween direction="horizontal" size="s">
-                <Button 
-                  formAction="none" 
-                  variant="link"
-                  onClick={cancelHandler}
-                  disabled={isGenerating}
-                >
-                  Clear
-                </Button>
-                <Button 
-                  formAction="submit" 
-                  variant="primary"
-                  disabled={isGenerating || !post.trim()}
-                >
-                  Post Comment
-                </Button>
-              </SpaceBetween>
-            </SpaceBetween>
+            <Box float="right">
+              <Button 
+                formAction="submit" 
+                variant="primary"
+                disabled={isGenerating || !post.trim()}
+              >
+                Post Comment
+              </Button>
+            </Box>
           </SpaceBetween>
         </SpaceBetween>
 

@@ -64,13 +64,11 @@ export default function Catalog(props: any) {
                 id: course.id,
                 label: course.name || "Unknown Course",
                 content: (
-                  <Container>
-                    {(activeClass && activeClass != null && activeClass.class_flag != null && activeClass.class_flag <= 0) ? (
-                      <Class activeClass={activeClass} userName={props.user} userId={props.uid} />
-                    ) : (
-                      <ClassCatalog activeCourse={course} setActiveClass={setActiveClass} />
-                    )}
-                  </Container>
+                  (activeClass && activeClass != null && activeClass.class_flag != null && activeClass.class_flag <= 0) ? (
+                    <Class activeClass={activeClass} userName={props.user} userId={props.uid} />
+                  ) : (
+                    <ClassCatalog activeCourse={course} setActiveClass={setActiveClass} />
+                  )
                 )
               }))}
             />
