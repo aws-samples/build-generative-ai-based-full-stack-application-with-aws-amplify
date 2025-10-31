@@ -93,30 +93,37 @@ export function Comments({ classId }: CommentsProps) {
   }, []);
 
   return (
-    <Container header={<Header variant='h3'>Comments</Header>}>
-      <Box>
-        <SpaceBetween size="xl">
-          <CommentForm 
-            classId={classId}
-            createCommentApi={createCommentApi}
-          />
-          <SpaceBetween size="xs">
-            {comments.length > 0 ? (
-              comments
-                .filter(comment => comment.classId === classId)
-                .map(comment => (
-                  <Comment
-                    key={comment.id}
-                    comment={comment}
-                    deleteCommentApi={deleteCommentApi}
-                  />
-                ))
-            ) : (
-              <NoComment />
-            )}
-          </SpaceBetween>
-        </SpaceBetween>
-      </Box>
+    <Container 
+      header={
+        <Header 
+          variant="h3" 
+          counter={comments.length > 0 ? `(${comments.length})` : undefined}
+          description="Share your thoughts and engage with other learners"
+        >
+          Comments
+        </Header>
+      }
+    >
+      <SpaceBetween size="m">
+        <CommentForm 
+          classId={classId}
+          createCommentApi={createCommentApi}
+        />
+        
+        {comments.length > 0 ? (
+          comments
+            .filter(comment => comment.classId === classId)
+            .map(comment => (
+              <Comment
+                key={comment.id}
+                comment={comment}
+                deleteCommentApi={deleteCommentApi}
+              />
+            ))
+        ) : (
+          <NoComment />
+        )}
+      </SpaceBetween>
     </Container>
   );
 }

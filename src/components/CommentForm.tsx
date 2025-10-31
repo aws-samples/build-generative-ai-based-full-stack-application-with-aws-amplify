@@ -4,10 +4,10 @@ import {
   Button,
   Container,
   Form,
-  Grid,
   Modal,
   SpaceBetween,
   Textarea,
+  Header,
 } from "@cloudscape-design/components";
 import LoadingBar from "@cloudscape-design/chat-components/loading-bar";
 import { generateClient } from 'aws-amplify/data';
@@ -112,76 +112,74 @@ export const CommentForm = ({
   return (
     <form onSubmit={submitHandler}>
       <Form>
-        <SpaceBetween size="m">
-          <Box>
-            <Button 
-              formAction="none" 
-              onClick={generateSummarization}
-              iconName="gen-ai"
-              disabled={isGenerating}
-              loading={isGenerating}
-            >
-              Summarize
-            </Button>
-          </Box>
-          
-          {isGenerating && (
-            <Container>
-              <Box
-                margin={{ bottom: "xs", left: "l" }}
-                color="text-body-secondary"
+        <SpaceBetween size="l">
+          <SpaceBetween size="s">
+            <Box>
+              <Button 
+                formAction="none" 
+                onClick={generateSummarization}
+                iconName="gen-ai"
+                disabled={isGenerating}
+                loading={isGenerating}
               >
-                Generating summary
+                Summarize Comments
+              </Button>
+            </Box>
+            
+            {isGenerating && (
+              <Box>
+                <SpaceBetween size="xs">
+                  <Box
+                    color="text-body-secondary"
+                    fontSize="body-s"
+                  >
+                    Generating AI summary...
+                  </Box>
+                  <LoadingBar variant="gen-ai" />
+                </SpaceBetween>
               </Box>
-              <LoadingBar variant="gen-ai" />
-            </Container>
-          )}
+            )}
 
-          <Box>
             <Box
-              variant="pre"
-              padding="s"
+              padding="m"
+              color={summary && summary !== "Generated summary will appear here." ? "text-body-default" : "text-body-secondary"}
               fontSize="body-m"
-              color="text-body-secondary"
             >
               <div
                 style={{
                   whiteSpace: 'pre-wrap',
                   wordWrap: 'break-word',
+                  lineHeight: '1.5',
+                  border: '1px solid #e9ebed',
+                  borderRadius: '8px',
+                  padding: '12px',
+                  backgroundColor: '#fafbfc'
                 }}
               >
                 <NewLineToBr>{summary || "Generated summary will appear here."}</NewLineToBr>
               </div>
             </Box>
-          </Box>
+          </SpaceBetween>
 
-          <hr style={{ width: '100%', margin: '20px 0' }} />
-
-          <Grid disableGutters gridDefinition={[{ colspan: 10 }, { colspan: 2 }]}>
+          <SpaceBetween size="s">
+            <Header variant="h4">Add Comment</Header>
             <Textarea
-              placeholder="Enter your comments here."
+              placeholder="Share your thoughts about this class..."
               onChange={({ detail }) => setPost(detail.value)}
               value={post}
-              rows={post.split(/\r\n|\r|\n/).length}
+              rows={Math.max(3, post.split(/\r\n|\r|\n/).length)}
             />
+            
             <Box float="right">
-              <SpaceBetween direction="horizontal" size="xs">
-                <Button 
-                  formAction="none" 
-                  iconName="undo" 
-                  variant="icon" 
-                  onClick={cancelHandler}
-                  disabled={isGenerating}
-                />
-                <Button 
-                  formAction="submit" 
-                  iconName="upload" 
-                  variant="icon"
-                  disabled={isGenerating}
-                />
-              </SpaceBetween>
+              <Button 
+                formAction="submit" 
+                variant="primary"
+                disabled={isGenerating || !post.trim()}
+              >
+                Post Comment
+              </Button>
             </Box>
-          </Grid>
+          </SpaceBetween>
         </SpaceBetween>
 
         <Modal
