@@ -19,6 +19,8 @@ import { Schema } from '../../amplify/data/resource';
 
 const client = generateClient<Schema>();
 
+const BUCKET_NAME = 'amplify-s3-ryz';
+const REGION = 'us-east-1';
 const CLOUDFRONT_URL = 'https://d28jhwy9xe688b.cloudfront.net';
 
 const toCloudFrontUrl = (url: string) => {
@@ -111,8 +113,8 @@ export function CreateClassWizard({
         data: file,
         options: {
           bucket: {
-            bucketName: 'amplify-s3-ryz',
-            region: 'us-east-1'
+            bucketName: BUCKET_NAME,
+            region: REGION
           },
           onProgress: ({ transferredBytes, totalBytes }) => {
             if (totalBytes) {
@@ -122,7 +124,7 @@ export function CreateClassWizard({
         }
       }).result;
 
-      const videoUrl = `https://amplify-s3-ryz.s3.us-east-1.amazonaws.com/${fileName}`;
+      const videoUrl = `https://${BUCKET_NAME}.s3.${REGION}.amazonaws.com/${fileName}`;
       setFormData({ ...formData, videoUrl });
       setUploadedFileName(file.name);
       
@@ -146,7 +148,7 @@ export function CreateClassWizard({
 
       const { data, errors } = await client.mutations.startVideoProcessing({
         videoKey: uploadedFileName,
-        bucketName: 'amplify-s3-ryz',
+        bucketName: BUCKET_NAME,
         transcriptionKey: `${baseFileName}_transcription`,
         summarizedTextFileKey: `${baseFileName}_summarize.txt`,
         languages: languages,
@@ -404,8 +406,8 @@ export function CreateClassWizard({
         data: file,
         options: {
           bucket: {
-            bucketName: 'amplify-s3-ryz',
-            region: 'us-east-1'
+            bucketName: BUCKET_NAME,
+            region: REGION
           },
           onProgress: ({ transferredBytes, totalBytes }) => {
             if (totalBytes) {
@@ -415,7 +417,7 @@ export function CreateClassWizard({
         }
       }).result;
 
-      const imageUrl = `https://amplify-s3-ryz.s3.us-east-1.amazonaws.com/${fileName}`;
+      const imageUrl = `https://${BUCKET_NAME}.s3.${REGION}.amazonaws.com/${fileName}`;
       setFormData({ ...formData, imageUrl, image: imageUrl });
       setThumbnailUploadProgress(0);
       setThumbnailUploaded(true);
@@ -458,7 +460,7 @@ export function CreateClassWizard({
           />
         </FormField>
 
-        <FormField label="Thumbnail Image" description="Upload thumbnail image to s3://amplify-s3-ryz/Image">
+        <FormField label="Thumbnail Image" description={`Upload thumbnail image to s3://${BUCKET_NAME}/Image`}>
           <SpaceBetween size="s">
             <FileUpload
               onChange={({ detail }) => setThumbnailFile(detail.value)}

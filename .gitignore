@@ -41,3 +41,6 @@ amplifyconfiguration*
 
 # env files
 .env.*
+
+# git files
+.github/*

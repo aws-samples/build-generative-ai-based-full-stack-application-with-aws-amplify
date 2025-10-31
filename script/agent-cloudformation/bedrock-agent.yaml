@@ -105,7 +105,7 @@ Resources:
                   print(f"📦 Request Body: {request_body}")
                   
                   # DynamoDB 클라이언트 초기화
-                  dynamodb = boto3.resource('dynamodb', region_name='us-east-1')
+                  dynamodb = boto3.resource('dynamodb', region_name='us-west-2')
                   
                   if api_path == '/search_classes' and http_method == 'POST':
                       # requestBody에서 content 추출

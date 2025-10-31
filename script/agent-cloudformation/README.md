@@ -47,7 +47,7 @@ python deploy-agent.py \
 
 ### 3. AWS 프로필 사용
 ```bash
-python deploy-agent.py --profile my-aws-profile --region us-east-1
+python deploy-agent.py --profile my-aws-profile --region us-west-2
 ```
 
 ## 배포 매개변수

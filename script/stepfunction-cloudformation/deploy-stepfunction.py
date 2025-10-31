@@ -13,7 +13,7 @@ import os
 from botocore.exceptions import ClientError, NoCredentialsError
 
 class StepFunctionsDeployer:
-    def __init__(self, region='us-east-1', profile=None):
+    def __init__(self, region='us-west-2', profile=None):
         """Initialize the deployer with AWS session"""
         try:
             if profile:
@@ -211,7 +211,7 @@ def main():
                        help='CloudFormation stack name')
     parser.add_argument('--state-machine-name', default='amplify-video-understanding-machine',
                        help='Step Functions State Machine name')
-    parser.add_argument('--region', default='us-east-1',
+    parser.add_argument('--region', default='us-west-2',
                        help='AWS region')
     parser.add_argument('--profile', 
                        help='AWS profile name')

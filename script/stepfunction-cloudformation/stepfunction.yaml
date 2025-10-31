@@ -143,7 +143,7 @@ Resources:
                 "response": "{% $states.result.Output.Message.Content[0].Text %}",
                 "title": "{% $substringAfter($substringBefore($states.result.Output.Message.Content[0].Text, 'Summary:'), 'Title:') ~> $trim %}",
                 "description": "{% $substringAfter($states.result.Output.Message.Content[0].Text, 'Summary:') ~> $trim %}",
-                "subtitle": "{% 'https://' & $BucketName & '.s3.us-east-1.amazonaws.com/output/' & $TranscriptionKey & '/' & $TranscriptionKey & '.vtt' %}"
+                "subtitle": "{% 'https://' & $BucketName & '.s3.us-west-2.amazonaws.com/output/' & $TranscriptionKey & '/' & $TranscriptionKey & '.vtt' %}"
               }
             },
             "PutObject": {
