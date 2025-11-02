@@ -19,9 +19,9 @@ import { Schema } from '../../amplify/data/resource';
 
 const client = generateClient<Schema>();
 
-const BUCKET_NAME = 'amplify-s3-ryz';
-const REGION = 'us-east-1';
-const CLOUDFRONT_URL = 'https://d28jhwy9xe688b.cloudfront.net';
+const BUCKET_NAME = 'amplify-s3-ryz'; // need to change the resource information
+const REGION = 'us-west-2'; // need to change the resource information
+const CLOUDFRONT_URL = 'https://d28jhwy9xe688b.cloudfront.net'; // need to change the resource information
 
 const toCloudFrontUrl = (url: string) => {
   if (!url) return url;

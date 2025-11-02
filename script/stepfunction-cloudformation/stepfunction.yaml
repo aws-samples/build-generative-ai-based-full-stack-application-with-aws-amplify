@@ -121,7 +121,7 @@ Resources:
             "Converse": {
               "Type": "Task",
               "Arguments": {
-                "ModelId": "us.anthropic.claude-sonnet-4-20250514-v1:0",
+                "ModelId": "us.amazon.nova-pro-v1:0",
                 "Messages": [
                   {
                     "Role": "user",
