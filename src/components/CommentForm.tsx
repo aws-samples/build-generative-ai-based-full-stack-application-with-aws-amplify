@@ -1,8 +1,8 @@
+// src/components/CommentForm.tsx
 import { useState } from 'react';
 import {
   Box,
   Button,
-  Container,
   Form,
   Modal,
   SpaceBetween,
@@ -10,11 +10,8 @@ import {
   Header,
 } from "@cloudscape-design/components";
 import LoadingBar from "@cloudscape-design/chat-components/loading-bar";
-import { generateClient } from 'aws-amplify/data';
-import { Schema } from '../../amplify/data/resource';
 import { NewLineToBr } from './utils/NewLineToBr';
-
-const client = generateClient<Schema>();
+import { useCommentSummary } from './utils/commentSummary';
 
 interface CommentFormProps {
   classId: string;
@@ -27,8 +24,9 @@ export const CommentForm = ({
 }: CommentFormProps) => {
   const [post, setPost] = useState('');
   const [alertVisible, setAlertVisible] = useState(false);
-  const [summary, setSummary] = useState('');
-  const [isGenerating, setIsGenerating] = useState(false);
+  
+  // Use comment summary hook
+  const { summary, isGenerating, generateSummarization } = useCommentSummary(classId);
 
   const submitHandler = async (event: any) => {
     event.preventDefault();
@@ -40,79 +38,11 @@ export const CommentForm = ({
     }
   };
 
-  const cancelHandler = () => {
-    setPost("");
-  }
-
-  const askBedrock = async (prompt: string) => {
-    const response = await client.queries.askBedrock({ prompt: prompt });
-    const res = JSON.parse(response.data?.body!);
-    const content = res.content[0].text;
-    return content || null;
-  };
-
-  const generateSummarization = async () => {
-    setIsGenerating(true);
-    console.log("Generating summarization...");
-    
-    try {
-      const { data: comments, errors } = await client.models.Comment.list({
-        filter: { classId: { eq: classId } },
-        limit: 1000
-      });
-
-      if (errors) {
-        console.error('Error fetching comments:', errors);
-        return;
-      }
-
-      if (!comments || comments.length === 0) {
-        console.log("No comments to summarize");
-        setSummary("No comments available to summarize.");
-        return;
-      }
-
-      console.log(`Total comments found: ${comments.length}`);
-      console.log('All comments:', comments);
-
-      const commentsText = comments
-        .map(comment => comment.content)
-        .join("\n");
-
-      console.log('Full comments text being sent to Bedrock:', commentsText);
-      console.log('Number of characters in prompt:', commentsText.length);
-
-      const prompt = `📊 Summarize the following comments in a structured format:
-
-      ${commentsText}
-
-      Format your response as follows:
-
-      📚 Summary:
-      [Provide a concise summary of the positive and negative sentiment]
-
-      ⭐️ Number of positive comment :
-      ⭐️ Number of Negative comment :
-
-      💫 Key Reason:
-      [Main reason for the score]`;
-
-      const response = await askBedrock(prompt);
-      console.log("Bedrock response:", response);
-      setSummary(response);
-
-    } catch (error) {
-      console.error("Error in generateSummarization:", error);
-      setSummary("An error occurred while generating the summary.");
-    } finally {
-      setIsGenerating(false);
-    }
-  };
-
   return (
     <form onSubmit={submitHandler}>
       <Form>
         <SpaceBetween size="l">
+          {/* Summary section */}
           <SpaceBetween size="s">
             <Box>
               <Button 
@@ -142,7 +72,9 @@ export const CommentForm = ({
 
             <Box
               padding="m"
-              color={summary && summary !== "Generated summary will appear here." ? "text-body-default" : "text-body-secondary"}
+              color={summary && summary !== "Generated summary will appear here." 
+                ? "text-body-default" 
+                : "text-body-secondary"}
               fontSize="body-m"
             >
               <div
@@ -156,11 +88,14 @@ export const CommentForm = ({
                   backgroundColor: '#fafbfc'
                 }}
               >
-                <NewLineToBr>{summary || "Generated summary will appear here."}</NewLineToBr>
+                <NewLineToBr>
+                  {summary || "Generated summary will appear here."}
+                </NewLineToBr>
               </div>
             </Box>
           </SpaceBetween>
 
+          {/* Comment input section */}
           <SpaceBetween size="s">
             <Header variant="h4">Add Comment</Header>
             <Textarea
