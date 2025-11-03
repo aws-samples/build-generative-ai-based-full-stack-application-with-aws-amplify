@@ -61,6 +61,14 @@ const WorkshopApp = ({ signOut, user = defaultUser }: WorkshopAppProps) => {
               element={signOut ? <Catalog /> : <NotFound />}
             />
             <Route
+              path="/catalog/course/:courseId"
+              element={signOut ? <Catalog /> : <NotFound />}
+            />
+            <Route
+              path="/catalog/course/:courseId/class/:classId"
+              element={signOut ? <Catalog /> : <NotFound />}
+            />
+            <Route
               path="/profile"
               element={signOut ? <ProfilePage {...getProfileProps(user)} /> : <NotFound />}
             />
