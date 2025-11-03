@@ -146,7 +146,8 @@ export function CreateClassWizard({
       const baseFileName = uploadedFileName.replace(/\.[^/.]+$/, '');
       const languages = ['english']; // Default to English only
 
-      const { data, errors } = await client.mutations.startVideoProcessing({
+      const { data, errors } = await client.mutations.stepFunction({
+        action: "START",
         videoKey: uploadedFileName,
         bucketName: BUCKET_NAME,
         transcriptionKey: `${baseFileName}_transcription`,
@@ -183,7 +184,8 @@ export function CreateClassWizard({
 
     const pollInterval = setInterval(async () => {
       try {
-        const { data, errors } = await client.queries.checkExecutionStatus({
+        const { data, errors } = await client.mutations.stepFunction({
+          action: "STATUS",
           executionArn: arn
         });
 
