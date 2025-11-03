@@ -61,6 +61,14 @@ const WorkshopApp = ({ signOut, user = defaultUser }: WorkshopAppProps) => {
               element={signOut ? <Catalog /> : <NotFound />}
             />
             <Route
+              path="/catalog/course/:courseId"
+              element={signOut ? <Catalog /> : <NotFound />}
+            />
+            <Route
+              path="/catalog/course/:courseId/class/:classId"
+              element={signOut ? <Catalog /> : <NotFound />}
+            />
+            <Route
               path="/profile"
               element={signOut ? <ProfilePage {...getProfileProps(user)} /> : <NotFound />}
             />
@@ -75,17 +83,17 @@ const WorkshopApp = ({ signOut, user = defaultUser }: WorkshopAppProps) => {
 
 export default function App() {
   // This parameter will be used in the workshop
-  const signOut = undefined;
-  const user = defaultUser;
+  // const signOut = undefined;
+  // const user = defaultUser;
 
   return (
-    // <Authenticator>
-    //   {({ signOut, user }) => (
+    <Authenticator>
+      {({ signOut, user }) => (
         <WorkshopApp
           signOut={signOut}
           user={user ? convertAuthToUserType(user) : defaultUser}
         />
-    //   )}
-    // </Authenticator>
+      )}
+    </Authenticator>
   );
 }
