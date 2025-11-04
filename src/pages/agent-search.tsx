@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import {
   Container, SpaceBetween, Button, Box, Header,
-  Textarea, ExpandableSection, Link, Badge, Spinner
+  Textarea, ExpandableSection, Link, Badge, Spinner, ColumnLayout
 } from "@cloudscape-design/components";
 import { generateClient } from 'aws-amplify/data';
 import { Schema } from '../../amplify/data/resource';
@@ -409,40 +409,18 @@ export default function AgentSearch() {
       case 'course':
         const thumbnail = courseThumbnails[section.link] || section.thumbnail;
         return (
-          <Box 
-            key={index} 
-            padding="l" 
-            variant="div" 
-            style={{ 
-              border: '3px solid #d1d5db', 
-              borderRadius: '16px',
-              backgroundColor: '#ffffff',
-              boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
-              marginBottom: '24px',
-              marginTop: '16px',
-              position: 'relative'
-            }}
-          >
-            {courseNumber && (
-              <Box 
-                style={{
-                  position: 'absolute',
-                  top: '-12px',
-                  left: '20px',
-                  backgroundColor: '#ffffff',
-                  borderRadius: '8px',
-                  padding: '8px 16px',
-                  fontSize: '24px',
-                  fontWeight: 'bold',
-                  boxShadow: '0 2px 8px rgba(0,0,0,0.2)',
-                  zIndex: 1,
-                  border: '2px solid #e9ebed'
-                }}
+          <Container
+            key={index}
+            header={
+              <Header
+                variant="h2"
+                description={`Instructor: ${section.instructor}`}
               >
-                🎬 {courseNumber}
-              </Box>
-            )}
-            <SpaceBetween size="s">
+                🎬 Course {courseNumber}: {section.title}
+              </Header>
+            }
+          >
+            <SpaceBetween size="l">
               {thumbnail && (
                 <Link href={section.link} external>
                   <img 
@@ -450,60 +428,74 @@ export default function AgentSearch() {
                     alt={section.title}
                     style={{ 
                       width: '100%',
-                      maxWidth: '500px',
-                      borderRadius: '8px', 
-                      cursor: 'pointer'
+                      maxWidth: '600px',
+                      borderRadius: '8px'
                     }}
                   />
                 </Link>
               )}
-              <Header variant="h4">{section.title}</Header>
-              <SpaceBetween size="xs" direction="horizontal">
-                <Badge color={
-                  section.difficulty === 'beginner' ? 'green' : 
-                  section.difficulty === 'intermediate' ? 'blue' : 'red'
-                }>
-                  {section.difficulty}
-                </Badge>
-                <Box fontSize="body-s">Instructor: {section.instructor}</Box>
-              </SpaceBetween>
-              <Box fontSize="body-s">{section.description}</Box>
-              <Box fontSize="body-s" color="text-status-info">
-                💡 {section.reason}
-              </Box>
+              
+              <ColumnLayout columns={2} variant="text-grid">
+                <div>
+                  <Box variant="awsui-key-label">Difficulty</Box>
+                  <Badge color={
+                    section.difficulty === 'beginner' ? 'green' : 
+                    section.difficulty === 'intermediate' ? 'blue' : 'red'
+                  }>
+                    {section.difficulty.toUpperCase()}
+                  </Badge>
+                </div>
+                <div>
+                  <Box variant="awsui-key-label">Instructor</Box>
+                  <Box>{section.instructor}</Box>
+                </div>
+              </ColumnLayout>
+
+              <div>
+                <Box variant="awsui-key-label">Description</Box>
+                <Box>{section.description}</Box>
+              </div>
+
+              <Container>
+                <Box variant="awsui-key-label">💡 Why this course?</Box>
+                <Box>{section.reason}</Box>
+              </Container>
+
+              <Button href={section.link} iconName="external" target="_blank">
+                View Course
+              </Button>
             </SpaceBetween>
-          </Box>
+          </Container>
         );
       
       case 'roadmap':
         return (
-          <Box key={index}>
-            <Header variant="h4">{section.title}</Header>
-            <SpaceBetween size="s">
+          <Container key={index} header={<Header variant="h3">{section.title}</Header>}>
+            <SpaceBetween size="m">
               {section.steps.map((step, stepIndex) => (
-                <Box key={stepIndex} padding="s" style={{ backgroundColor: '#f9f9f9', borderRadius: '4px' }}>
-                  <SpaceBetween size="xs">
-                    <Header variant="h5">{step.step}: {step.title}</Header>
-                    <Box fontSize="body-s">{step.description}</Box>
+                <Container key={stepIndex}>
+                  <SpaceBetween size="s">
+                    <Header variant="h4">{step.step}: {step.title}</Header>
+                    <Box>{step.description}</Box>
                     {step.courses.length > 0 && (
-                      <Box fontSize="body-s">
-                        <strong>Related Courses:</strong> {step.courses.join(', ')}
-                      </Box>
+                      <div>
+                        <Box variant="awsui-key-label">Related Courses</Box>
+                        <Box>{step.courses.join(', ')}</Box>
+                      </div>
                     )}
                   </SpaceBetween>
-                </Box>
+                </Container>
               ))}
             </SpaceBetween>
-          </Box>
+          </Container>
         );
       
       case 'list':
         return (
-          <Box key={index}>
-            <Header variant="h4">{section.title}</Header>
+          <Container key={index} header={<Header variant="h3">{section.title}</Header>}>
             <SpaceBetween size="xs">
               {section.items.map((item, itemIndex) => (
-                <Box key={itemIndex} margin={{ left: "s" }}>
+                <Box key={itemIndex}>
                   • {item.link ? (
                     <Link external href={item.link}>{item.text}</Link>
                   ) : (
@@ -512,7 +504,7 @@ export default function AgentSearch() {
                 </Box>
               ))}
             </SpaceBetween>
-          </Box>
+          </Container>
         );
       
       default:
@@ -523,42 +515,27 @@ export default function AgentSearch() {
   const renderMessage = (message: ChatMessage) => {
     if (message.type === 'user') {
       return (
-        <Box 
-          key={message.id}
-          padding="m"
-          style={{ 
-            backgroundColor: '#e3f2fd', 
-            borderRadius: '8px',
-            marginLeft: '20%'
-          }}
-        >
+        <Container key={message.id}>
           <SpaceBetween size="xs">
-            <Box fontSize="body-s" color="text-status-info">You</Box>
+            <Box variant="awsui-key-label">👤 You</Box>
             <Box>{message.content}</Box>
           </SpaceBetween>
-        </Box>
+        </Container>
       );
     }
 
     return (
-      <Box 
-        key={message.id}
-        padding="m"
-        style={{ 
-          backgroundColor: '#f5f5f5', 
-          borderRadius: '8px',
-          marginRight: '10%'
-        }}
-      >
-        <SpaceBetween size="s">
-          <Box fontSize="body-s" color="text-status-info">
-            🤖 Agent {streamingMessageId === message.id && (
-              <SpaceBetween size="xs" direction="horizontal">
+      <Container key={message.id}>
+        <SpaceBetween size="m">
+          <SpaceBetween size="xs" direction="horizontal" alignItems="center">
+            <Box variant="awsui-key-label">🤖 AI Agent</Box>
+            {streamingMessageId === message.id && (
+              <SpaceBetween size="xs" direction="horizontal" alignItems="center">
                 <Spinner size="small" />
-                <span>Generating response...</span>
+                <Box fontSize="body-s" color="text-status-info">typing...</Box>
               </SpaceBetween>
             )}
-          </Box>
+          </SpaceBetween>
           
           {message.traces && message.traces.length > 0 && (
             <ExpandableSection headerText={`🔍 Processing Steps (${message.traces.length})`} variant="container">
@@ -572,9 +549,8 @@ export default function AgentSearch() {
             </ExpandableSection>
           )}
           
-          {/* Render structured response if available */}
           {message.parsedResponse ? (
-            <SpaceBetween size="m">
+            <SpaceBetween size="l">
               {message.parsedResponse.sections.map((section, index) => {
                 // Calculate course number
                 const courseNumber = message.parsedResponse!.sections
@@ -595,32 +571,21 @@ export default function AgentSearch() {
             </Box>
           </ExpandableSection>
         </SpaceBetween>
-      </Box>
+      </Container>
     );
   };
 
   return (
     <BaseAppLayout
       content={
-        <div>
-          <style>{`
-            @keyframes fadeIn {
-              from { opacity: 0; transform: translateY(10px); }
-              to { opacity: 1; transform: translateY(0); }
-            }
-            @keyframes pulse {
-              0%, 100% { opacity: 1; }
-              50% { opacity: 0.7; }
-            }
-          `}</style>
-          
+        <Container>
           <SpaceBetween size="l">
-          <Container>
-            <Header variant="h1">🤖 Bedrock Agent Chat</Header>
-            <Box fontSize="body-s" color="text-status-info">
-              Session ID: {sessionId.current}
-            </Box>
-          </Container>
+            <Header 
+              variant="h1" 
+              description="Ask questions and get AI-powered course recommendations"
+            >
+              🤖 Bedrock Agent Chat
+            </Header>
           
           {/* Chat History */}
           {messages.length > 0 && (
@@ -696,6 +661,7 @@ export default function AgentSearch() {
                   onClick={handleSearch}
                   loading={loading}
                   disabled={!query.trim()}
+                  iconName="send"
                 >
                   Send
                 </Button>
@@ -704,18 +670,15 @@ export default function AgentSearch() {
                     setMessages([]);
                     sessionId.current = `session-${Date.now()}`;
                   }}
+                  iconName="refresh"
                 >
-                  New Session
+                  New Chat
                 </Button>
               </SpaceBetween>
-              
-              <Box fontSize="body-s" color="text-status-info">
-                Tip: Press Cmd+Enter (Mac) or Ctrl+Enter (Windows) to send
-              </Box>
             </SpaceBetween>
           </Container>
-        </SpaceBetween>
-      </div>
+          </SpaceBetween>
+        </Container>
       }
     />
   );
