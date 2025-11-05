@@ -306,10 +306,10 @@ Resources:
           "sections": [
             {
               "type": "course",
-              "title": "<copy from courses[].title>",
-              "difficulty": "<copy from courses[].difficulty>",
+              "title": "<copy from courses[].title and translate to  with user's given language>",
+              "difficulty": "<copy from courses[].difficulty and translate to  with user's given language>",
               "instructor": "<copy from courses[].author>",
-              "description": "<copy from courses[].description>",
+              "description": "<copy from courses[].description and translate to  with user's given language>",
               "link": "<copy from courses[].url>",
               "thumbnail": "<copy from courses[].thumbnail>",
               "reason": "<your 1 sentence with user's given language>"
