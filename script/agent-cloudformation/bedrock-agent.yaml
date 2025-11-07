@@ -89,10 +89,10 @@ Resources:
 
           def lambda_handler(event, context):
               """
-              Bedrock을 활용한 의미 기반 영상 검색
+              Semantic video search using Bedrock
               """
               
-              print(f"📥 받은 이벤트: {json.dumps(event, default=str)}")
+              print(f"📥 Received event: {json.dumps(event, default=str)}")
               
               try:
                   api_path = event.get('apiPath', '')
@@ -115,7 +115,7 @@ Resources:
                               query = prop.get('value', '')
                               break
                       
-                      print(f"🔎 사용자 질문: {query}")
+                      print(f"🔎 User query: {query}")
                       result = search_with_bedrock(dynamodb, bedrock, query)
                       
                   else:
@@ -139,13 +139,13 @@ Resources:
                       }
                   }
                   
-                  print(f"📤 반환 응답: {json.dumps(response, ensure_ascii=False, default=str)}")
+                  print(f"📤 Return response: {json.dumps(response, ensure_ascii=False, default=str)}")
                   return response
                   
               except Exception as e:
-                  print(f"❌ 오류 발생: {str(e)}")
+                  print(f"❌ Error occurred: {str(e)}")
                   import traceback
-                  print(f"📋 스택 트레이스: {traceback.format_exc()}")
+                  print(f"📋 Stack trace: {traceback.format_exc()}")
                   
                   return {
                       'messageVersion': '1.0',
@@ -163,19 +163,19 @@ Resources:
                   }
 
           def search_with_bedrock(dynamodb, bedrock, query):
-              """Bedrock Nova Pro로 질문 이해 후 DynamoDB 검색"""
+              """Understand question with Bedrock Nova Pro and search DynamoDB"""
               
               table_name = os.environ['DYNAMODB_TABLE_NAME']
               
               try:
-                  # 1. DynamoDB에서 모든 활성 강의 가져오기
+                  # 1. Get all active courses from DynamoDB
                   table = dynamodb.Table(table_name)
                   response = table.scan(
                       FilterExpression=Attr('class_flag').ne(10) & (Attr('class_flag').eq(0) | Attr('class_flag').not_exists())
                   )
                   
                   all_courses = response.get('Items', [])
-                  print(f"📊 전체 강의 수: {len(all_courses)}개")
+                  print(f"📊 Total courses: {len(all_courses)}")
                   
                   if not all_courses:
                       return {
@@ -183,31 +183,31 @@ Resources:
                           'body': json.dumps({
                               'courses_found': 0,
                               'courses': [],
-                              'message': '등록된 강의가 없습니다.'
+                              'message': 'No courses registered.'
                           }, ensure_ascii=False)
                       }
                   
-                  # 2. 강의 목록을 텍스트로 변환 (최대 50개)
+                  # 2. Convert course list to text (max 50)
                   courses_text = "\n\n".join([
-                      f"강의 {i+1}:\n제목: {c.get('name', '')}\n설명: {c.get('description', '')}\n난이도: {c.get('difficulty', 'intermediate')}"
+                      f"Course {i+1}:\nTitle: {c.get('name', '')}\nDescription: {c.get('description', '')}\nDifficulty: {c.get('difficulty', 'intermediate')}"
                       for i, c in enumerate(all_courses[:50])
                   ])
                   
-                  # 3. Bedrock Nova Pro 프롬프트
-                  prompt = f"""사용자 질문: {query}
+                  # 3. Bedrock Nova Pro prompt
+                  prompt = f"""User question: {query}
 
-          다음은 사용할 수 있는 AWS 강의 목록입니다:
+          Here is the list of available AWS courses:
 
           {courses_text}
 
-          위 강의 중에서 사용자 질문에 가장 적합한 강의를 최대 3개 선택하고, 각 강의 번호만 JSON 배열로 반환하세요.
-          예시: {{"selected": [1, 3, 5]}}
+          Select up to 3 courses that best match the user's question from the above list, and return only the course numbers as a JSON array.
+          Example: {{"selected": [1, 3, 5]}}
 
-          만약 적합한 강의가 없다면 빈 배열을 반환하세요: {{"selected": []}}
+          If no suitable courses are found, return an empty array: {{"selected": []}}
 
-          JSON만 반환하고 다른 설명은 하지 마세요."""
+          Return only JSON without any other explanation."""
 
-                  # 4. Bedrock Nova Pro 호출
+                  # 4. Call Bedrock Nova Pro
                   body = json.dumps({
                       "messages": [
                           {
@@ -228,12 +228,12 @@ Resources:
                   
                   response_body = json.loads(bedrock_response['body'].read())
                   bedrock_text = response_body['output']['message']['content'][0]['text']
-                  print(f"🤖 Bedrock 응답: {bedrock_text}")
+                  print(f"🤖 Bedrock response: {bedrock_text}")
                   
-                  # 5. JSON 추출
+                  # 5. Extract JSON
                   selected_indices = json.loads(bedrock_text)['selected']
                   
-                  # 6. 선택된 강의 정보 구성
+                  # 6. Build selected course information
                   selected_courses = []
                   for idx in selected_indices:
                       if 0 < idx <= len(all_courses):
@@ -247,20 +247,20 @@ Resources:
                               'difficulty': str(course.get('difficulty', 'intermediate'))
                           })
                   
-                  message = f"'{query}' 관련 강의 {len(selected_courses)}개를 찾았습니다." if selected_courses else f"'{query}' 관련 강의를 찾지 못했습니다."
+                  message = f"Found {len(selected_courses)} courses related to '{query}'." if selected_courses else f"No courses found related to '{query}'."
                   
                   result_data = {
                       'courses_found': len(selected_courses),
                       'courses': selected_courses,
                       'message': message,
                       'traces': [
-                          {'type': 'preprocessing', 'content': f"🔍 '{query}' 검색 시작", 'timestamp': ''},
-                          {'type': 'function_call', 'content': f'⚡ Bedrock Nova Pro로 {len(all_courses)}개 강의 분석', 'timestamp': ''},
-                          {'type': 'observation', 'content': f'✅ {len(selected_courses)}개 강의 선택 완료', 'timestamp': ''}
+                          {'type': 'preprocessing', 'content': f"🔍 Started searching for '{query}'", 'timestamp': ''},
+                          {'type': 'function_call', 'content': f'⚡ Analyzing {len(all_courses)} courses with Bedrock Nova Pro', 'timestamp': ''},
+                          {'type': 'observation', 'content': f'✅ Completed selection of {len(selected_courses)} courses', 'timestamp': ''}
                       ]
                   }
                   
-                  print(f"✅ 검색 완료: {len(selected_courses)}개 강의 발견")
+                  print(f"✅ Search completed: {len(selected_courses)} courses found")
                   
                   return {
                       'statusCode': 200,
@@ -268,7 +268,7 @@ Resources:
                   }
                   
               except Exception as e:
-                  print(f"❌ 검색 오류: {str(e)}")
+                  print(f"❌ Search Error: {str(e)}")
                   import traceback
                   print(traceback.format_exc())
                   return {
