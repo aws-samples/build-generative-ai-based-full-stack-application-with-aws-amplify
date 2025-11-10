@@ -42,7 +42,11 @@ const ClassCatalog = ({
   }, [activeCourse]);
 
   const getCurrentPageItems = () => {
-    const sortedClasses = classes.sort((a, b) => (a.class_flag ?? 0) - (b.class_flag ?? 0));
+    const sortedClasses = classes.sort((a, b) => {
+      const dateA = new Date(a.createdAt || 0).getTime();
+      const dateB = new Date(b.createdAt || 0).getTime();
+      return dateB - dateA; // 최신순 (내림차순)
+    });
     const startIndex = (currentPage - 1) * itemsPerPage;
     return sortedClasses.slice(startIndex, startIndex + itemsPerPage);
   };

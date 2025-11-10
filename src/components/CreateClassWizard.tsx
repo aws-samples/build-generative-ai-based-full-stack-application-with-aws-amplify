@@ -11,7 +11,8 @@ import {
   Alert,
   FileUpload,
   Button,
-  ColumnLayout
+  ColumnLayout,
+  Tiles
 } from '@cloudscape-design/components';
 import { uploadData } from 'aws-amplify/storage';
 import { generateClient } from 'aws-amplify/data';
@@ -21,7 +22,8 @@ const client = generateClient<Schema>();
 
 const BUCKET_NAME = 'amplify-s3-ryz'; // need to change the resource information
 const REGION = 'us-west-2'; // need to change the resource information
-const CLOUDFRONT_URL = 'https://d28jhwy9xe688b.cloudfront.net'; // need to change the resource information
+const CLOUDFRONT_DOMAIN = 'd28jhwy9xe688b.cloudfront.net'; // need to change the resource information
+const CLOUDFRONT_URL = `https://${CLOUDFRONT_DOMAIN}`;
 
 const toCloudFrontUrl = (url: string) => {
   if (!url) return url;
@@ -70,7 +72,7 @@ export function CreateClassWizard({
   const [thumbnailUploaded, setThumbnailUploaded] = useState(false);
 
   // Step 2: Processing state
-  const [useAIFeature, setUseAIFeature] = useState<boolean | null>(null);
+  const [useAIFeature, setUseAIFeature] = useState<boolean | null>(true);
   const [processingStatus, setProcessingStatus] = useState<'idle' | 'processing' | 'completed' | 'error'>('idle');
   const [executionArn, setExecutionArn] = useState('');
   const [processingProgress, setProcessingProgress] = useState(0);
@@ -93,7 +95,7 @@ export function CreateClassWizard({
       });
       setThumbnailFile([]);
       setThumbnailUploaded(false);
-      setUseAIFeature(null);
+      setUseAIFeature(true);
       setProcessingStatus('idle');
       setExecutionArn('');
     }
@@ -236,20 +238,40 @@ export function CreateClassWizard({
   const handleSaveClass = async () => {
     if (!activeCourse) return;
 
-    // Check if thumbnail is not uploaded
-    if (!thumbnailUploaded) {
-      alert('Please select and upload a thumbnail image before saving.');
+    // Check if thumbnail file is selected
+    if (thumbnailFile.length === 0) {
+      alert('Please select a thumbnail image before saving.');
       return;
     }
 
     setIsLoadingNextStep(true);
     try {
+      // Upload thumbnail if not already uploaded
+      let imageUrl = formData.image;
+      if (!thumbnailUploaded && thumbnailFile.length > 0) {
+        const file = thumbnailFile[0];
+        const fileName = `Image/${file.name}`;
+        
+        await uploadData({
+          path: fileName,
+          data: file,
+          options: {
+            bucket: {
+              bucketName: BUCKET_NAME,
+              region: REGION
+            }
+          }
+        }).result;
+
+        imageUrl = `https://${BUCKET_NAME}.s3.${REGION}.amazonaws.com/${fileName}`;
+      }
+
       const { data: newClass, errors } = await client.models.Class.create({
         name: formData.name,
         description: formData.description,
         url: toCloudFrontUrl(formData.videoUrl),
         author: formData.author,
-        image: toCloudFrontUrl(formData.image),
+        image: toCloudFrontUrl(imageUrl),
         transcript: formData.transcript,
         subtitle: formData.subtitleUrl ? toCloudFrontUrl(formData.subtitleUrl) : undefined,
         courseId: activeCourse.id,
@@ -312,38 +334,41 @@ export function CreateClassWizard({
       <Container>
         <SpaceBetween size="m">
           {processingStatus === 'idle' && (
-            <FormField
-              label="AI Processing Options"
-              description="Choose an option and click Next to proceed"
-            >
-              <SpaceBetween size="m">
-                <Button
-                  variant={useAIFeature === true ? "primary" : "normal"}
-                  onClick={() => setUseAIFeature(true)}
-                >
-                  🤖 Use AI Features
-                </Button>
-                <Box variant="p">
-                  Automatically generate title, description and transcript using AI
-                </Box>
-                
-                <Button
-                  variant={useAIFeature === false ? "primary" : "normal"}
-                  onClick={() => setUseAIFeature(false)}
-                >
-                  ✏️ Manual Entry
-                </Button>
-                <Box variant="p">
-                  Skip AI processing and manually enter title, description and transcript
-                </Box>
-              </SpaceBetween>
-            </FormField>
+            <Tiles
+              onChange={({ detail }) => setUseAIFeature(detail.value === 'ai')}
+              value={useAIFeature === true ? 'ai' : useAIFeature === false ? 'manual' : ''}
+              columns={2}
+              items={[
+                {
+                  value: 'ai',
+                  label: <span style={{ fontWeight: 'bold' }}>🤖 Use AI Features</span>,
+                  description: 'Automatically generate title, description and transcript using AI'
+                },
+                {
+                  value: 'manual',
+                  label: <span style={{ fontWeight: 'bold' }}>✏️ Manual Entry</span>,
+                  description: 'Skip AI processing and manually enter title, description and transcript'
+                }
+              ]}
+            />
           )}
 
           {useAIFeature === true && processingStatus === 'processing' && (
             <>
               <Alert type="info">
                 AI is processing your video. This may take a few minutes...
+                {executionArn && (
+                  <>
+                    <br />
+                    <a 
+                      href={`https://${REGION}.console.aws.amazon.com/states/home?region=${REGION}#/v2/executions/details/${executionArn}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      View in Step Functions Console →
+                    </a>
+                  </>
+                )}
               </Alert>
               <ProgressBar
                 value={processingProgress}
@@ -462,39 +487,24 @@ export function CreateClassWizard({
           />
         </FormField>
 
-        <FormField label="Thumbnail Image" description={`Upload thumbnail image to s3://${BUCKET_NAME}/Image`}>
-          <SpaceBetween size="s">
-            <FileUpload
-              onChange={({ detail }) => setThumbnailFile(detail.value)}
-              value={thumbnailFile}
-              i18nStrings={{
-                uploadButtonText: e => e ? "Choose files" : "Choose file",
-                dropzoneText: e => e ? "Drop files to upload" : "Drop file to upload",
-                removeFileAriaLabel: e => `Remove file ${e + 1}`,
-                limitShowFewer: "Show fewer files",
-                limitShowMore: "Show more files",
-                errorIconAriaLabel: "Error"
-              }}
-              showFileLastModified
-              showFileSize
-              showFileThumbnail
-              tokenLimit={1}
-              accept="image/*"
-            />
-            {thumbnailFile.length > 0 && (
-              <Button onClick={handleUploadThumbnail}>Upload Thumbnail</Button>
-            )}
-            {thumbnailUploadProgress > 0 && thumbnailUploadProgress < 100 && (
-              <ProgressBar
-                value={thumbnailUploadProgress}
-                label="Uploading thumbnail"
-                description={`${thumbnailUploadProgress}% complete`}
-              />
-            )}
-            {thumbnailUploaded && (
-              <Alert type="success">Upload completed!</Alert>
-            )}
-          </SpaceBetween>
+        <FormField label="Thumbnail Image" description="Select thumbnail image (will be uploaded when you save)">
+          <FileUpload
+            onChange={({ detail }) => setThumbnailFile(detail.value)}
+            value={thumbnailFile}
+            i18nStrings={{
+              uploadButtonText: e => e ? "Choose files" : "Choose file",
+              dropzoneText: e => e ? "Drop files to upload" : "Drop file to upload",
+              removeFileAriaLabel: e => `Remove file ${e + 1}`,
+              limitShowFewer: "Show fewer files",
+              limitShowMore: "Show more files",
+              errorIconAriaLabel: "Error"
+            }}
+            showFileLastModified
+            showFileSize
+            showFileThumbnail
+            tokenLimit={1}
+            accept="image/*"
+          />
         </FormField>
 
         <FormField label="Transcript" description="Edit if needed">
@@ -544,7 +554,7 @@ export function CreateClassWizard({
         else if (requestedStepIndex < activeStepIndex) {
           // Reset states when going back to step 1
           if (requestedStepIndex === 1) {
-            setUseAIFeature(null);
+            setUseAIFeature(true);
             setProcessingStatus('idle');
             setExecutionArn('');
             setProcessingProgress(0);
@@ -566,7 +576,7 @@ export function CreateClassWizard({
         },
         {
           title: "AI Processing",
-          description: "AI generates description and transcript",
+          description: "Choose how to create your class content",
           content: renderStep2(),
           isOptional: false
         },
