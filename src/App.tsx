@@ -4,11 +4,9 @@ import { USE_BROWSER_ROUTER } from "./common/constants.ts";
 import GlobalHeader from "./components/global-header.tsx";
 import HomePage from "./pages/home.tsx";
 import "./styles/app.scss";
-import NotFound from "./pages/not-found.tsx";
 import ProfilePage from './pages/profile.tsx';
 import Catalog from "./pages/catalog.tsx";
 import AgentSearch from "./pages/agent-search.tsx";
-
 import { Authenticator } from "@aws-amplify/ui-react";
 import { Amplify } from 'aws-amplify';
 import outputs from '../amplify_outputs.json';
