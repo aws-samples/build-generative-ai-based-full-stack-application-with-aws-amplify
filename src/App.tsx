@@ -1,4 +1,4 @@
-import { HashRouter, BrowserRouter, Routes, Route } from "react-router-dom";
+import { HashRouter, BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { useEffect } from 'react';
 import { USE_BROWSER_ROUTER } from "./common/constants.ts";
 import GlobalHeader from "./components/global-header.tsx";
@@ -22,6 +22,8 @@ import {
 } from './components/utils/profile-manager';
 
 Amplify.configure(outputs);
+
+const HOME_PATH = "/proxy/5173/absproxy/5173";
 
 interface WorkshopAppProps {
   signOut?: () => void;
@@ -50,30 +52,30 @@ const WorkshopApp = ({ signOut, user = defaultUser }: WorkshopAppProps) => {
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/absproxy/5173" element={<HomePage />} />
-            <Route path="/proxy/5173/absproxy/5173" element={<HomePage />} />
+            <Route path={HOME_PATH} element={<HomePage />} />
 
             <Route
               path="/agent-search"
-              element={signOut ? <AgentSearch /> : <NotFound />}
+              element={signOut ? <AgentSearch /> : <Navigate to={HOME_PATH} replace />}
             />
             <Route
               path="/catalog"
-              element={signOut ? <Catalog /> : <NotFound />}
+              element={signOut ? <Catalog /> : <Navigate to={HOME_PATH} replace />}
             />
             <Route
               path="/catalog/course/:courseId"
-              element={signOut ? <Catalog /> : <NotFound />}
+              element={signOut ? <Catalog /> : <Navigate to={HOME_PATH} replace />}
             />
             <Route
               path="/catalog/course/:courseId/class/:classId"
-              element={signOut ? <Catalog /> : <NotFound />}
+              element={signOut ? <Catalog /> : <Navigate to={HOME_PATH} replace />}
             />
             <Route
               path="/profile"
-              element={signOut ? <ProfilePage {...getProfileProps(user)} /> : <NotFound />}
+              element={signOut ? <ProfilePage {...getProfileProps(user)} /> : <Navigate to={HOME_PATH} replace />}
             />
 
-            <Route path="*" element={<NotFound />} />
+            <Route path="*" element={<Navigate to={HOME_PATH} replace />} />
           </Routes>
         </div>
       </Router>
