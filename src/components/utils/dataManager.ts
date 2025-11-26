@@ -144,7 +144,7 @@ export const uploadSampleData = async (
     console.error('=== Upload failed ===', error);
     setMessage({ 
       type: 'error', 
-      text: `Upload failed: ${error instanceof Error ? error.message : 'Unknown error'}` 
+      text: `Upload failed. Check workshop "Verify Amplify Resources" section. Data model changes need ~3min to deploy. Error: ${error instanceof Error ? error.message : 'Unknown error'}` 
     });
   }
 };
